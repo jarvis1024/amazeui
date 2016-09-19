@@ -1,0 +1,109 @@
+{
+    "promission_id": 051,
+    "url": "https://api.weixin.qq.com/cgi-bin/menu/create" ,
+    "type": 2
+},
+{
+    "button":[
+    {  
+        "type":"click",
+        "name":"今日歌曲",
+        "key":"V1001_TODAY_MUSIC"
+    },
+    {
+        "name":"菜单",
+        "sub_button":[
+        {    
+            "type":"view",
+            "name":"搜索",
+            "url":"http://www.soso.com/"
+        },
+        {
+            "type":"view",
+            "name":"视频",
+            "url":"http://v.qq.com/"
+        },
+        {
+            "type":"click",
+            "name":"赞一下我们",
+            "key":"V1001_GOOD"
+        }]
+    }]
+},
+{
+    "button":{
+        "REQUIRED": true,
+        "TYPE": Array,
+        "LEN": [1,3],
+        "ITEM": Object,
+
+        "name":{
+            "REQUIRED": true,
+            "TYPE" String,
+            "LEN": [0,16]
+        },
+
+        "type":{
+            "REQUIRED": true,
+            "TYPE": String,
+            "ENUM": [
+                "click", "view", "scancode_push", "scancode_waitmsg",
+                "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                "location_select", "media_id", "view_limited"
+            ],
+        },
+        "url": {
+            "REQUIRED": ["DEPEND", "type", [] ],
+            "TYPE": ,
+        },
+        "key": {
+            "REQUIRED": ["DEPEND", "type",  ],
+            "TYPE": ,
+        },
+        "media_id": {
+            "REQUIRED": ["DEPEND", "type", ],
+            "TYPE": ,
+        },
+
+        "sub_button":{
+            "REQUIRED": false,
+            "TYPE": Array,
+            "LEN": [1,5],
+            "ITEM": Object,
+        }
+
+    },
+
+    "matchrule":{
+
+    }
+}
+/*
+function trueType(){
+    
+}
+
+function jug( item, juger){
+
+}
+
+var FieldJudged = function( rename ){
+    var FieldLocaled = rename[1].split("."), FieldKey 
+    if(rename[0]=="DEPEND"){
+        FieldKey = $(".infos."+FieldLocaled[FieldLocaled.length-2]+"[name='"+FieldLocaled[FieldLocaled.length-1]+"']").val();
+    }
+    if(rename[2] instanceof Array){
+        //return boolean
+        if($.inArray( FieldKey, rename[2]) > -1 ){
+            return true
+        }else{
+            return rename[3]
+        }
+    }
+    if(rename[2] instanceof Object){
+        //return string
+        return rename[2][FieldKey];
+    }
+}
+
+*/

@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Amaze UI Examples</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="icon" type="image/png" href="{{assets}}i/favicon.png">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="{{assets}}i/app-icon72x72@2x.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+  <!--
+  <link rel="canonical" href="http://www.example.com/">
+  -->
+
+  <link rel="stylesheet" href="../assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <style type="text/css">
+  [class*='am-u']{
+    border: 1px solid #666;
+  }
+  [class*='am-u'] [class*='am-u']{
+    border-color: #39F;
+  }
+  [class*='am-u'] [class*='am-u'] [class*='am-u']{
+    border-color: #FA0;
+  }
+  .am-container{
+    border: 1px solid #090;
+  }
+  pre>code{
+    color: 900;
+  }
+  ol>li{
+    margin-bottom: 1rem;
+  }
+  </style>
+</head>
+<body>
+<button type="button" class="am-btn am-btn-primary" data-am-button>切换状态</button>
+
+<div class="am-g">
+  <div class="am-u-lg-3 am-u-md-6 am-u-sm-4" style="border:1px solid #666">
+    <div class="am-container">
+      <div class="am-u-sm-12 am-padding-0">contain1</div>
+    </div>
+  </div>
+  <div class="am-u-lg-9 am-u-md-6 am-u-sm-8" style="border:1px solid #666">
+    contain2
+  </div>
+</div>
+
+
+<div class="am-g am-hide-sm-only">
+  <div class="am-u-sm-3">am-hide-sm-only</div>
+  <div class="am-u-sm-3">2</div>
+  <div class="am-u-sm-3">WithOut <code>am-u-end</code> Class</div>
+</div>
+<br>
+<br>
+<div class="am-g am-show-sm-only">
+  <div class="am-u-sm-3">am-show-sm-only</div>
+  <div class="am-u-sm-3">2</div>
+  <div class="am-u-sm-3 am-u-end">With <code>am-u-end</code> Class</div>
+</div>
+
+<div class="am-container" style="background-color:#F0F0F0">
+  辅助类<br>
+  ** = <code>['sm','md','lg']</code><br>
+  <ol style="margin-left:1rem;list-style-type: decimal">
+  <li><code>am-show-**-[up,down,only,!]</code>响应式显示</li>
+  <li><code>am-u-**-offset-n</code>响应式左边距 以Grid为单位</li>
+  <li><code>am-u-**-[uncentered,centered]</code>响应式居中</li>
+  <li><code>am[-**[-only]]-text-[top, middle, bottom]</code>垂直对齐</li>
+  <li><code>am[-**[-only]]-text-[left, center, right]</code>水平对齐</li>
+  <li><code>am-align-[left, right]</code>使用 float 实现的类似 HTML align 属性的效果，父容器要清除浮动。与 .am-fl、.am-fr 相比，浮动的元素加了 margin。</li>
+  <li><strong>父容器</strong>:<code>am-vertical-align</code>; <strong>目标容器</strong>:<code>am-vertical-align-[middle,bottom]</code>实现垂直居中</li>
+    
+  </ol>
+</div>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="../assets/js/amazeui.min.js"></script>
+</body>
+</html>

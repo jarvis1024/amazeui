@@ -1,0 +1,152 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dm-Base[1] Amaze UI Examples</title>
+
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" href="../assets/css/amazeui.min.css">
+  <link rel="stylesheet" type="text/css" href="admin-base-1.css">
+</head>
+<body>
+
+<div class="dm-leftnav am-hide-sm-down">
+  
+  <div class="dm-leftnav-user am-container">
+    <div style="color:#FFF">
+      <span class="am-icon-user"> User </span>
+      <a class="am-btn-link am-btn-sm am-fr am-icon-sign-out" style="color:#FFF" href="#logout"> sign out </a>
+    </div>
+    <div class="am-btn-group am-btn-group-xs">
+      <a class="am-btn am-btn-default" href="#messages" >消息</a>
+      <a class="am-btn am-btn-default" href="#todo" >待办</a>
+    </div>
+  </div>
+
+  <div class="dm-leftnav-menu">
+    <ul class="am-list" id="collapase-nav-1">
+      <li  class="am-panel">
+        <a data-am-collapse="{parent: '#collapase-nav-1'}" href="#/"><i class="am-icon-home am-icon-fw am-margin-left-sm"></i> 首页</a>
+      </li>
+
+      <li class="am-panel">
+        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" class="am-collapsed">
+          <i class="am-icon-user am-icon-fw am-margin-left-sm"></i> 账号设置 <i class="am-icon-angle-down am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse" id="user-nav">
+          <li><a href="#/userAdd"><i class="am-icon-lock am-icon-fw am-margin-left-sm"></i> 账号安全 </a></li>
+          <li><a href="#/userList/0"><i class="am-icon-user am-icon-fw am-margin-left-sm"></i> 人员列表 </a></li>
+        </ul>
+      </li>
+
+      <li class="am-panel">
+        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#wechat-nav'}" class="am-collapsed">
+          <i class="am-icon-wechat am-icon-fw am-margin-left-sm"></i> 微信管理 <i class="am-icon-angle-down am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse" id="wechat-nav">
+          <li><a href="#/wechat/material"><i class="am-icon-file-text-o am-icon-fw am-margin-left-sm"></i> 微信素材 </a></li>
+          <li><a href="#/wechat/menu"><i class="am-icon-navicon am-icon-fw am-margin-left-sm"></i> 自定义导航 </a></li>
+          <li><a href="#/wechat/menu"><i class="am-icon-comments-o am-icon-fw am-margin-left-sm"></i> 客服管理 </a></li>
+          <li><a href="#/wechat/menu"><i class="am-icon-users am-icon-fw am-margin-left-sm"></i> 用户管理 </a></li>
+          <li><a href="#/wechat/menu"><i class="am-icon-ticket am-icon-fw am-margin-left-sm"></i> 微信卡券 </a></li>
+          <li><a href="#/wechat/menu"><i class="am-icon-qrcode am-icon-fw am-margin-left-sm"></i> 微信卡券Code </a></li>
+        </ul>
+      </li>
+
+      <li class="am-panel">
+        <a data-am-collapse="{parent: '#collapase-nav-1', target: '#role-nav'}" class="am-collapsed">
+          <i class="am-icon-table am-icon-fw am-margin-left-sm"></i> 角色管理 <i class="am-icon-angle-down am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse" id="role-nav">
+          <li><a href="#/roleAdd"><span class="am-icon-table am-margin-left-sm"></span> 添加角色 </a></li>
+          <li><a href="#/roleList/0"><span class="am-icon-table am-margin-left-sm"></span> 角色列表 </a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<div class="dm-container am-padding-horizontal">
+  
+  <ol class="am-breadcrumb am-breadcrumb-slash">
+    <li><a href="#/">首页</a></li>
+    <li><a href="#/user">账号设置</a></li>
+    <li class="am-active">账号安全</li>
+  </ol>
+
+  <div class="dm-content am-container">
+    <table class="am-table am-table-striped am-table-hover">
+      <tr>
+        <th width="60%">标题</th>
+        <th width="15%">日期</th>
+        <th width="25%">操作</th>
+      </tr>
+
+      <tr>
+        <td class="am-text-sm">
+          虚妄
+        </td>
+        <td class="am-text-xs" style="color:#999">2016-9-20 20:19</td>
+        <td class="am-text-xs">
+          <a href="#/" class="am-icon-edit"> 编辑 </a> &nbsp;
+          <a href="#/" class="am-icon-send"> 发布 </a> &nbsp;
+          <a href="#/" class="am-icon-copy"> 复制 </a> &nbsp;
+          <a href="#/" class="am-icon-remove hover-danger"> 删除 </a> &nbsp;
+        </td>
+      </tr>
+      <!-- repeat -->
+    </table>
+    <ul class="am-pagination am-pagination-centered">
+      <li class="am-disabled"><a href="#prev">&laquo;</a></li>
+      <li class="am-active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li><a href="#next">&raquo;</a></li>
+    </ul>
+
+    <div>
+      <span class="am-badge am-badge-success">offset: 1</span>
+      <span class="am-badge am-badge-primary">total: 129</span>
+      <span class="am-badge am-badge-default">perpage: 50</span>
+    </div>
+  </div>
+
+  <div class="am-form-group">
+    <label class="am-checkbox-inline">
+      <input type="checkbox" name="promission" value="1" checked>
+      素材
+    </label>
+  </div>
+
+  <select id="view_perpage">
+    <option value="20" selected>20</option>
+    <option value="35">35</option>
+    <option value="50">50</option>
+    <option value="75">75</option>
+    <option value="100">100</option>
+  </select>
+</div>
+
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/amazeui.min.js"></script>
+<script type="text/javascript">
+  var addDate = function(day){
+    return new Date(new Date().valueOf() + day*86400000)
+  }
+  $(document).ready(function(){
+    $("#view_perpage")
+      .val( $.AMUI.utils.cookie.get("view_perpage"))
+      .on( "change", function(){
+        $.AMUI.utils.cookie.set("view_perpage", $(this).val(), addDate(7));
+        location.reload();
+      })
+  })
+</script>
+</body>
+</html>
