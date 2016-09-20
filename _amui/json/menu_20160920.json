@@ -1,0 +1,87 @@
+{
+    "menu": {
+        "button": [
+            {
+                "name": "独艺君说", 
+                "sub_button": [
+                    {
+                        "type": "media_id", 
+                        "name": "独艺无二是什么", 
+                        "sub_button": [ ], 
+                        "media_id": "6eruAh2rrbiTcZXMCeoN6WiyJfSnMRG5qWJgOJ8SNGw"
+                    }, 
+                    {
+                        "type": "media_id", 
+                        "name": "最近有啥好玩的", 
+                        "sub_button": [ ], 
+                        "media_id": "6eruAh2rrbiTcZXMCeoN6Qu9KIR1mqnARwlyjEJbe7c"
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "一言不合买买买", 
+                        "url": "https://wap.koudaitong.com/v2/home/11oabkze7?redirect_count=1", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "想看官网戳这里", 
+                        "url": "http://www.mycuo.com", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "media_id", 
+                        "name": "限量私藏笔记书", 
+                        "sub_button": [ ], 
+                        "media_id": "6eruAh2rrbiTcZXMCeoN6V25hRACNQvnVx1_AAsmBvU"
+                    }
+                ]
+            }, 
+            {
+                "name": "艺普向", 
+                "sub_button": [
+                    {
+                        "type": "media_id", 
+                        "name": "女权后现代", 
+                        "sub_button": [ ], 
+                        "media_id": "6eruAh2rrbiTcZXMCeoN6SZx46Jd-bZ7usK5FWHED3g"
+                    }, 
+                    {
+                        "type": "media_id", 
+                        "name": "艺术界的花样作死", 
+                        "sub_button": [ ], 
+                        "media_id": "6eruAh2rrbiTcZXMCeoN6YSNaP1G2deh9y2vyG5XIng"
+                    }, 
+                    {
+                        "type": "media_id", 
+                        "name": "铲屎官必点", 
+                        "sub_button": [ ], 
+                        "media_id": "6eruAh2rrbiTcZXMCeoN6aBUnc9SBgfW1TDILIGfCCw"
+                    }
+                ]
+            }, 
+            {
+                "name": "我的账户", 
+                "sub_button": [
+                    {
+                        "type": "click", 
+                        "name": "专属优惠", 
+                        "key": "V0001_COUPONS_1", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "click", 
+                        "name": "使用说明", 
+                        "key": "V0001_MANUAL_1", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "click", 
+                        "name": "为你推荐", 
+                        "key": "V0001_RECOMMEND_1", 
+                        "sub_button": [ ]
+                    }
+                ]
+            }
+        ]
+    }
+}

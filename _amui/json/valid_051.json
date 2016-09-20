@@ -1,0 +1,93 @@
+{// menu/create
+    "button":{
+        "REQUIRED": true,
+        "TYPE": Array,
+        "LEN": [1,3],
+        "ITEM": {
+            "TYPE":Object,
+
+            "name":{
+                "REQUIRED": true,
+                "TYPE": "string",
+                "LEN": [0,16]
+            },
+
+            "type":{
+                "REQUIRED": ["DEPEND", "sub_button", [null, undefined] ],
+                "UNREQUIRED": ["INSTANCE", "sub_button", Array ],
+                "TYPE": "string",
+                "ENUM": [
+                    "click", "view", "scancode_push", "scancode_waitmsg",
+                    "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                    "location_select", "media_id", "view_limited"
+                ],
+            },
+
+            "url": {
+                "REQUIRED": ["DEPEND", "type", ["view"] ],
+                "TYPE": "string",
+                "LEN": [0, 1024]
+            },
+
+            "key": {
+                "REQUIRED": ["DEPEND", "type", ["click"] ],
+                "TYPE": "string",
+                "LEN": [0, 128]
+            },
+
+            "media_id": {
+                "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                "TYPE": "string"
+            },
+
+
+            "sub_button":{
+                "TYPE": Array,
+                "LEN": [1,5],
+                "ITEM": {
+                    "TYPE": Object,
+
+                    "sub_button":{
+                        "REQUIRED": true,
+                        "TYPE": Array,
+                        "DEFAULT": [],
+                        "LEN": [0,0]
+                    },
+
+                    "name":{
+                        "REQUIRED": true,
+                        "TYPE": "string",
+                        "LEN": [0,60]
+                    },
+
+                    "type":{
+                        "REQUIRED": true,
+                        "TYPE": "string",
+                        "ENUM": [
+                            "click", "view", "scancode_push", "scancode_waitmsg",
+                            "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                            "location_select", "media_id", "view_limited"
+                        ],
+                    },
+
+                    "url": {
+                        "REQUIRED": ["DEPEND", "type", ["view"] ],
+                        "TYPE": "string",
+                        "LEN": [0, 1024]
+                    },
+
+                    "key": {
+                        "REQUIRED": ["DEPEND", "type", ["click"] ],
+                        "TYPE": "string",
+                        "LEN": [0, 128]
+                    },
+
+                    "media_id": {
+                        "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                        "TYPE": "string"
+                    }
+                }
+            }
+        }
+    }
+}

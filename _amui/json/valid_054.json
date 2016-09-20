@@ -1,0 +1,180 @@
+{// menu/create
+    "button":{
+        "REQUIRED": true,
+        "TYPE": Array,
+        "LEN": [1,3],
+        "ITEM": {
+            "TYPE":Object,
+
+            "name":{
+                "REQUIRED": true,
+                "TYPE": "string",
+                "LEN": [0,16]
+            },
+
+            "type":{
+                "REQUIRED": ["DEPEND", "sub_button", [null, undefined] ],
+                "UNREQUIRED": ["INSTANCE", "sub_button", Array ],
+                "TYPE": "string",
+                "ENUM": [
+                    "click", "view", "scancode_push", "scancode_waitmsg",
+                    "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                    "location_select", "media_id", "view_limited"
+                ],
+            },
+
+            "url": {
+                "REQUIRED": ["DEPEND", "type", ["view"] ],
+                "TYPE": "string",
+                "LEN": [0, 1024]
+            },
+
+            "key": {
+                "REQUIRED": ["DEPEND", "type", ["click"] ],
+                "TYPE": "string",
+                "LEN": [0, 128]
+            },
+
+            "media_id": {
+                "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                "TYPE": "string"
+            },
+
+
+            "sub_button":{
+                "TYPE": Array,
+                "LEN": [1,5],
+                "ITEM": {
+                    "TYPE": Object,
+
+                    "sub_button":{
+                        "REQUIRED": true,
+                        "TYPE": Array,
+                        "DEFAULT": [],
+                        "LEN": [0,0]
+                    },
+
+                    "name":{
+                        "REQUIRED": true,
+                        "TYPE": "string",
+                        "LEN": [0,60]
+                    },
+
+                    "type":{
+                        "REQUIRED": true,
+                        "TYPE": "string",
+                        "ENUM": [
+                            "click", "view", "scancode_push", "scancode_waitmsg",
+                            "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                            "location_select", "media_id", "view_limited"
+                        ],
+                    },
+
+                    "url": {
+                        "REQUIRED": ["DEPEND", "type", ["view"] ],
+                        "TYPE": "string",
+                        "LEN": [0, 1024]
+                    },
+
+                    "key": {
+                        "REQUIRED": ["DEPEND", "type", ["click"] ],
+                        "TYPE": "string",
+                        "LEN": [0, 128]
+                    },
+
+                    "media_id": {
+                        "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                        "TYPE": "string"
+                    }
+                }
+            }
+        }
+    },
+    "matchrule":{
+        "TYPE": Object,
+        "REQUIRED": true,
+        "LEN":[1, Infinity],
+
+        "tag_id":{
+            "TYPE":"string",
+            "REQUIRED":false,
+            "ENUM": WXES_USER_TAGID,
+            "ENUMTXT": WXEO_USER_TAGID
+        },
+
+        "sex": {
+            "TYPE": "string",
+            "REQUIRED": false,
+            "ENUM": ["1","2"],
+            "ENUMTXT": {
+                "1": "男",
+                "2": "女"
+            }
+        },
+
+        "client_platform_type":{
+            "TYPE":"string",
+            "REQUIRED":false,
+            "ENUM": ["1", "2", "3"],
+            "ENUMTXT": {
+                "1": "iOS",
+                "2": "Android",
+                "3": "Others"
+            }
+        },
+
+        "country":{
+            "TYPE":"string",
+            "REQUIRED":false,
+            "ENUM": WXES_COUNTRY,
+            "ENUMTXT": WXEO_COUNTRY
+
+        },
+        "province":{
+            "TYPE":"string",
+            "REQUIRED":false,
+            "ENUM": WXES_PROVINCE,
+            "ENUMTXT": WXEO_PROVINCE
+        },
+        "city":{
+            "TYPE":"string",
+            "REQUIRED":false,
+            "ENUM": WXES_CITY,
+            "ENUMTXT": WXEO_CITY
+        },
+        "language":{
+            "TYPE":"string",
+            "REQUIRED":false,
+            "ENUM": [
+                "zh_CN", "zh_TW", "zh_HK", "en", 
+                "id", "ms", "es", "ko", "it", 
+                "ja", "pl", "pt","ru", 
+                "th", "vi", "ar", "hi", 
+                "he", "tr", "de", "fr"
+            ],
+            "ENUMTXT":{
+                "zh_CN": "简体中文"  ,
+                "zh_TW": "繁体中文TW"  ,
+                "zh_HK": "繁体中文HK"  ,
+                "en": "英文"  ,
+                "id": "印尼"  ,
+                "ms": "马来"  ,
+                "es": "西班牙"  ,
+                "ko": "韩国"  ,
+                "it": "意大利"  ,
+                "ja": "日本"  ,
+                "pl": "波兰"  ,
+                "pt": "葡萄牙"  ,
+                "ru": "俄国"  ,
+                "th": "泰文"  ,
+                "vi": "越南"  ,
+                "ar": "阿拉伯语"  ,
+                "hi": "北印度"  ,
+                "he": "希伯来"  ,
+                "tr": "土耳其"  ,
+                "de": "德语"  ,
+                "fr": "法语"
+            }
+        }
+    }
+}
