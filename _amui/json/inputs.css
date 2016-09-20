@@ -1,0 +1,70 @@
+body{
+	font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","Apple Color Emoji","Segoe UI Symbol",Arial,sans-serif;
+	padding: 0;
+	margin: auto;
+}
+.vj-form{
+	width: 95%;
+	min-width: 400px;
+	margin: 0 auto;
+}
+.vj-form td{
+	border: 0;
+	border-top: 1px solid #CCC;
+	padding: 6px 12px;
+}
+.vj-form input, .vj-form textarea{
+	border: 1px solid #AAA;
+	line-height: 16px;
+	font-size: 13px;
+	color: #222;
+	padding: 4px 6px;
+	min-width: 200px;
+}
+.vj-form input:focus, .vj-form textarea:focus{
+	border-color: #3A3;
+	outline: 0;
+}
+.vj-form td.vj-title{
+	width: 25%;
+	text-align: right;
+	vertical-align: baseline;
+}
+.vj-title-text{
+	font-size: 15px;
+	color: #333;
+	line-height: 26px;
+}
+.vj-title-text:after{
+	content: "：";
+}
+
+.vj-ctrl-input{
+	position: relative;
+	display: inline-block;
+
+}
+.vj-ctrl-input input, .vj-ctrl-input textarea{
+	display: block;
+	position: relative;
+	margin-bottom: 12px;
+}
+.vj-input-mutiple [data-vj-item]{
+	position: relative;
+}
+.vj-ctrl-input [data-vj-placeholder]{
+	position: absolute;
+	z-index: 1;
+	color: #666;
+	line-height: 26px;
+	margin-left: 8px;
+}
+.vj-ctrl-input [data-vj-counter]{
+	position: absolute;
+	z-index: 1;
+	color: #666;
+	line-height: 26px;
+	right: 0;
+	bottom: 0;
+	margin-right: 8px;
+}

@@ -1,15 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
     <title>form control</title>
     <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
-    <style type="text/css"></style>
+    <link rel="stylesheet" type="text/css" href="./inputs.css">
 </head>
 <body>
 <span id="emoji1"></span>
+
+<div style="max-width:900px">
+	<table class="vj-form" cellspacing="0" cellpadding="0" ><tbody>
+		<tr>
+			<td class="vj-title">
+				<span class="vj-title-text">名</span>
+			</td>
+
+			<td>
+				<div class="vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
+					<div data-vj-item >
+						<span data-vj-placeholder >hinter</span>
+						<span data-vj-counter >0/1</span>
+						<input type="text" data-vj-name="" data-vj-max="50" data-vj-min="20" data-vj-price >
+					</div>
+					<span data-vj-placeholder >hinter</span>
+					<input type="text" data-vj-name="" data-vj-date >
+					<span data-vj-placeholder >hinter</span>
+					<input type="text" data-vj-name="" data-vj-timestamp >
+					<input type="text" data-vj-name="" data-vj-price >
+					
+				</div>
+
+			</td>
+		</tr>
+	</tbody></table>
+	
+</div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#emoji1").html("\ue04a")
+    	$(".vj-ctrl-input input")
+	    	.on("input", function(){
+	    		this.value? 
+	    			$(this).prevAll("[data-vj-placeholder]:first").hide()
+	    		  : $(this).prevAll("[data-vj-placeholder]:first").show()
+	    	})
+	    	.on("change", function(){
+	    		if( $(this).is("[data-vj-max],[data-vj-min],[data-vj-price]") && isNaN(this.value) )
+	    			this.value = "0"
+
+	    		if( $(this).is("[data-vj-max]") )
+	    			this.value = Math.min( this.value, $(this).attr("data-vj-max") )
+
+	    		if( $(this).is("[data-vj-min]") )
+	    			this.value = Math.max( this.value, $(this).attr("data-vj-min") )
+
+	    		if( $(this).is("[data-vj-price]")){
+	    			$(this)
+						.attr( "data-vj-value", parseInt( this.value*100 ) )
+	    				.val( ($(this).attr( "data-vj-value")/100).toFixed(2) )
+    			}
+
+	    	}).on("bulr", function(){
+
+	    	})
     })
 </script>
 </body>

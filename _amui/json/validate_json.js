@@ -22,11 +22,12 @@ var VJSON = function( init_judge ){
         console.error("Missing required parameters!")
         return undefined;
     }
-        this.validation = function( input_json ){
-            target = input_json;
-            this.result = parseFields( input_json, judge )
-            return this.result
-        }
+
+    this.validation = function( input_json ){
+        target = input_json;
+        this.result = parseFields( input_json, judge )
+        return this.result
+    }
 
 
     this.getRequired = function( parent, valid, reqed ){
@@ -87,8 +88,11 @@ var VJSON = function( init_judge ){
 
     this.getLength = function( item, valid ){
         if( typeof(item) === "string" ){
-            var dbcLen = item.match(/[^\x00-\xff]/g) || [];
-            var chrLen = item.length + dbcLen.length *2 ;
+            // var dbcLen = item.match(/[^\x00-\xff]/g) || [];
+            // var chrLen = item.length + dbcLen.length *2 ;
+            var dubChr = item.match(/[\u0080-\u07ff]/g) || [],
+                trbChr = item.match(/[\u0800-\uffff]/g) || [],
+                chrLen = trbChr.length*2 + dubChr.length + item.length;
             return chrLen>=valid.LEN[0] && chrLen<=valid.LEN[1] 
         }else{
             var arrLen = item || [];
@@ -124,8 +128,7 @@ var VJSON = function( init_judge ){
                         parsed_itm[i] = vld[i].DEFAULT
                       : console.error("!!missing field: "+i )
                 }else{
-                    console.log( false )
-                    console.log( delete parsed_itm[i] )
+                    delete parsed_itm[i]
                 }
                 continue
             }
