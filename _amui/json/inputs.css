@@ -3,6 +3,9 @@ body{
 	padding: 0;
 	margin: auto;
 }
+*{
+	box-sizing: border-box;
+}
 .vj-form{
 	width: 95%;
 	min-width: 400px;
@@ -19,7 +22,7 @@ body{
 	font-size: 13px;
 	color: #222;
 	padding: 4px 6px;
-	min-width: 200px;
+	min-width: 220px;
 }
 .vj-form input:focus, .vj-form textarea:focus{
 	border-color: #3A3;
@@ -42,29 +45,63 @@ body{
 .vj-ctrl-input{
 	position: relative;
 	display: inline-block;
-
 }
 .vj-ctrl-input input, .vj-ctrl-input textarea{
 	display: block;
 	position: relative;
-	margin-bottom: 12px;
+	background-color: transparent;
 }
-.vj-input-mutiple [data-vj-item]{
+.vj-ctrl-input>*{
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+}
+/*.vj-input-mutiple [data-vj-item]{
+	margin-left: 60px;
 	position: relative;
 }
+*/
 .vj-ctrl-input [data-vj-placeholder]{
 	position: absolute;
-	z-index: 1;
-	color: #666;
+	/*z-index: 1;*/
+	color: #999;
 	line-height: 26px;
 	margin-left: 8px;
 }
 .vj-ctrl-input [data-vj-counter]{
 	position: absolute;
-	z-index: 1;
-	color: #666;
-	line-height: 26px;
+	/*z-index: 1;*/
 	right: 0;
 	bottom: 0;
+	color: #999;
+	font-size: 13px;
+	font-style: italic;
+	font-family: Verdana;
+	line-height: 26px;
 	margin-right: 8px;
+}
+.vj-ctrl-input [data-vj-title]{
+	white-space: nowrap;
+	line-height: 26px;
+	font-size: 14px;
+	color: #444;
+}
+
+
+.vj-err{
+	border-color: #D44 !important;
+}
+.vj-err[data-vj-counter]{
+	color: #D44 !important;
+}
+.vj-ctrl-input [data-vj-unit]{
+	position: absolute;
+	/*z-index: 1;*/
+	right: 0;
+	bottom: 0;
+	color: #444;
+	font-size: 14px;
+	line-height: 26px;
+	margin-right: 8px;
+
 }
