@@ -1,9 +1,10 @@
 body{
 	font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","Apple Color Emoji","Segoe UI Symbol",Arial,sans-serif;
 	padding: 0;
-	margin: auto;
 }
 *{
+	margin: auto;
+	vertical-align: top;
 	box-sizing: border-box;
 }
 .vj-form{
@@ -14,7 +15,7 @@ body{
 .vj-form td{
 	border: 0;
 	border-top: 1px solid #CCC;
-	padding: 6px 12px;
+	padding: 12px;
 }
 .vj-form input, .vj-form textarea{
 	border: 1px solid #AAA;
@@ -22,16 +23,16 @@ body{
 	font-size: 13px;
 	color: #222;
 	padding: 4px 6px;
-	min-width: 220px;
+	width: 300px;
 }
 .vj-form input:focus, .vj-form textarea:focus{
 	border-color: #3A3;
 	outline: 0;
 }
-.vj-form td.vj-title{
+.vj-form td.vj-name{
 	width: 25%;
 	text-align: right;
-	vertical-align: baseline;
+	vertical-align: baseline !important ;
 }
 .vj-title-text{
 	font-size: 15px;
@@ -46,31 +47,28 @@ body{
 	position: relative;
 	display: inline-block;
 }
+.vj-ctrl-item{
+	display: inherit;
+	margin: 0 16px 8px 0;
+}
 .vj-ctrl-input input, .vj-ctrl-input textarea{
 	display: block;
-	position: relative;
 	background-color: transparent;
 }
-.vj-ctrl-input>*{
-	display: inline-block;
+
+[data-vj-elm]{
 	position: relative;
-	vertical-align: top;
+	display: inherit;
 }
-/*.vj-input-mutiple [data-vj-item]{
-	margin-left: 60px;
-	position: relative;
-}
-*/
+
 .vj-ctrl-input [data-vj-placeholder]{
 	position: absolute;
-	/*z-index: 1;*/
 	color: #999;
 	line-height: 26px;
 	margin-left: 8px;
 }
 .vj-ctrl-input [data-vj-counter]{
 	position: absolute;
-	/*z-index: 1;*/
 	right: 0;
 	bottom: 0;
 	color: #999;
@@ -80,28 +78,38 @@ body{
 	line-height: 26px;
 	margin-right: 8px;
 }
-.vj-ctrl-input [data-vj-title]{
-	white-space: nowrap;
-	line-height: 26px;
-	font-size: 14px;
-	color: #444;
-}
-
-
-.vj-err{
-	border-color: #D44 !important;
-}
-.vj-err[data-vj-counter]{
-	color: #D44 !important;
-}
 .vj-ctrl-input [data-vj-unit]{
 	position: absolute;
-	/*z-index: 1;*/
 	right: 0;
 	bottom: 0;
 	color: #444;
 	font-size: 14px;
 	line-height: 26px;
 	margin-right: 8px;
-
 }
+.vj-ctrl-input [data-vj-title]{
+	white-space: nowrap;
+	line-height: 26px;
+	font-size: 14px;
+	color: #444;
+}
+.vj-ctrl-input [data-vj-text]>*{
+	display: block;
+	margin-top: 8px;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+[data-vj-text] .vj-alert{
+	color: #D22;
+}
+[data-vj-text] .vj-describe{
+	color: #666;
+}
+.vj-err{
+	border-color: #D44 !important;
+}
+.vj-err[data-vj-counter]{
+	color: #D44 !important;
+}
+

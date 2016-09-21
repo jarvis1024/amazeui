@@ -12,35 +12,127 @@
 <div style="/*max-width:900px*/">
     <table class="vj-form" cellspacing="0" cellpadding="0" data-vj-utf8 ><tbody>
         <tr>
-            <td class="vj-title">
+            <td class="vj-name">
                 <span class="vj-title-text">名</span>
             </td>
 
             <td>
                 <div class="vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
-                    <span data-vj-title>名名</span>
-                    <div data-vj-item>
-                        <span data-vj-placeholder >hinter</span>
-                        <span data-vj-counter >0/1</span>
-                        <span data-vj-unit >个</span>
-                        <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-tofixed="2">
+                    <div class="vj-ctrl-item" data-vj-index="">
+                        <span data-vj-title>名名</span>
+                        <div data-vj-elm>
+                            <span data-vj-placeholder >hinter</span>
+                            <span data-vj-counter >0/1</span>
+                            <span data-vj-unit >个</span>
+                            <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-tofixed="2">
+                        </div>
+                        <p data-vj-text >
+                            <span class="vj-alert">123</span>
+                            <span class="vj-describe">123</span>
+                        </p>
                     </div>
-
+                
                 </div>
+
                 <div class="vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
-                    <span data-vj-title>名名</span>
-                    <div data-vj-item>
-                        <span data-vj-placeholder >hinter</span>
-                        <span data-vj-counter >0/1</span>
-                        <span data-vj-unit >个</span>
-                        <textarea type="text" data-vj-name="" data-vj-max="50" data-vj-min="20" data-vj-price></textarea>
+                    <div class="vj-ctrl-item" data-vj-index="1">
+                        <span data-vj-title>名1</span>
+                        <div data-vj-elm>
+                            <span data-vj-unit >个</span>
+                            <input type="text" data-vj-name="" style="width:80px;" >
+                        </div>
+                        <p data-vj-text >
+                            <span class="vj-alert">123</span>
+                            <span class="vj-describe">123</span>
+                        </p>
                     </div>
 
-                </div>
+                    <div class="vj-ctrl-item" data-vj-index="2">
+                        <span data-vj-title>名2</span>
+                        <div data-vj-elm>
+                            <span data-vj-unit >个</span>
+                            <input type="text" data-vj-name="" style="width:80px;" >
+                        </div>
+                        <p data-vj-text >
+                            <span class="vj-alert">123</span>
+                            <span class="vj-describe">123</span>
+                        </p>
+                    </div>
 
+                    <div class="vj-ctrl-item" data-vj-index="3">
+                        <span data-vj-title>名3</span>
+                        <div data-vj-elm>
+                            <span data-vj-unit >个</span>
+                            <input type="text" data-vj-name="" style="width:80px;" >
+                        </div>
+                        <p data-vj-text >
+                            <span class="vj-alert">123</span>
+                            <span class="vj-describe">123</span>
+                        </p>
+                    </div>
+                </div>
 
             </td>
         </tr>
+        <tr>
+            <td class="vj-name">
+                <span class="vj-title-text">名</span>
+            </td>
+
+            <td>
+                <div class="vj-ctrl-input vj-input-single" data-vj-group="">
+                    <div class="vj-ctrl-item" data-vj-index="">
+                        <span data-vj-title>field_name_cn</span>
+                        <div data-vj-elm>
+                            <span data-vj-placeholder>{{ PHOLDER }}</span>
+                            <span data-vj-unit>{{ UNIT }}</span>
+                            <span data-vj-counter>0/{{ LEN /3 }}</span>
+                            <!-- if "USE" = input -->
+                            <input 
+                                type="text"
+
+                                data-vj-name="field_name"
+                                data-vj-LEN=" LEN "
+                                data-vj-max=" MAX "
+                                data-vj-min=" MIN "
+                                FORMAT:
+                                    data-vj-price
+                                    data-vj-date
+                                    data-vj-rate
+                                    data-vj-
+                                EXPRES:
+                                    data-vj-expression
+
+                                 >
+                            <!-- if "USE" = text -->
+                            <!-- <textarea data-vj-nam="" data-vj-len=""> -->
+                        </div>
+                        <p data-vj-text>
+                            <span class="vj-alert">alter!</span>
+                            <span class="vj-describe">describer</span>
+                            
+                        </p>                        
+                    </div>
+                    
+                </div>
+                <br>
+                <br>
+                <br>
+
+                <div class="vj-ctrl-select vj-select-matrix">
+                    <div class="vj-ctrl-item">
+                        <span data-vj-title></span>
+                        <div data-vj-matrix>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>                
+
+            </td>
+        </tr>
+
     </tbody></table>
     
 </div>
