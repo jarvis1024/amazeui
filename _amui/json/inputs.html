@@ -17,14 +17,14 @@
             </td>
 
             <td>
-                <div class="vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
+                <div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
                     <div class="vj-ctrl-item" data-vj-index="">
                         <span data-vj-title>名名</span>
                         <div data-vj-elm>
-                            <span data-vj-placeholder >hinter</span>
-                            <span data-vj-counter >0/1</span>
-                            <span data-vj-unit >个</span>
-                            <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-tofixed="2">
+                            <span data-vj="placeholder" >hinter</span>
+                            <span data-vj="counter" >0/1</span>
+                            <span data-vj="unit" >个</span>
+                            <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-expression="parseFloat({{}}).toFixed(2)">
                         </div>
                         <p data-vj-text >
                             <span class="vj-alert">123</span>
@@ -34,11 +34,11 @@
                 
                 </div>
 
-                <div class="vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
+                <div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
                     <div class="vj-ctrl-item" data-vj-index="1">
                         <span data-vj-title>名1</span>
                         <div data-vj-elm>
-                            <span data-vj-unit >个</span>
+                            <span data-vj="unit" >个</span>
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
                         <p data-vj-text >
@@ -50,7 +50,7 @@
                     <div class="vj-ctrl-item" data-vj-index="2">
                         <span data-vj-title>名2</span>
                         <div data-vj-elm>
-                            <span data-vj-unit >个</span>
+                            <span data-vj="unit" >个</span>
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
                         <p data-vj-text >
@@ -62,7 +62,7 @@
                     <div class="vj-ctrl-item" data-vj-index="3">
                         <span data-vj-title>名3</span>
                         <div data-vj-elm>
-                            <span data-vj-unit >个</span>
+                            <span data-vj="unit" >个</span>
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
                         <p data-vj-text >
@@ -80,13 +80,13 @@
             </td>
 
             <td>
-                <div class="vj-ctrl-input vj-input-single" data-vj-group="">
+                <div class="vj-ctrl vj-ctrl-input vj-input-single" data-vj-group="">
                     <div class="vj-ctrl-item" data-vj-index="">
                         <span data-vj-title>field_name_cn</span>
                         <div data-vj-elm>
-                            <span data-vj-placeholder>{{ PHOLDER }}</span>
-                            <span data-vj-unit>{{ UNIT }}</span>
-                            <span data-vj-counter>0/{{ LEN /3 }}</span>
+                            <span data-vj="placeholder">{{ PHOLDER }}</span>
+                            <span data-vj="unit">{{ UNIT }}</span>
+                            <span data-vj="counter">0/{{ LEN /3 }}</span>
                             <!-- if "USE" = input -->
                             <input 
                                 type="text"
@@ -95,6 +95,7 @@
                                 data-vj-LEN=" LEN "
                                 data-vj-max=" MAX "
                                 data-vj-min=" MIN "
+                                data-vj-format=" FORMAT "
                                 FORMAT:
                                     data-vj-price
                                     data-vj-date
@@ -115,21 +116,86 @@
                     </div>
                     
                 </div>
-                <br>
-                <br>
-                <br>
 
-                <div class="vj-ctrl-select vj-select-matrix">
-                    <div class="vj-ctrl-item">
-                        <span data-vj-title></span>
-                        <div data-vj-matrix>
-                            
+
+                <div class="vj-ctrl vj-ctrl-select vj-select-matrix" data-vj-group="">
+                    <div class="vj-ctrl-item" data-vj-index="" >
+                        <span data-vj-title>Title</span>
+                        <div data-vj-elm data-vj-name="" data-vj-value="" >
+                            <span data-vj="viewer"></span>
+                            <span data-vj="text">select-matrix</span>
+                            <div data-vj-select="matrix" >
+                                <span data-vj-data="Color010" data-vj-bgcolor >Color010</span>
+                                <span data-vj-data="Color020" data-vj-bgcolor >Color020</span>
+                                <span data-vj-data="Color030" data-vj-bgcolor >Color030</span>
+                                <span data-vj-data="Color040" data-vj-bgcolor >Color040</span>
+                                <span data-vj-data="Color050" data-vj-bgcolor >Color050</span>
+                                <span data-vj-data="Color060" data-vj-bgcolor >Color060</span>
+                                <span data-vj-data="Color070" data-vj-bgcolor >Color070</span>
+                                <span data-vj-data="Color080" data-vj-bgcolor >Color080</span>
+                                <span data-vj-data="Color081" data-vj-bgcolor >Color081</span>
+                                <span data-vj-data="Color082" data-vj-bgcolor >Color082</span>
+                                <span data-vj-data="Color090" data-vj-bgcolor >Color090</span>
+                                <span data-vj-data="Color100" data-vj-bgcolor >Color100</span>
+                                <span data-vj-data="Color101" data-vj-bgcolor >Color101</span>
+                                <span data-vj-data="Color102" data-vj-bgcolor >Color102</span>
+                            </div>
                         </div>
                         
                     </div>
                     
-                </div>                
+                </div>
 
+                <div class="vj-ctrl vj-ctrl-select vj-selet-row" data-vj-group="">
+                    <div class="vj-ctrl-item" data-vj-index="">
+                        <span data-vj-title>Title</span>
+                        <div data-vj-elm data-vj-name="" data-vj-value="">
+                            <span data-vj="viewer"></span>
+                            <span data-vj="text">selet-row</span>
+                            <div data-vj-select="row">
+                                <span data-vj-data="value1">item1</span>
+                                <span data-vj-data="value2">item2</span>
+                                <span data-vj-data="value3">item3</span>
+                                <span data-vj-data="value4">item4</span>
+                                <span data-vj-data="value5">item5</span>
+                                <span data-vj-data="value6">item6</span>
+                                <span data-vj-data="value7">item7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="vj-ctrl vj-ctrl-check vj-check-single" data-vj-group="">
+                    <div class="vj-ctrl-item" data-vj-index="" >
+                        <span data-vj-title>Title</span>
+                        <div data-vj-elm data-vj-name="" data-vj-value="" data-vj-check="single">
+                            <span data-vj-data="value1" class="vj-checked" >item1</span>
+                            <span data-vj-data="value2" >item2</span>
+                            <span data-vj-data="value3" >item3</span>
+                            <span data-vj-data="value4" >item4</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+                <div class="vj-ctrl vj-ctrl-check vj-check-mutiple" data-vj-group="">
+                    <div class="vj-ctrl-item" data-vj-index="" >
+                        <span data-vj-title>Title</span>
+                        <div data-vj-elm data-vj-name="" data-vj-value="" data-vj-check="mutiple">
+                            <span data-vj-data="value1" class="vj-checked" >item1</span>
+                            <span data-vj-data="value2" >item2</span>
+                            <span data-vj-data="value3" >item3</span>
+                            <span data-vj-data="value4" >item4</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="vj-ctrl-button">
+                    <button data-vj-action="">上传</button>
+                </div>                
             </td>
         </tr>
 
@@ -138,93 +204,195 @@
 </div>
 <script type="text/javascript">
 
-    var vj_fm = (function(){
-        var dubUtf8_REG = /[\u0080-\u07ff]/g ,
-            trbUtf8_REG = /[\u0800-\uffff]/g ,
-            dubByte_REG = /[^\x00-\xff]/g;
 
-
-        this.checkLen = function( elm ){
-
-            if( $(elm).closest("[data-vj-utf8]").length ){
-                var elmVal = elm.value || $(elm).attr("data-vj-value") || "", 
-                    limitLen = parseInt("0" + $(elm).attr("data-vj-len") ),
-                    dubChr = elmVal.match( dubUtf8_REG ) || [],
-                    trbChr = elmVal.match( trbUtf8_REG ) || [],
-                    chrLen = trbChr.length*2 + dubChr.length + elmVal.length;
-
-                $(elm).prevAll("[data-vj-counter]:first")
-                    .html( 
-                        parseInt(chrLen/3).toString() 
-                      + "/" 
-                      + parseInt(limitLen/3).toString() );
-
-                return chrLen<=limitLen
-
-            }else if( $(elm).closest("[data-vj-gbk]").length ){
-                //
-            }
-        }
-
-        return this
-    })()
     $(document).ready(function(){
 
-        $(".vj-ctrl-input input, .vj-ctrl-input textarea")
-            .on("input", function(){
-                if( this.value ){
-                    $(this).prevAll("[data-vj-placeholder]:first").hide()
+        var vj = (function(){
+            var ss;
 
-                    if( $(this).is("[data-vj-len]") ){
-                        !checkLen( this )?
-                            $(this).addClass("vj-err").prevAll("[data-vj-counter]:first").addClass("vj-err")
-                          : $(this).removeClass("vj-err").prevAll("[data-vj-counter]:first").removeClass("vj-err")
+            var vj_fn = (function(){
+                var dubUtf8_REG = /[\u0080-\u07ff]/g ,
+                    trbUtf8_REG = /[\u0800-\uffff]/g ,
+                    dubByte_REG = /[^\x00-\xff]/g;
+
+
+                return {
+                    checkLen : function( elm ){
+
+                        if( $(elm).closest("[data-vj-utf8]").length ){
+                            var elmVal = elm.value || $(elm).attr("data-vj-value") || "", 
+                                limitLen = parseInt("0" + $(elm).attr("data-vj-len") ),
+                                dubChr = elmVal.match( dubUtf8_REG ) || [],
+                                trbChr = elmVal.match( trbUtf8_REG ) || [],
+                                chrLen = trbChr.length*2 + dubChr.length + elmVal.length;
+
+                            $(elm).siblings("[data-vj=counter]:first")
+                                .html( 
+                                    parseInt(chrLen/3).toString() 
+                                  + "/" 
+                                  + parseInt(limitLen/3).toString() );
+
+                            return chrLen<=limitLen
+
+                        }else if( $(elm).closest("[data-vj-gbk]").length ){
+                            //
+                        }
+                    },
+
+                    nWindow : function(){
+                        var thisDom = 
+                            '<div class=""> '
+                        +   '<div> '
                     }
 
-                }else{
-                    $(this).prevAll("[data-vj-placeholder]:first").show()
-
                 }
-            })
-            .on("change", function(){
-                var thisVal = this.value
-                if( $(this).is("[data-vj-max],[data-vj-min],[data-vj-price]") && isNaN( thisVal ) ){
-                    thisVal = "0"
-                }
-                if( !thisVal.trim() || thisVal==0 ){
-                    thisVal.toString().length ?
-                        $(this).prevAll("[data-vj-placeholder]:first").hide()
-                      : $(this).prevAll("[data-vj-placeholder]:first").show()
-                    this.value = thisVal
-                    return 0
+            })();
+
+            return {
+                input:{
+                    onInput: function(){
+                        if( this.value ){
+                            $(this).siblings("[data-vj=placeholder]:first").hide()
+
+                            if( $(this).is("[data-vj-len]") ){
+                                !vj_fn.checkLen( this )?
+                                    $(this).closest("[data-vj-elm]").addClass("vj-err vj-err-len")
+                                  : $(this).closest("[data-vj-elm]").removeClass("vj-err vj-err-len")
+                            }
+
+                        }else{
+                            $(this).siblings("[data-vj=placeholder]:first").show()
+
+                        }
+                    } ,
+                    onChange: function(){
+                        var thisVal = this.value
+                        if( $(this).is("[data-vj-max],[data-vj-min],[data-vj-price]") && isNaN( thisVal ) ){
+                            thisVal = "0"
+                        }
+                        if( !thisVal.trim() || thisVal==0 ){
+                            thisVal.toString().length ?
+                                $(this).siblings("[data-vj=placeholder]:first").hide()
+                              : $(this).siblings("[data-vj=placeholder]:first").show()
+                            this.value = thisVal
+                            return 0
+                        }
+
+                        if( $(this).is("[data-vj-max]") )
+                            thisVal = Math.min( thisVal, $(this).attr("data-vj-max") )
+
+                        if( $(this).is("[data-vj-min]") )
+                            thisVal = Math.max( thisVal, $(this).attr("data-vj-min") )
+
+                        if( $(this).is("[data-vj-price]") )
+                            $(this).attr( "data-vj-value", parseInt( thisVal*100 ) )
+
+                        if( $(this).is("[data-vj-tofixed]") )
+                            thisVal = parseFloat(thisVal).toFixed(2)
+
+                        if( $(this).is("[data-vj-expression]") )
+                            thisVal = eval( $(this).attr("data-vj-expression").replace(/\{\{\}\}/g , thisVal ) )
+
+                        if( thisVal!==NaN && thisVal!==null )
+                            this.value = thisVal;
+
+                    } ,
+                    onBlur: function(){
+                        // vj_fm.update( $(this).closest("data-vj-group") );
+                    }
+
+                },
+
+                select: {
+                    onClick: function(e){
+                        if( $(e.target).is("[data-vj-data]") ){
+                            if( $(this).has("[data-vj-select='matrix']") ){
+                                var func = "css"; 
+                                var pram = 
+                                    $(e.target).is("[data-vj-bgcolor]") ?
+                                    { backgroundColor: $(e.target).attr("data-vj-bgcolor"), width: 20 }
+                                    :{ width: 0 }
+                            }else{
+                                var func = "html";
+                                var pram = 
+                                    $(e.target).is("[data-vj-html]") ?
+                                    $(e.target).attr("data-vj-html")
+                                    :""
+                            }
+
+                            $(this)
+                                .attr("data-vj-value", $(e.target).attr("data-vj-data") )
+                                .find("[data-vj=text]")
+                                    .html( $(e.target).html() )
+                                    .siblings("[data-vj=viewer]")[func](pram)
+                                   
+                            $(this).trigger("change")
+                        }
+                        $(this).toggleClass("vj-active").find("[data-vj-select]").slideToggle(100);
+                    },
+                    onChange: function(){
+                        // vj_fm.update( $(this).closest("data-vj-group") );
+
+                    }
+
+                },
+
+                check:{
+                    onClick: function(){
+                        if( $(this).closest('[data-vj-check]').attr("data-vj-check")==="single" )
+                            $(this).siblings().removeClass("vj-checked")
+                        $(this).toggleClass("vj-checked");
+
+                        var arrChecked = new Array();
+                        $.each( 
+                            $(this).is(".vj-checked") ?
+                            (   $(this).siblings(".vj-checked").add(this)
+                            ):( $(this).siblings(".vj-checked")
+                            ), function(idx, elm){
+                            arrChecked.push("\"" + $(elm).attr("data-vj-data") + "\"");
+                        })
+
+                        $(this).is("[data-vj-name]") ?
+                            $(this).attr("data-vj-value", true)
+                          : $(this).closest("[data-vj-name]").attr("data-vj-value", arrChecked.join(",") )
+
+
+                    },
+                    onChange: function(){
+                        // vj_fm.update( $(this).closest("data-vj-group") );
+                    }
                 }
 
-                if( $(this).is("[data-vj-max]") )
-                    thisVal = Math.min( thisVal, $(this).attr("data-vj-max") )
+            }
 
-                if( $(this).is("[data-vj-min]") )
-                    thisVal = Math.max( thisVal, $(this).attr("data-vj-min") )
+        })();
 
-                if( $(this).is("[data-vj-price]")){
-                    $(this)
-                        .attr( "data-vj-value", parseInt( thisVal*100 ) )
-                }
-                if( $(this).is("[data-vj-tofixed]") ){
-                    thisVal = parseFloat(thisVal).toFixed(2)
-                }
-                this.value = thisVal
+        $(".vj-ctrl-input input, .vj-ctrl-input textarea")
+            .on("input", vj.input.onInput )
+            .on("change", vj.input.onChange )
+            .on("bulr", vj.input.onBlur )
 
-            })
-            .on("bulr", function(){
-                // vj_fm.update( $(this).closest("data-vj-group") );
-            })
+        $(".vj-ctrl-select [data-vj-elm] ")
+            .on("click", vj.select.onClick )
+            .on("change", vj.select.onChange )
+
+        $(".vj-ctrl-check [data-vj-elm] *")
+            .on("click", vj.check.onClick )
+            .on("change", vj.check.onChange )
 
 
 
         //CSS            
-        $.each( $(".vj-ctrl-input input").closest("[data-vj-item]").has("[data-vj-unit]").find("input"), function(){
+        $.each( $(".vj-ctrl-input input").siblings("[data-vj=unit],[data-vj=counter]"), function(){
+            $(this)
+                .siblings("input")
+                    .css( "padding-right", (this.offsetWidth+8).toString() + "px" )
 
-            $(this).css("padding-right","28px")
+        } )
+        $.each( $(".vj-select-matrix [data-vj-bgcolor]"), function(){
+            $(this)
+                .attr( "data-vj-bgcolor", $(this).css("background-color") )
+                .css("font-size",0)
 
         } )
 
