@@ -193,6 +193,15 @@
                     </div>
                 </div>
 
+                <div class="vj-ctrl vj-ctrl-check vj-check-mutiple" data-vj-group="">
+                    <div class="vj-ctrl-item" data-vj-index="" >
+                        <span data-vj-title>Title</span>
+                        <div data-vj-elm data-vj-check="mutiple">
+                            <span data-vj-data="value1" class="vj-checked" data-vj-name="" data-vj-value="" >item1</span>
+                        </div>
+                        
+                    </div>
+                </div>
                 <div class="vj-ctrl-button">
                     <button data-vj-action="">上传</button>
                 </div>                
@@ -353,10 +362,10 @@
                         })
 
                         $(this).is("[data-vj-name]") ?
-                            $(this).attr("data-vj-value", true)
+                            $(this).attr("data-vj-value", $(this).is(".vj-checked") )
                           : $(this).closest("[data-vj-name]").attr("data-vj-value", arrChecked.join(",") )
 
-
+                        $(this).trigger("change")
                     },
                     onChange: function(){
                         // vj_fm.update( $(this).closest("data-vj-group") );
