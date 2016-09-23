@@ -1,4 +1,4 @@
-var VJSON = function( init_judge ){
+var VJSON = function( init_judge, helper ){
     var target,
         judge = init_judge,
         jugEnum = [ "TYPE", "REQUIRED", "UNREUIRED", "ENUM", "LEN", "ITEM", "RENAME", "DEFAULT", "MAX", "MIN" ],
@@ -128,7 +128,7 @@ var VJSON = function( init_judge ){
                     if( getRequired( itm, vld[i], "REQUIRED" ) ){
                         vld[i].DEFAULT ?
                             parsed_itm[i] = vld[i].DEFAULT
-                          : console.error("!!missing field: "+i )
+                          : console.error("!!missing field: "+i )   //helper.alert( parsed_item[i].ERRMSG.REQ )
                     }else{
                         delete parsed_itm[i]
                     }
@@ -143,7 +143,7 @@ var VJSON = function( init_judge ){
                 if( vld[i].TYPE ){
                     if( vld[i].TYPE.prototype ){
                         if( ! parsed_itm[i] instanceof vld[i].TYPE ){
-                            console.error("!!error type: "+i)
+                            console.error("!!error type: "+i)   //helper.alert( parsed_item[i].ERRMSG.TYP )
                             continue
                         }
                     }else{
@@ -159,7 +159,7 @@ var VJSON = function( init_judge ){
 
                 if( vld[i].LEN ){
                     if( ! getLength( parsed_itm[i], vld[i] ) ){
-                        console.error("!!error length: "+i)
+                        console.error("!!error length: "+i) //helper.alert( parsed_item[i].ERRMSG.LEN )
                         continue
                     }
                 }

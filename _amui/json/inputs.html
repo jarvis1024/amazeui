@@ -24,7 +24,7 @@
                             <span data-vj="placeholder" >hinter</span>
                             <span data-vj="counter" >0/1</span>
                             <span data-vj="unit" >个</span>
-                            <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-expression="parseFloat({{}}).toFixed(2)">
+                            <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
                         </div>
                         <p data-vj-text >
                             <span class="vj-alert">123</span>
@@ -65,10 +65,10 @@
                             <span data-vj="unit" >个</span>
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
-                        <p data-vj-text >
+                        <div data-vj-text >
                             <span class="vj-alert">123</span>
                             <span class="vj-describe">123</span>
-                        </p>
+                        </div>
                     </div>
                 </div>
 
@@ -102,14 +102,14 @@
                                     data-vj-rate
                                     data-vj-
                                 EXPRES:
-                                    data-vj-expression
+                                    data-vj-express
 
                                  >
                             <!-- if "USE" = text -->
                             <!-- <textarea data-vj-nam="" data-vj-len=""> -->
                         </div>
                         <p data-vj-text>
-                            <span class="vj-alert">alter!</span>
+                            <span class="vj-alert">alert!</span>
                             <span class="vj-describe">describer</span>
                             
                         </p>                        
@@ -202,8 +202,24 @@
                         
                     </div>
                 </div>
-                <div class="vj-ctrl-button">
-                    <button data-vj-action="">上传</button>
+
+
+                <div class="vj-ctrl vj-ctrl-button vj-button-upload">
+                    <div class="vj-ctrl-item">
+                        <span data-vj-title >Title</span>
+                        <div data-vj-elm>
+                            <button data-vj-action="FUNCTION_NAME">上传</button>
+                        </div>
+                        <div data-vj-text>
+                            <span class="vj-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                            
+                        </div>
+                    </div>
                 </div>                
             </td>
         </tr>
@@ -214,7 +230,7 @@
 <script type="text/javascript">
 
 
-    $(document).ready(function(){
+    (function(){
 
         var vj = (function(){
             var ss;
@@ -258,6 +274,7 @@
             })();
 
             return {
+
                 input:{
                     onInput: function(){
                         if( this.value ){
@@ -299,8 +316,8 @@
                         if( $(this).is("[data-vj-tofixed]") )
                             thisVal = parseFloat(thisVal).toFixed(2)
 
-                        if( $(this).is("[data-vj-expression]") )
-                            thisVal = eval( $(this).attr("data-vj-expression").replace(/\{\{\}\}/g , thisVal ) )
+                        if( $(this).is("[data-vj-express]") )
+                            thisVal = eval( $(this).attr("data-vj-express").replace(/\{\{\}\}/g , thisVal ) )
 
                         if( thisVal!==NaN && thisVal!==null )
                             this.value = thisVal;
@@ -348,17 +365,17 @@
 
                 check:{
                     onClick: function(){
-                        if( $(this).closest('[data-vj-check]').attr("data-vj-check")==="single" )
-                            $(this).siblings().removeClass("vj-checked")
-                        $(this).toggleClass("vj-checked");
+                        $(this).closest('[data-vj-check]').attr("data-vj-check")==="single" ?
+                            $(this).addClass("vj-checked").siblings().removeClass("vj-checked")
+                          : $(this).toggleClass("vj-checked");
 
                         var arrChecked = new Array();
                         $.each( 
                             $(this).is(".vj-checked") ?
-                            (   $(this).siblings(".vj-checked").add(this)
-                            ):( $(this).siblings(".vj-checked")
-                            ), function(idx, elm){
-                            arrChecked.push("\"" + $(elm).attr("data-vj-data") + "\"");
+                                $(this).siblings(".vj-checked").add(this)
+                              : $(this).siblings(".vj-checked")
+                            , function(idx, elm){
+                                arrChecked.push("\"" + $(elm).attr("data-vj-data") + "\"");
                         })
 
                         $(this).is("[data-vj-name]") ?
@@ -376,10 +393,23 @@
 
         })();
 
+
+        // $.fn.extend({
+        //     vj.alert: function(msg){
+        //             $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-alert").html(msg).show()
+        //         }
+        // })
+
+
         $(".vj-ctrl-input input, .vj-ctrl-input textarea")
             .on("input", vj.input.onInput )
             .on("change", vj.input.onChange )
             .on("bulr", vj.input.onBlur )
+            .fn = {
+                alert : function (msg){
+                    console.log("alert:msg" + msg)
+                }
+            } 
 
         $(".vj-ctrl-select [data-vj-elm] ")
             .on("click", vj.select.onClick )
@@ -388,8 +418,6 @@
         $(".vj-ctrl-check [data-vj-elm] *")
             .on("click", vj.check.onClick )
             .on("change", vj.check.onChange )
-
-
 
         //CSS            
         $.each( $(".vj-ctrl-input input").siblings("[data-vj=unit],[data-vj=counter]"), function(){
@@ -405,7 +433,7 @@
 
         } )
 
-    })
+    })()
 </script>
 </body>
 </html>

@@ -23,10 +23,6 @@
 }
 .vj-form input, .vj-form textarea{
 	border: 1px solid #AAA;
-	line-height: 16px;
-	font-size: 13px;
-	color: #222;
-	padding: 4px 6px;
 	width: 300px;
 }
 .vj-form input:focus, .vj-form textarea:focus, .vj-form button:focus{
@@ -58,6 +54,10 @@
 .vj-ctrl-input input, .vj-ctrl-input textarea{
 	display: block;
 	background-color: transparent;
+	line-height: 16px;
+	font-size: 13px;
+	color: #222;
+	padding: 4px 6px;
 }
 
 [data-vj-elm]{
@@ -70,6 +70,7 @@
 [data-vj-elm]>[data-vj=placeholder]{
 	position: absolute;
 	color: #999;
+	font-size: 14px;
 	line-height: 26px;
 	margin-left: 8px;
 }
@@ -106,7 +107,7 @@
 	font-size: 14px;
 	color: #444;
 }
-.vj-ctrl-input [data-vj-text]>*{
+.vj-ctrl [data-vj-text]>*{
 	display: block;
 	margin-top: 8px;
 	font-size: 12px;

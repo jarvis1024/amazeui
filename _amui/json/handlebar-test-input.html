@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="./inputs.css">
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript" src="./handlebars-v4.0.5.js"></script>
+<script id="entry-template" type="text/x-handlebars-template" >
+    <div class="vj-ctrl vj-ctrl-input {{CTRL_TYPE}}" data-vj-gourp="{{GROUP}}">
+        <div class="vj-ctrl-item" data-vj-index="">
+            <span data-vj-title>{{TITLE}}</span>
+            <div data-vj-elm>
+                {{#if PHOLDER}}<span data-vj="placeholder" >{{PHOLDER}}</span> {{/if}}
+                {{#if COUNTER}}<span data-vj="counter" >0/{{COUNTER}}</span> {{/if}}
+                {{#if UNIT}}<span data-vj="unit" >{{UNIT}}</span> {{/if}}
+                {{#if TEXT}}<span data-vj="text" >{{TEXT}}</span> {{/if}}
+                <{{INPUT}} type="text" data-vj-name="{{NAME}}"{{#if MAX}} data-vj-max="{{MAX}}"{{/if}}{{#if MIN}} data-vj-min="{{MIN}}"{{/if}}{{#if FORMAT}} data-vj-format="{{FORMAT}}"{{/if}}{{#if LEN}} data-vj-len="{{LEN}}"{{/if}}{{#if EXPRESS}} data-vj-express="{{EXPRESS}}"{{/if}}>{{#if_equal INPUT "textarea"}}</textarea>{{/if_equal}}
+            </div>
+            {{#if DESCRIBE}}<div data-vj-text>
+                <span class="vj-alert"></span>
+                <span class="vj-describe">{{DESCRIBE}}</span>
+            </div>{{/if}}
+        </div>
+        {{if ISARR}} {{/if}}
+    </div>
+</script>
+<script type="text/javascript">
+    Handlebars.registerHelper('if_equal', function(val1, val2, options) {
+      if( val1 === val2 ) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    });
+    var source   = $("#entry-template").html();
+    var template = Handlebars.compile(source);
+    var context = {
+        GROUP : "Group Name",
+        TITLE : "Title Text",
+        CTRL_TYPE : "vj-input-single",
+        PHOLDER : "Holder Text",
+        COUNTER : 3076,
+        INPUT: "textarea",
+        MAX : 1000,
+        FORMAT : "price",
+        DESCRIBE : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod."
+
+    };
+    var html    = template(context);
+    document.write(html)
+</script>
