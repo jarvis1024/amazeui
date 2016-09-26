@@ -208,7 +208,7 @@
                     <div class="vj-ctrl-item">
                         <span data-vj-title >Title</span>
                         <div data-vj-elm>
-                            <button data-vj-action="FUNCTION_NAME">上传</button>
+                            <button data-vj-action="{ endpoint: enpointVal }" >上传</button>
                         </div>
                         <div data-vj-text>
                             <span class="vj-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -286,6 +286,7 @@
                                   : $(this).closest("[data-vj-elm]").removeClass("vj-err vj-err-len")
                             }
 
+                            $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-alert").hide()
                         }else{
                             $(this).siblings("[data-vj=placeholder]:first").show()
 
@@ -394,13 +395,6 @@
         })();
 
 
-        // $.fn.extend({
-        //     vj.alert: function(msg){
-        //             $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-alert").html(msg).show()
-        //         }
-        // })
-
-
         $(".vj-ctrl-input input, .vj-ctrl-input textarea")
             .on("input", vj.input.onInput )
             .on("change", vj.input.onChange )
@@ -418,6 +412,16 @@
         $(".vj-ctrl-check [data-vj-elm] *")
             .on("click", vj.check.onClick )
             .on("change", vj.check.onChange )
+
+        $.fn.extend({
+            vj_alert: function( msg ){
+                if( $(this).closest("[data-vj-elm]").length>0 ){
+                    $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-alert").html( msg ).show()
+                }else{
+                    return false
+                }
+            }
+        })
 
         //CSS            
         $.each( $(".vj-ctrl-input input").siblings("[data-vj=unit],[data-vj=counter]"), function(){
