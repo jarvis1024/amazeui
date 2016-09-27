@@ -1,6 +1,9 @@
 <link rel="stylesheet" type="text/css" href="./inputs.css">
-<script type="text/javascript" src="./jquery.min.js"></script>
-<script type="text/javascript" src="./handlebars-v4.0.5.js"></script>
+
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/js/handlebars.js"></script>
+
+<body>
 <script id="entry-template" type="text/x-handlebars-template" >
     <div class="vj-ctrl vj-ctrl-input {{CTRL_TYPE}}" data-vj-gourp="{{GROUP}}">
         <div class="vj-ctrl-item" data-vj-index="">
@@ -12,10 +15,10 @@
                 {{#if TEXT}}<span data-vj="text" >{{TEXT}}</span> {{/if}}
                 <{{INPUT}} type="text" data-vj-name="{{NAME}}"{{#if MAX}} data-vj-max="{{MAX}}"{{/if}}{{#if MIN}} data-vj-min="{{MIN}}"{{/if}}{{#if FORMAT}} data-vj-format="{{FORMAT}}"{{/if}}{{#if LEN}} data-vj-len="{{LEN}}"{{/if}}{{#if EXPRESS}} data-vj-express="{{EXPRESS}}"{{/if}}>{{#if_equal INPUT "textarea"}}</textarea>{{/if_equal}}
             </div>
-            {{#if DESCRIBE}}<div data-vj-text>
+            <div data-vj-text>
                 <span class="vj-alert"></span>
-                <span class="vj-describe">{{DESCRIBE}}</span>
-            </div>{{/if}}
+                <span class="vj-describe">{{{DESC}}}</span>
+            </div>
         </div>
         {{#if ISARR}}{{ISARR}} {{/if}}
     </div>
@@ -38,12 +41,15 @@
         INPUT: "textarea",
         MAX : 1000,
         FORMAT : "price",
-        DESCRIBE : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod."
+        DESC : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.",
+        ERRMSG: {
+            TYP: "type error!",
+            LEN: "length error!",
+            REQ: "missing required field"
+        }
 
     };
     var html    = template(context);
-    $(document).ready(function(){$("body").html(html)})
+    $(document).ready(function(){$("#entry-template").after(html)})
 </script>
-<body>
-    
 </body>

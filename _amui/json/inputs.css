@@ -34,18 +34,19 @@
 	text-align: right;
 	vertical-align: baseline !important ;
 }
-.vj-title-text{
+.vj-title{
 	font-size: 15px;
 	color: #333;
 	line-height: 26px;
 }
-.vj-title-text:after{
+.vj-title:after{
 	content: "：";
 }
 
 .vj-ctrl{
 	position: relative;
 	display: inline-block;
+	font-size: 0;
 }
 .vj-ctrl-item{
 	display: inherit;
@@ -102,6 +103,7 @@
 }
 
 .vj-ctrl [data-vj-title]{
+	margin-right: 4px;
 	white-space: nowrap;
 	line-height: 26px;
 	font-size: 14px;
@@ -114,10 +116,10 @@
 	line-height: 16px;
 }
 
-[data-vj-text] .vj-alert{
+[data-vj-text] .vj-err{
 	color: #D44;
 }
-[data-vj-text] .vj-describe{
+[data-vj-text] .vj-desc{
 	color: #666;
 }
 

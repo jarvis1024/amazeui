@@ -13,7 +13,7 @@
     <table class="vj-form" cellspacing="0" cellpadding="0" data-vj-utf8 ><tbody>
         <tr>
             <td class="vj-name">
-                <span class="vj-title-text">名</span>
+                <span class="vj-title">名</span>
             </td>
 
             <td>
@@ -27,8 +27,8 @@
                             <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
                         </div>
                         <p data-vj-text >
-                            <span class="vj-alert">123</span>
-                            <span class="vj-describe">123</span>
+                            <span class="vj-err">123</span>
+                            <span class="vj-desc">123</span>
                         </p>
                     </div>
                 
@@ -42,8 +42,8 @@
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
                         <p data-vj-text >
-                            <span class="vj-alert">123</span>
-                            <span class="vj-describe">123</span>
+                            <span class="vj-err">123</span>
+                            <span class="vj-desc">123</span>
                         </p>
                     </div>
 
@@ -54,8 +54,8 @@
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
                         <p data-vj-text >
-                            <span class="vj-alert">123</span>
-                            <span class="vj-describe">123</span>
+                            <span class="vj-err">123</span>
+                            <span class="vj-desc">123</span>
                         </p>
                     </div>
 
@@ -66,8 +66,8 @@
                             <input type="text" data-vj-name="" style="width:80px;" >
                         </div>
                         <div data-vj-text >
-                            <span class="vj-alert">123</span>
-                            <span class="vj-describe">123</span>
+                            <span class="vj-err">123</span>
+                            <span class="vj-desc">123</span>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
         </tr>
         <tr>
             <td class="vj-name">
-                <span class="vj-title-text">名</span>
+                <span class="vj-title">名</span>
             </td>
 
             <td>
@@ -109,8 +109,8 @@
                             <!-- <textarea data-vj-nam="" data-vj-len=""> -->
                         </div>
                         <p data-vj-text>
-                            <span class="vj-alert">alert!</span>
-                            <span class="vj-describe">describer</span>
+                            <span class="vj-err">alert!</span>
+                            <span class="vj-desc">describer</span>
                             
                         </p>                        
                     </div>
@@ -211,7 +211,8 @@
                             <button data-vj-action="{ endpoint: enpointVal }" >上传</button>
                         </div>
                         <div data-vj-text>
-                            <span class="vj-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            <span class="vj-err"></span>
+                            <span class="vj-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -227,217 +228,7 @@
     </tbody></table>
     
 </div>
-<script type="text/javascript">
-
-
-    (function(){
-
-        var vj = (function(){
-            var ss;
-
-            var vj_fn = (function(){
-                var dubUtf8_REG = /[\u0080-\u07ff]/g ,
-                    trbUtf8_REG = /[\u0800-\uffff]/g ,
-                    dubByte_REG = /[^\x00-\xff]/g;
-
-
-                return {
-                    checkLen : function( elm ){
-
-                        if( $(elm).closest("[data-vj-utf8]").length ){
-                            var elmVal = elm.value || $(elm).attr("data-vj-value") || "", 
-                                limitLen = parseInt("0" + $(elm).attr("data-vj-len") ),
-                                dubChr = elmVal.match( dubUtf8_REG ) || [],
-                                trbChr = elmVal.match( trbUtf8_REG ) || [],
-                                chrLen = trbChr.length*2 + dubChr.length + elmVal.length;
-
-                            $(elm).siblings("[data-vj=counter]:first")
-                                .html( 
-                                    parseInt(chrLen/3).toString() 
-                                  + "/" 
-                                  + parseInt(limitLen/3).toString() );
-
-                            return chrLen<=limitLen
-
-                        }else if( $(elm).closest("[data-vj-gbk]").length ){
-                            //
-                        }
-                    },
-
-                    nWindow : function(){
-                        var thisDom = 
-                            '<div class=""> '
-                        +   '<div> '
-                    }
-
-                }
-            })();
-
-            return {
-
-                input:{
-                    onInput: function(){
-                        if( this.value ){
-                            $(this).siblings("[data-vj=placeholder]:first").hide()
-
-                            if( $(this).is("[data-vj-len]") ){
-                                !vj_fn.checkLen( this )?
-                                    $(this).closest("[data-vj-elm]").addClass("vj-err vj-err-len")
-                                  : $(this).closest("[data-vj-elm]").removeClass("vj-err vj-err-len")
-                            }
-
-                            $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-alert").hide()
-                        }else{
-                            $(this).siblings("[data-vj=placeholder]:first").show()
-
-                        }
-                    } ,
-                    onChange: function(){
-                        var thisVal = this.value
-                        if( $(this).is("[data-vj-max],[data-vj-min],[data-vj-price]") && isNaN( thisVal ) ){
-                            thisVal = "0"
-                        }
-                        if( !thisVal.trim() || thisVal==0 ){
-                            thisVal.toString().length ?
-                                $(this).siblings("[data-vj=placeholder]:first").hide()
-                              : $(this).siblings("[data-vj=placeholder]:first").show()
-                            this.value = thisVal
-                            return 0
-                        }
-
-                        if( $(this).is("[data-vj-max]") )
-                            thisVal = Math.min( thisVal, $(this).attr("data-vj-max") )
-
-                        if( $(this).is("[data-vj-min]") )
-                            thisVal = Math.max( thisVal, $(this).attr("data-vj-min") )
-
-                        if( $(this).is("[data-vj-price]") )
-                            $(this).attr( "data-vj-value", parseInt( thisVal*100 ) )
-
-                        if( $(this).is("[data-vj-tofixed]") )
-                            thisVal = parseFloat(thisVal).toFixed(2)
-
-                        if( $(this).is("[data-vj-express]") )
-                            thisVal = eval( $(this).attr("data-vj-express").replace(/\{\{\}\}/g , thisVal ) )
-
-                        if( thisVal!==NaN && thisVal!==null )
-                            this.value = thisVal;
-
-                    } ,
-                    onBlur: function(){
-                        // vj_fm.update( $(this).closest("data-vj-group") );
-                    }
-
-                },
-
-                select: {
-                    onClick: function(e){
-                        if( $(e.target).is("[data-vj-data]") ){
-                            if( $(this).has("[data-vj-select='matrix']") ){
-                                var func = "css"; 
-                                var pram = 
-                                    $(e.target).is("[data-vj-bgcolor]") ?
-                                    { backgroundColor: $(e.target).attr("data-vj-bgcolor"), width: 20 }
-                                    :{ width: 0 }
-                            }else{
-                                var func = "html";
-                                var pram = 
-                                    $(e.target).is("[data-vj-html]") ?
-                                    $(e.target).attr("data-vj-html")
-                                    :""
-                            }
-
-                            $(this)
-                                .attr("data-vj-value", $(e.target).attr("data-vj-data") )
-                                .find("[data-vj=text]")
-                                    .html( $(e.target).html() )
-                                    .siblings("[data-vj=viewer]")[func](pram)
-                                   
-                            $(this).trigger("change")
-                        }
-                        $(this).toggleClass("vj-active").find("[data-vj-select]").slideToggle(100);
-                    },
-                    onChange: function(){
-                        // vj_fm.update( $(this).closest("data-vj-group") );
-
-                    }
-
-                },
-
-                check:{
-                    onClick: function(){
-                        $(this).closest('[data-vj-check]').attr("data-vj-check")==="single" ?
-                            $(this).addClass("vj-checked").siblings().removeClass("vj-checked")
-                          : $(this).toggleClass("vj-checked");
-
-                        var arrChecked = new Array();
-                        $.each( 
-                            $(this).is(".vj-checked") ?
-                                $(this).siblings(".vj-checked").add(this)
-                              : $(this).siblings(".vj-checked")
-                            , function(idx, elm){
-                                arrChecked.push("\"" + $(elm).attr("data-vj-data") + "\"");
-                        })
-
-                        $(this).is("[data-vj-name]") ?
-                            $(this).attr("data-vj-value", $(this).is(".vj-checked") )
-                          : $(this).closest("[data-vj-name]").attr("data-vj-value", arrChecked.join(",") )
-
-                        $(this).trigger("change")
-                    },
-                    onChange: function(){
-                        // vj_fm.update( $(this).closest("data-vj-group") );
-                    }
-                }
-
-            }
-
-        })();
-
-
-        $(".vj-ctrl-input input, .vj-ctrl-input textarea")
-            .on("input", vj.input.onInput )
-            .on("change", vj.input.onChange )
-            .on("bulr", vj.input.onBlur )
-            .fn = {
-                alert : function (msg){
-                    console.log("alert:msg" + msg)
-                }
-            } 
-
-        $(".vj-ctrl-select [data-vj-elm] ")
-            .on("click", vj.select.onClick )
-            .on("change", vj.select.onChange )
-
-        $(".vj-ctrl-check [data-vj-elm] *")
-            .on("click", vj.check.onClick )
-            .on("change", vj.check.onChange )
-
-        $.fn.extend({
-            vj_alert: function( msg ){
-                if( $(this).closest("[data-vj-elm]").length>0 ){
-                    $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-alert").html( msg ).show()
-                }else{
-                    return false
-                }
-            }
-        })
-
-        //CSS            
-        $.each( $(".vj-ctrl-input input").siblings("[data-vj=unit],[data-vj=counter]"), function(){
-            $(this)
-                .siblings("input")
-                    .css( "padding-right", (this.offsetWidth+8).toString() + "px" )
-
-        } )
-        $.each( $(".vj-select-matrix [data-vj-bgcolor]"), function(){
-            $(this)
-                .attr( "data-vj-bgcolor", $(this).css("background-color") )
-                .css("font-size",0)
-
-        } )
-
-    })()
-</script>
+<script type="text/javascript" src="validate_json.js"></script>
+<script type="text/javascript" src="inputs.js"></script>
 </body>
 </html>
