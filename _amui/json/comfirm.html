@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="inputs.css">
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+    $.extend({
+        vj_comfirm: function(option){
+            if( !typeof(option.primary)==="function" )
+                return false
+            
+            if( !typeof(option.default)==="function" )
+                return false
+
+            title = option.title || "确认操作";
+            desc = option.desc || "该操作可能无法撤销，是否确认？";
+            btn1 = option.primaryText || "确认";
+            btn2 = option.defaultText || "取消";
+
+            var box = $.parseHTML("<div class="+(option.theme? "vj-cfm-"+option.theme: "vj-cfm-box")+"><div><h5>"+title+"</h5><p>"+(option.icon? "<span data-vj-icon="+option.icon+"></span>": "")+desc+"</p><button id=vj_btn_primary>"+btn1+"</button><button id=vj_btn_default>"+btn2+"</button></div></div>")
+            
+            $(box).find("#vj_btn_primary").on("click", option.primary )
+            $(box).find("#vj_btn_default").on("click", option.default )
+            $(box).find("#vj_btn_primary,#vj_btn_default,#vj_btn_close").on("click", function(){
+                $(this).closest("[class*=vj-cfm]").remove()
+            } )
+
+            if( !$(document.body).find("[class*=vj-cfm]").length )
+                $(document.body).append(box)
+        }
+    })
+
+    var s = (msg)=>{$.vj_comfirm({
+            title: "the title",
+            desc: "the description "+msg,
+            primary: function(){
+                console.log("primary btn "+msg)
+            },
+            default: function(){
+                console.log("default btn "+msg)
+            },
+            icon: "test"
+        })}
+</script>
+
+<button onclick="s('hello world')">test</button>
+

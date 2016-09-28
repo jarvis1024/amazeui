@@ -1,0 +1,36 @@
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/js/jquery-ui[drag_ort].min.js"></script>
+<body>
+    <style type="text/css">
+        .items{
+            display: inline-block;
+            font-size: 14px;
+            vertical-align: middle;
+            padding: 0 10px;
+            font-size: 13px;
+            line-height: 26px;
+            color: #7F7F7F;
+            background-color: #EEE;
+            cursor: move;
+        }
+    </style>
+    <div style="height:36px;padding:0 35px; margin:50px 0; font-size:0" class="sortable">
+        <span class="items" data-idx="0">item1 </span>
+        <span class="items" data-idx="0">item2</span>
+        <span class="items" data-idx="0">item3</span>
+        <span class="items" data-idx="0">item4</span>
+    </div>
+    <script type="text/javascript">
+        $(".sortable").sortable({
+            axis: "x",
+            update: function( e, ui){
+                $.each( $(this).find(".items"), function( idx, elm ){
+                    var targetIdx = $(elm).attr("data-idx")
+                    console.log(targetIdx)
+                    $(elm).attr("data-idx", idx);
+                })
+            }
+        })
+    </script>
+
+</body>
