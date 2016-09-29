@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>form control</title>
     <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui[drag_ort].min.js"></script>
     <link rel="stylesheet" type="text/css" href="./inputs.css">
 </head>
 <body>
@@ -223,6 +224,43 @@
                     </div>
                 </div>                
             </td>
+        </tr>
+
+        <tr>
+            <td class="vj-name">
+                <span class="vj-title">{{TITLE}}</span>
+            </td>
+            <td>
+                <div class="vj-table vj-tag-table" data-vj-group="GROUPNAEM" >
+                    <div class="vj-tag-container">
+                        <span data-vj-tag="0" class="vj-tag-view vj-active">未命名</span>
+                        <span data-vj-add></span>
+                    </div>
+                    <div class="vj-tab-container">
+                        <div data-vj-tab="0" class="vj-active">
+                            <div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="GROUPNAEM">
+                                <div class="vj-ctrl-item" data-vj-index="">
+                                    <span data-vj-title>名名</span>
+                                    <div data-vj-elm data-vj-toview>
+                                        <span data-vj="placeholder" >hinter</span>
+                                        <span data-vj="counter" >0/1</span>
+                                        <span data-vj="unit" >个</span>
+                                        <input type="text" data-vj-name="FILED" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
+                                    </div>
+                                    <p data-vj-text >
+                                        <span class="vj-err">123</span>
+                                        <span class="vj-desc">123</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </td>
+
         </tr>
 
     </tbody></table>

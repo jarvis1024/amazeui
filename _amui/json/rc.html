@@ -19,7 +19,7 @@
                 <!-- tag table -->
                 <div class="vj-table vj-tag-table" data-vj-group="GROUPNAEM" >
                     <div class="vj-tag-container">
-                        <span data-vj-tag="0" class="btn-view vj-active">未命名</span>
+                        <span data-vj-tag="0" class="vj-tag-view vj-active">未命名</span>
                         <span data-vj-add></span>
                     </div>
                     <div class="vj-tab-container">
@@ -51,70 +51,6 @@
 
         </tr>
     </tbody></table>
-    <style type="text/css">
-        .vj-tag-container{
-            position: relative;
-            padding: 0 24px;
-            font-size: 0;
-            z-index: 1;
-            margin-bottom: -1px;
-        }
-        .vj-tag-container .btn-view{
-            display: inline-block;
-            vertical-align: middle;
-            padding: 0 10px;
-            font-size: 13px;
-            line-height: 26px;
-            color: #7F7F7F;
-            background-color: #EEE;
-        }
-        .vj-tag-container .btn-view:hover{
-            color: #2A2;
-            cursor: pointer;
-            text-decoration: underline; 
-        }
-        .vj-tag-container .btn-view.vj-active{
-            color: #666;
-            border-width: 1px 1px 0 1px;
-            background-color: #FFF;
-            border-color: #CCC;
-            border-style: solid;
-        }
-        .vj-tag-container [data-vj-add]:before{
-            content: "+";
-            display: inline-block;
-            font-family: Tahoma;
-            font-weight: bold;
-            font-size: 16px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            vertical-align: middle;
-            text-align: center;
-            color: #7F7F7F;
-            background-color: #EEE;
-            cursor: pointer;
-            margin-left: 12px;
-        }
-        .vj-tag-container [data-vj-add]:hover:before{
-            color: #2A2;
-        }
-
-
-        .vj-tab-container{
-            border: 1px solid #CCC;
-            padding: 24px;
-            position: relative;
-        }
-        .vj-tab-container [data-vj-tab]{
-            position: relative;
-            top: 0
-        }
-/*        .vj-tab-container [data-vj-tab].vj-active{
-            left: 0;
-        }
-*/
-    </style>
     <script id="vj_root" type="text/x-handlebars-template" >
         <tr>
             <td class="vj-name">
@@ -127,133 +63,7 @@
         </tr>
     </script>
 
-    <script type="text/javascript">
-
-        (function(){
-            $.extend({
-                vj_comfirm: function(option){
-                    if(!typeof(option.primary)==="function")
-                        return false
-                    
-                    if(!(typeof(option.default)==="function"))
-                        return false
-                    
-                    title = option.title || "确认操作";
-                    desc = option.desc || "该操作可能无法撤销，是否确认？";
-                    btn1 = option.primaryText || "确认";
-                    btn2 = option.defaultText || "取消";
-
-                    var box = $.parseHTML("<div><h5>"+title+"</h5><p>"+desc+(option.icon? "<i class="+option.icon+"></i>": "")+"</p><button id=vj_btn_primary>"+btn1+"</button><button id=vj_btn_default>"+btn2+"</button></div>")
-                    $(box).addClass( option.theme? "vj-cfm-"+option.theme: "vj-cfm-box" )
-                    
-                    $(box).find("#vj_btn_primary").on("click", option.primary )
-                    $(box).find("#vj_btn_default").on("click", option.default )
-                    $(box).find("#vj_btn_primary,#vj_btn_default,#vj_btn_close").on("click", function(){
-                        $(this).closest("[class*=vj-cfm]").remove()
-                    } )
-
-                    $(document.body).prepend(box)
-                }
-            })
-
-            var  vj_table_toview_target_onChange = function(){
-                    var str = $(this).val() || $(this).attr("data-vj-value");
-                        target = $(this).closest("[data-vj-tab]").attr("data-vj-tab");
-                    $("[data-vj-tag='"+target+"']").html( str );
-                },
-                vj_tag_click = function(){
-                    var tagIdx = $(this).attr("data-vj-tag"),
-                        currIdx = $(this).siblings(".vj-active").attr("data-vj-tag");
-
-                    if( !$(this).hasClass("vj-active") )
-                        $(this).add( $(this).siblings(".vj-active") ).toggleClass("vj-active")
-                    $(this).closest(".vj-table")
-                        .find(".vj-tab-container [data-vj-tab="+ tagIdx +"]")
-                            .addClass("vj-active").fadeIn(100)
-                            .siblings().removeClass("vj-active").hide()
-
-
-                }
-            window.model = {
-                GROUPNAEM: {
-                    TAG_HTML: '<span data-vj-tag="\{\{INDEX\}\}" class="btn-view">未命名</span>',
-                    TAB_HTML: '<div data-vj-tab="\{\{INDEX\}\}">'+
-                            '<div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="GROUPNAEM">'+
-                                '<div class="vj-ctrl-item" data-vj-index="">'+
-                                    '<span data-vj-title>名名</span>'+
-                                    '<div data-vj-elm data-vj-toview>'+
-                                        '<span data-vj="placeholder" >hinter</span>'+
-                                        '<span data-vj="counter" >0/1</span>'+
-                                        '<span data-vj="unit" >个</span>'+
-                                        '<input type="text" data-vj-name="FILED" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">'+
-                                    '</div>'+
-                                    '<p data-vj-text >'+
-                                        '<span class="vj-err">123</span>'+
-                                        '<span class="vj-desc">123</span>'+
-                                    '</p>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                }
-            }
-            $("[data-vj-toview] [data-vj-value],input,textarea")
-                .on("change", vj_table_toview_target_onChange )
-
-            $(".btn-view")
-                .on("click", vj_tag_click )
-
-            $(".vj-tag-table").sortable({
-                axis: "x",
-                items: " .btn-view",
-                start: function( e, ui){
-                    $.each( $(this).find("[data-vj-tab]"), function( idx, elm ){
-                        $(elm).attr("data-vj-cache", $(elm).attr("data-vj-tab"))
-                    })
-                },
-                update: function( e, ui){
-                    var $context = $(this)
-                    $.each( $context.find("[data-vj-tag]"), function( idx, elm ){
-                        var targetIdx = $(elm).attr("data-vj-tag")
-                        $context.find("[data-vj-cache="+targetIdx+"]").attr("data-vj-tab", idx)
-                        $(elm).attr("data-vj-tag", idx)
-                    })
-
-                    $context.find("[data-vj-cache]").removeAttr("data-vj-cache")
-                }
-            })
-
-
-            $(".vj-tag-container [data-vj-add]")
-                .on("click", function(){
-                    var tagCount = $(".btn-view").length,
-                        tagHTML = $.parseHTML( model.GROUPNAEM.TAG_HTML.replace(/\{\{INDEX\}\}/g, tagCount) ),
-                        tabHTML = $.parseHTML( model.GROUPNAEM.TAB_HTML.replace(/\{\{INDEX\}\}/g, tagCount) );
-
-                    $( tabHTML )
-                        .find("[data-vj-toview] [data-vj-value],input,textarea")
-                        .on("change", vj_table_toview_target_onChange );
-                    $( tagHTML )
-                        .on("click", vj_tag_click);
-
-                    $(this)
-                        .before( tagHTML )
-                        .closest(".vj-table")
-                        .find(".vj-tab-container")
-                        .append( tabHTML )
-
-                    $(tagHTML).trigger("click")
-                } )
-
-
-            $(document).on("click", function(e){
-                // console.log(e)
-            }).on("mouseup", function(e){
-                // console.log(e)
-            }).on("mousemove", function(e){
-                // console.log(e)
-            })
-        })()
-    </script>
+    <script type="text/javascript" src="table.tag.js"></script>
 
 </body>
 </html>
