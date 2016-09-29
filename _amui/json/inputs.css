@@ -281,13 +281,13 @@
 /*COMFIRM*/
 	.vj-cfm-box{
 		position: fixed;
+        z-index: 1;
 		width: 100%;
         top: 50%;
         left: 0;
 	}
     .vj-cfm-box>div{
         position: relative;
-        z-index: 1;
         margin: -50px auto;
         width: 340px;
         background-color: #FFF;
@@ -328,20 +328,115 @@
     .vj-cfm-box button:hover{
         text-decoration: underline;
     }
-    .vj-cfm-box>#vj_btn_primary{
-    }
-    .vj-cfm-box>#vj_btn_default{
-    }
     .vj-cfm-box [data-vj-icon]{
-    	display: block;
-    	float: left;
-    	height: 100%;
-    	min-height: 32px;
-    	width: 32px;
-    	margin: 0 8px 8px 0;
-    	background-repeat: no-repeat;
+        display: block;
+        float: left;
+        height: 100%;
+        min-height: 32px;
+        width: 32px;
+        margin: 0 8px 8px 0;
+        background-repeat: no-repeat;
+    }
+/*CONTEXT MENU*/
+    .vj-context-menu{
+        position: fixed;
+        border: 1px solid #CCC;
+        background-color: #FFF;
+        font-size: 0;
+        z-index: 1
+    }
+    .vj-context-menu:before,.vj-context-menu:after{
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: dashed dashed solid;
+    }
+    .vj-context-menu:after{
+        border-color: transparent transparent #FFF;
+        border-width: 0 5px 8px 5px;
+        top: -8px;
+        left: 10px;
+    }
+    .vj-context-menu:before{
+        border-color: transparent transparent #CCC;
+        border-width: 0 6px 10px 6px;
+        top: -10px;
+        left: 9px;
     }
 
-    .vj-cfm-box [data-vj-icon=test]{
-    	background-color: #666;
+    .vj-context-menu>div{
+        display: block;
+        cursor: pointer;
+        font-size: 12px;
+        color: #444;
+        padding: 0 8px;
+        line-height: 24px;
+        z-index: 1
+    }
+    .vj-context-menu>div:hover{
+        background-color: #F0F0F0;
+        color: #2A2;
+    }
+
+/*TABLE TAG*/
+    .vj-table{
+        margin: 0 20px;
+    }
+    .vj-tag-container{
+        position: relative;
+        padding: 0 24px;
+        font-size: 0;
+        z-index: 1;
+        margin-bottom: -1px;
+    }
+    .vj-tag-container .vj-tag-view{
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0 10px;
+        font-size: 13px;
+        line-height: 26px;
+        color: #7F7F7F;
+        background-color: #EEE;
+    }
+    .vj-tag-container .vj-tag-view:hover{
+        color: #2A2;
+        cursor: pointer;
+        text-decoration: underline; 
+    }
+    .vj-tag-container .vj-tag-view.vj-active{
+        color: #666;
+        border-width: 1px 1px 0 1px;
+        background-color: #FFF;
+        border-color: #CCC;
+        border-style: solid;
+    }
+    .vj-tag-container [data-vj-add]:before{
+        content: "+";
+        display: inline-block;
+        font-family: Tahoma;
+        font-weight: bold;
+        font-size: 16px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        vertical-align: middle;
+        text-align: center;
+        color: #7F7F7F;
+        background-color: #EEE;
+        cursor: pointer;
+        margin-left: 12px;
+    }
+    .vj-tag-container [data-vj-add]:hover:before{
+        color: #2A2;
+    }
+    .vj-tab-container{
+        border: 1px solid #CCC;
+        padding: 24px;
+        position: relative;
+    }
+    .vj-tab-container [data-vj-tab]{
+        position: relative;
+        top: 0
     }

@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="inputs.css">
+<link rel="stylesheet" type="text/css" href="contextMenu.css">
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+
+<span style="background:#CCC; line-height: 80px; padding: 0 20px;display:inline-block;box-sizing:border-box;" id="tag" contextmenu="tag-menu">ABCDEFG</span>
+<script type="text/javascript">
+(function(){
+
+    var dataTagMen = {
+        "按钮1": {
+            fn: function(e){
+                // e.data.target.dosth
+
+            }
+        }
+    }
+    var createContextMenu = function(e){
+            $("body>.vj-context-menu").remove()
+            e.preventDefault()
+            var menu = document.createElement("div")
+                items = [],
+                $context = $(this),
+                ii = 0;
+
+            $(menu)
+                .addClass("vj-context-menu")
+                .css({
+                    top: e.clientY + 10,
+                    left: e.clientX - 15,
+                })
+
+            for( var x in e.data ){
+                items.push( document.createElement("div") )
+                items[ii].innerHTML = x;
+                $(items[ii])
+                    .on("click", { target: $context }, e.data[x].fn || {} )
+                    .css( e.data[x].css|| {} )
+                $(menu).append( items[ii] )
+                ii++;
+            }
+
+            $(document.body)
+                .append(menu)
+                .one("click", function(){
+                    $(menu).remove()
+                })
+        }
+    $("#tag")
+        .on("contextmenu", dataTagMen, createContextMenu )
+
+})()
+
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON MVForm</title>
+    <link rel="stylesheet" type="text/css" href="../json/inputs.css">
+</head>
+<body>
+<script id="temp-ctrl-input" type="text/x-handlebars-template" >
+    <div class="vj-ctrl vj-ctrl-input {{CTRL_TYPE}}" data-vj-gourp="{{GROUP}}">
+        <div class="vj-ctrl-item" data-vj-index="">
+            <span data-vj-title>{{TITLE}}</span>
+            <div data-vj-elm>
+                {{#if PHOLDER}}<span data-vj="placeholder" >{{PHOLDER}}</span> {{/if}}
+                {{#if COUNTER}}<span data-vj="counter" >0/{{COUNTER}}</span> {{/if}}
+                {{#if UNIT}}<span data-vj="unit" >{{UNIT}}</span> {{/if}}
+                {{#if TEXT}}<span data-vj="text" >{{TEXT}}</span> {{/if}}
+                <{{INPUT}} type="text" data-vj-name="{{NAME}}"{{#if MAX}} data-vj-max="{{MAX}}"{{/if}}{{#if MIN}} data-vj-min="{{MIN}}"{{/if}}{{#if FORMAT}} data-vj-format="{{FORMAT}}"{{/if}}{{#if LEN}} data-vj-len="{{LEN}}"{{/if}}{{#if EXPRESS}} data-vj-express="{{EXPRESS}}"{{/if}}>{{#if_equal INPUT "textarea"}}</textarea>{{/if_equal}}
+            </div>
+            <div data-vj-text>
+                <span class="vj-alert"></span>
+                <span class="vj-describe">{{{DESC}}}</span>
+            </div>
+        </div>
+        {{#if ISARR}}{{ISARR}} {{/if}}
+    </div>
+</script>
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/js/handlebars.min.js"></script>
+<script type="text/javascript">
+    var modle = {
+            "field":{
+                "TYPE": "string"
+            }
+
+        },
+        m_defaults={
+            "string":{
+                "DOM": "<input type=text >",
+                "ERRMSG":{
+                    "LEN": "length error",
+                    "TYPE": "type error",
+                    "REQ": "missing field"
+                }
+            }
+        },
+        m_option ={
+            "string":{
+                "ERRMSG":{
+                    "LEN": "length error (m_option)",
+                    "TYPE": "type error (m_option)",
+                    "REQ": "missing field (m_option)"
+                }
+            }
+        };
+
+    (()=>{
+        $.fn.extend({
+            vj: function( m ){
+                function loop ( object, option, defaults ){
+                    //@param objcet: 
+                    //@param option: 
+                    //@param defaults: 
+                    $.eatch( option, function( idx, elm ){
+                        if( elm instanceof Object ){
+                            object[idx] = loop( object[idx], option[idx], defaults )
+                        }else{
+                            var elmType = 
+                                ( typeof(elm.TYPE)==="string" ? 
+                                    elm.TYPE
+                                  : ( elm.TYPE===Object ? "object": elm.ITEM )
+                                )
+                            if( typeof(elm.TYPE)==="string" ){
+                                elm = $.extend( elm, defaults[ elm.TYPE ])
+                            }
+                        }
+
+                        object[idx] = modle[idx];
+
+                    } )
+
+                }
+                var $container = $(this),
+                    loop = ( object, option, defaults )=>{
+                        $.eatch( option, function( idx, elm ){
+                            if( )
+                            object[idx] = modle[idx];
+
+                        } )
+
+                    }
+                    main = {},
+                    option = m;
+            }
+        })
+        console.log(jQuery)
+    })()
+</script>
+</body>
+</html>
