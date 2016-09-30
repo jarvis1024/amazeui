@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../json/inputs.css">
 </head>
 <body>
+<div id="tag" data-vj-test='{ set:"UP"}' >DATA</div>
 <script id="temp-ctrl-input" type="text/x-handlebars-template" >
     <div class="vj-ctrl vj-ctrl-input {{CTRL_TYPE}}" data-vj-gourp="{{GROUP}}">
         <div class="vj-ctrl-item" data-vj-index="">
@@ -35,7 +36,7 @@
         },
         m_defaults={
             "string":{
-                "DOM": "<input type=text >",
+                "CTRL_TYPE": "vj-input-single",
                 "ERRMSG":{
                     "LEN": "length error",
                     "TYPE": "type error",
@@ -53,47 +54,57 @@
             }
         };
 
-    (()=>{
-        $.fn.extend({
-            vj: function( m ){
-                function loop ( object, option, defaults ){
-                    //@param objcet: 
-                    //@param option: 
-                    //@param defaults: 
-                    $.eatch( option, function( idx, elm ){
-                        if( elm instanceof Object ){
-                            object[idx] = loop( object[idx], option[idx], defaults )
-                        }else{
-                            var elmType = 
-                                ( typeof(elm.TYPE)==="string" ? 
-                                    elm.TYPE
-                                  : ( elm.TYPE===Object ? "object": elm.ITEM )
-                                )
-                            if( typeof(elm.TYPE)==="string" ){
-                                elm = $.extend( elm, defaults[ elm.TYPE ])
-                            }
-                        }
+    (($)=>{
+        // $.fn.extend({
+        //     vj: function( m ){
+        //         function loop ( object, option, defaults ){
+        //             //@param objcet: 
+        //             //@param option: 
+        //             //@param defaults: 
+        //             $.eatch( option, function( idx, elm ){
+        //                 if( elm instanceof Object ){
+        //                     object[idx] = loop( object[idx], option[idx], defaults )
+        //                 }else{
+        //                     var elmType = 
+        //                         ( typeof(elm.TYPE)==="string" ? 
+        //                             elm.TYPE
+        //                           : ( elm.TYPE===Object ? "object": elm.ITEM )
+        //                         )
+        //                     if( typeof(elm.TYPE)==="string" ){
+        //                         elm = $.extend( elm, defaults[ elm.TYPE ])
+        //                     }
+        //                 }
 
-                        object[idx] = modle[idx];
+        //                 object[idx] = modle[idx];
 
-                    } )
+        //             } )
 
-                }
-                var $container = $(this),
-                    loop = ( object, option, defaults )=>{
-                        $.eatch( option, function( idx, elm ){
-                            if( )
-                            object[idx] = modle[idx];
+        //         }
+        //         var $container = $(this),
+        //             loop = ( object, option, defaults )=>{
+        //                 $.eatch( option, function( idx, elm ){
+        //                     if( )
+        //                     object[idx] = modle[idx];
 
-                        } )
+        //                 } )
 
-                    }
-                    main = {},
-                    option = m;
+        //             }
+        //             main = {},
+        //             option = m;
+        //     }
+        // })
+        $.extend({
+            vj: function( selector, option ){
+                var $container = selector instanceof $ ? selector : $(selector);
+                if( !$container.length ) return false
+
+                console.log( $.extend(0, {}, m_option, m_defaults) )
+
             }
+
         })
-        console.log(jQuery)
-    })()
+    })(jQuery)
+
 </script>
 </body>
 </html>

@@ -19,7 +19,7 @@
             btn1 = option.primaryText || "确认";
             btn2 = option.defaultText || "取消";
 
-            var box = $.parseHTML("<div class="+(option.theme? "vj-cfm-"+option.theme: "vj-cfm-box")+"><div><h5>"+title+"</h5><p>"+(option.icon? "<span data-vj-icon="+option.icon+"></span>": "")+desc+"</p><button id=vj_btn_primary>"+btn1+"</button><button id=vj_btn_default>"+btn2+"</button></div></div>")
+            var box = $.parseHTML("<div class="+(option.theme? "vj-cfm-"+option.theme: "vj-cfm-box")+"><div><h5>"+title+"</h5><p>"+(option.icon? "<span class=vj-icon-"+option.icon+"></span>": "")+desc+"</p><button id=vj_btn_primary>"+btn1+"</button><button id=vj_btn_default>"+btn2+"</button></div></div>")
             
             $(box).find("#vj_btn_primary").on("click", option.primary )
             $(box).find("#vj_btn_default").on("click", option.default )

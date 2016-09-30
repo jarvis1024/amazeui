@@ -14,62 +14,42 @@
     <table class="vj-form" cellspacing="0" cellpadding="0" data-vj-utf8 ><tbody>
         <tr>
             <td class="vj-name">
-                <span class="vj-title">名</span>
+                <span>名</span>
             </td>
 
             <td>
                 <div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
-                    <div class="vj-ctrl-item" data-vj-index="">
-                        <span data-vj-title>名名</span>
-                        <div data-vj-elm>
-                            <span data-vj="placeholder" >hinter</span>
-                            <span data-vj="counter" >0/1</span>
-                            <span data-vj="unit" >个</span>
-                            <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
-                        </div>
-                        <p data-vj-text >
-                            <span class="vj-err">123</span>
-                            <span class="vj-desc">123</span>
-                        </p>
+                    <span class="vj-title">名名</span>
+                    <div class="vj-item">
+                        <span class="vj-placeholder" >hinter</span>
+                        <span class="vj-counter" >0/1</span>
+                        <span class="vj-unit" >个</span>
+                        <input type="text" data-vj-name="ss" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
                     </div>
+                    <p class="vj-desc">
+                        <span class="vj-err">123</span>
+                        <span>123</span>
+                    </p>
                 
                 </div>
 
                 <div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="">
-                    <div class="vj-ctrl-item" data-vj-index="1">
-                        <span data-vj-title>名1</span>
-                        <div data-vj-elm>
-                            <span data-vj="unit" >个</span>
-                            <input type="text" data-vj-name="" style="width:80px;" >
-                        </div>
-                        <p data-vj-text >
-                            <span class="vj-err">123</span>
-                            <span class="vj-desc">123</span>
-                        </p>
+                    <span class="vj-title">名1</span>
+                    <div class="vj-item">
+                        <span class="vj-unit" >个</span>
+                        <input type="text" data-vj-name="" style="width:80px;" >
                     </div>
-
-                    <div class="vj-ctrl-item" data-vj-index="2">
-                        <span data-vj-title>名2</span>
-                        <div data-vj-elm>
-                            <span data-vj="unit" >个</span>
-                            <input type="text" data-vj-name="" style="width:80px;" >
-                        </div>
-                        <p data-vj-text >
-                            <span class="vj-err">123</span>
-                            <span class="vj-desc">123</span>
-                        </p>
+                    <div class="vj-item">
+                        <span class="vj-unit" >个</span>
+                        <input type="text" data-vj-name="" style="width:80px;" >
                     </div>
-
-                    <div class="vj-ctrl-item" data-vj-index="3">
-                        <span data-vj-title>名3</span>
-                        <div data-vj-elm>
-                            <span data-vj="unit" >个</span>
-                            <input type="text" data-vj-name="" style="width:80px;" >
-                        </div>
-                        <div data-vj-text >
-                            <span class="vj-err">123</span>
-                            <span class="vj-desc">123</span>
-                        </div>
+                    <div class="vj-item">
+                        <span class="vj-unit" >个</span>
+                        <input type="text" data-vj-name="" style="width:80px;" >
+                    </div>
+                    <div class="vj-desc">
+                        <span class="vj-err">123</span>
+                        <span>123</span>
                     </div>
                 </div>
 
@@ -82,145 +62,130 @@
 
             <td>
                 <div class="vj-ctrl vj-ctrl-input vj-input-single" data-vj-group="">
-                    <div class="vj-ctrl-item" data-vj-index="">
-                        <span data-vj-title>field_name_cn</span>
-                        <div data-vj-elm>
-                            <span data-vj="placeholder">{{ PHOLDER }}</span>
-                            <span data-vj="unit">{{ UNIT }}</span>
-                            <span data-vj="counter">0/{{ LEN /3 }}</span>
-                            <!-- if "USE" = input -->
-                            <input 
-                                type="text"
+                    <span class="vj-title">field_name_cn</span>
+                    <div class="vj-item">
+                        <span class="vj-placeholder">{{ PHOLDER }}</span>
+                        <span class="vj-unit">{{ UNIT }}</span>
+                        <span class="vj-counter">0/{{ LEN /3 }}</span>
+                        <!-- if "USE" = input -->
+                        <input 
+                            type="text"
 
-                                data-vj-name="field_name"
-                                data-vj-LEN=" LEN "
-                                data-vj-max=" MAX "
-                                data-vj-min=" MIN "
-                                data-vj-format=" FORMAT "
-                                FORMAT:
-                                    data-vj-price
-                                    data-vj-date
-                                    data-vj-rate
-                                    data-vj-
-                                EXPRES:
-                                    data-vj-express
+                            data-vj-name="field_name"
+                            data-vj-LEN=" LEN "
+                            data-vj-max=" MAX "
+                            data-vj-min=" MIN "
+                            data-vj-format=" FORMAT "
+                            FORMAT:
+                                data-vj-price
+                                data-vj-date
+                                data-vj-rate
+                                data-vj-
+                            EXPRES:
+                                data-vj-express
 
-                                 >
-                            <!-- if "USE" = text -->
-                            <!-- <textarea data-vj-nam="" data-vj-len=""> -->
-                        </div>
-                        <p data-vj-text>
-                            <span class="vj-err">alert!</span>
-                            <span class="vj-desc">describer</span>
-                            
-                        </p>                        
+                             >
+                        <!-- if "USE" = text -->
+                        <!-- <textarea data-vj-nam="" data-vj-len=""> -->
                     </div>
+                    <p data-vj-text>
+                        <span class="vj-err">alert!</span>
+                        <span>describer</span>
+                        
+                    </p>                        
                     
                 </div>
 
 
                 <div class="vj-ctrl vj-ctrl-select vj-select-matrix" data-vj-group="">
-                    <div class="vj-ctrl-item" data-vj-index="" >
-                        <span data-vj-title>Title</span>
-                        <div data-vj-elm data-vj-name="" data-vj-value="" >
-                            <span data-vj="viewer"></span>
-                            <span data-vj="text">select-matrix</span>
-                            <div data-vj-select="matrix" >
-                                <span data-vj-data="Color010" data-vj-bgcolor >Color010</span>
-                                <span data-vj-data="Color020" data-vj-bgcolor >Color020</span>
-                                <span data-vj-data="Color030" data-vj-bgcolor >Color030</span>
-                                <span data-vj-data="Color040" data-vj-bgcolor >Color040</span>
-                                <span data-vj-data="Color050" data-vj-bgcolor >Color050</span>
-                                <span data-vj-data="Color060" data-vj-bgcolor >Color060</span>
-                                <span data-vj-data="Color070" data-vj-bgcolor >Color070</span>
-                                <span data-vj-data="Color080" data-vj-bgcolor >Color080</span>
-                                <span data-vj-data="Color081" data-vj-bgcolor >Color081</span>
-                                <span data-vj-data="Color082" data-vj-bgcolor >Color082</span>
-                                <span data-vj-data="Color090" data-vj-bgcolor >Color090</span>
-                                <span data-vj-data="Color100" data-vj-bgcolor >Color100</span>
-                                <span data-vj-data="Color101" data-vj-bgcolor >Color101</span>
-                                <span data-vj-data="Color102" data-vj-bgcolor >Color102</span>
-                            </div>
+                    <span class="vj-title">Title</span>
+                    <div class="vj-item" data-vj-name="" data-vj-value="" >
+                        <span class="vj-viewer"></span>
+                        <span class="vj-text">select-matrix</span>
+                        <div class="vj-select" >
+                            <span data-value="Color010" data-bgcolor >Color010</span>
+                            <span data-value="Color020" data-bgcolor >Color020</span>
+                            <span data-value="Color030" data-bgcolor >Color030</span>
+                            <span data-value="Color040" data-bgcolor >Color040</span>
+                            <span data-value="Color050" data-bgcolor >Color050</span>
+                            <span data-value="Color060" data-bgcolor >Color060</span>
+                            <span data-value="Color070" data-bgcolor >Color070</span>
+                            <span data-value="Color080" data-bgcolor >Color080</span>
+                            <span data-value="Color081" data-bgcolor >Color081</span>
+                            <span data-value="Color082" data-bgcolor >Color082</span>
+                            <span data-value="Color090" data-bgcolor >Color090</span>
+                            <span data-value="Color100" data-bgcolor >Color100</span>
+                            <span data-value="Color101" data-bgcolor >Color101</span>
+                            <span data-value="Color102" data-bgcolor >Color102</span>
                         </div>
-                        
                     </div>
                     
                 </div>
 
-                <div class="vj-ctrl vj-ctrl-select vj-selet-row" data-vj-group="">
-                    <div class="vj-ctrl-item" data-vj-index="">
-                        <span data-vj-title>Title</span>
-                        <div data-vj-elm data-vj-name="" data-vj-value="">
-                            <span data-vj="viewer"></span>
-                            <span data-vj="text">selet-row</span>
-                            <div data-vj-select="row">
-                                <span data-vj-data="value1">item1</span>
-                                <span data-vj-data="value2">item2</span>
-                                <span data-vj-data="value3">item3</span>
-                                <span data-vj-data="value4">item4</span>
-                                <span data-vj-data="value5">item5</span>
-                                <span data-vj-data="value6">item6</span>
-                                <span data-vj-data="value7">item7</span>
-                            </div>
+                <div class="vj-ctrl vj-ctrl-select vj-select-row" data-vj-group="">
+                    <span class="vj-title">Title</span>
+                    <div class="vj-item" data-vj-name="" data-vj-value="">
+                        <span class="vj-viewer"></span>
+                        <span class="vj-text">selet-row</span>
+                        <div class="vj-select">
+                            <span data-value="value1">item1</span>
+                            <span data-value="value2">item2</span>
+                            <span data-value="value3">item3</span>
+                            <span data-value="value4">item4</span>
+                            <span data-value="value5">item5</span>
+                            <span data-value="value6">item6</span>
+                            <span data-value="value7">item7</span>
                         </div>
                     </div>
                 </div>
 
 
                 <div class="vj-ctrl vj-ctrl-check vj-check-single" data-vj-group="">
-                    <div class="vj-ctrl-item" data-vj-index="" >
-                        <span data-vj-title>Title</span>
-                        <div data-vj-elm data-vj-name="" data-vj-value="" data-vj-check="single">
-                            <span data-vj-data="value1" class="vj-checked" >item1</span>
-                            <span data-vj-data="value2" >item2</span>
-                            <span data-vj-data="value3" >item3</span>
-                            <span data-vj-data="value4" >item4</span>
-                        </div>
-                        
+                    <span class="vj-title">Title</span>
+                    <div class="vj-item" data-vj-name="" data-vj-value="">
+                        <span data-value="value1" class="vj-checked" >item1</span>
+                        <span data-value="value2" >item2</span>
+                        <span data-value="value3" >item3</span>
+                        <span data-value="value4" >item4</span>
                     </div>
+                    
                 </div>
 
 
                 <div class="vj-ctrl vj-ctrl-check vj-check-mutiple" data-vj-group="">
-                    <div class="vj-ctrl-item" data-vj-index="" >
-                        <span data-vj-title>Title</span>
-                        <div data-vj-elm data-vj-name="" data-vj-value="" data-vj-check="mutiple">
-                            <span data-vj-data="value1" class="vj-checked" >item1</span>
-                            <span data-vj-data="value2" >item2</span>
-                            <span data-vj-data="value3" >item3</span>
-                            <span data-vj-data="value4" >item4</span>
-                        </div>
-                        
+                    <span class="vj-title">Title</span>
+                    <div class="vj-item" data-vj-name="" data-vj-value="" data-vj-check="mutiple">
+                        <span data-value="value1" class="vj-checked" >item1</span>
+                        <span data-value="value2" >item2</span>
+                        <span data-value="value3" >item3</span>
+                        <span data-value="value4" >item4</span>
                     </div>
+                    
                 </div>
 
                 <div class="vj-ctrl vj-ctrl-check vj-check-mutiple" data-vj-group="">
-                    <div class="vj-ctrl-item" data-vj-index="" >
-                        <span data-vj-title>Title</span>
-                        <div data-vj-elm data-vj-check="mutiple">
-                            <span data-vj-data="value1" class="vj-checked" data-vj-name="" data-vj-value="" >item1</span>
-                        </div>
-                        
+                    <span class="vj-title">Title</span>
+                    <div class="vj-item" data-vj-check="mutiple">
+                        <span data-value="value1" class="vj-checked" data-vj-name="" data-vj-value="" >item1</span>
                     </div>
+                        
                 </div>
 
 
                 <div class="vj-ctrl vj-ctrl-button vj-button-upload">
-                    <div class="vj-ctrl-item">
-                        <span data-vj-title >Title</span>
-                        <div data-vj-elm>
-                            <button data-vj-action="{ endpoint: enpointVal }" >上传</button>
-                        </div>
-                        <div data-vj-text>
-                            <span class="vj-err"></span>
-                            <span class="vj-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                            
-                        </div>
+                    <span class="vj-title" >Title</span>
+                    <div class="vj-item">
+                        <button data-vj-action="{ endpoint: enpointVal }" >上传</button>
+                    </div>
+                    <div data-vj-text>
+                        <span class="vj-err"></span>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                        
                     </div>
                 </div>                
             </td>
@@ -233,25 +198,23 @@
             <td>
                 <div class="vj-table vj-tag-table" data-vj-group="GROUPNAEM" >
                     <div class="vj-tag-container">
-                        <span data-vj-tag="0" class="vj-tag-view vj-active">未命名</span>
-                        <span data-vj-add></span>
+                        <span data-vj-tag="0" class="vj-tag-name vj-active">未命名</span>
+                        <span class="vj-tag-add"></span>
                     </div>
                     <div class="vj-tab-container">
                         <div data-vj-tab="0" class="vj-active">
                             <div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="GROUPNAEM">
-                                <div class="vj-ctrl-item" data-vj-index="">
-                                    <span data-vj-title>名名</span>
-                                    <div data-vj-elm data-vj-toview>
-                                        <span data-vj="placeholder" >hinter</span>
-                                        <span data-vj="counter" >0/1</span>
-                                        <span data-vj="unit" >个</span>
-                                        <input type="text" data-vj-name="FILED" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
-                                    </div>
-                                    <p data-vj-text >
-                                        <span class="vj-err">123</span>
-                                        <span class="vj-desc">123</span>
-                                    </p>
+                                <span class="vj-title">名名</span>
+                                <div class="vj-item" data-vj-toview>
+                                    <span class="vj-placeholder" >hinter</span>
+                                    <span class="vj-counter" >0/1</span>
+                                    <span class="vj-unit" >个</span>
+                                    <input type="text" data-vj-name="FILED" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">
                                 </div>
+                                <p class="vj-desc">
+                                    <span class="vj-err">123</span>
+                                    <span>123</span>
+                                </p>
                             </div>
                         </div>
 

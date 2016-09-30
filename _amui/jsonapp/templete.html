@@ -1,0 +1,115 @@
+<link rel="stylesheet" type="text/css" href="../json/inputs.css">
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/js/handlebars.js"></script>
+<script type="text/javascript">
+    Handlebars.registerHelper('if_equal', function(val1, val2, options) {
+      if( val1 === val2 ) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    });
+    Handlebars.registerHelper("addOne",function(index,options){
+        return index;
+    });
+</script>
+
+<!-- INPUT -->
+<script type="text/x-handlebars-template" id="vj-ctrl">
+{{#each this}}
+    {{#INPUT}}
+        <div class="vj-ctrl vj-ctrl-input {{CLASS}}">
+            <span class="vj-title">{{TITLE}}</span>
+            <div class="vj-item">
+                {{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}
+                {{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}
+                {{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}
+                {{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}
+                {{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}
+                {{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}
+                {{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}
+            </div>
+            <p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p>
+        </div>
+    {{/INPUT}}
+
+    {{#SELECT}}
+        <div class="vj-ctrl vj-ctrl-select {{CLASS}}">
+            <span class="vj-title">{{TITLE}}</span>
+            <div class="vj-item">
+                {{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}
+                {{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}
+                <div class="vj-select">{{#each ITEM}}<span data-vj-data="{{DATA}}">{{TEXT}}</span>{{/each}}</div>
+            </div>
+            <p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p>
+        </div>
+    {{/SELECT}}
+
+    {{#CHECK}}
+        <div class="vj-ctrl vj-ctrl-check {{CLASS}}" index="{{@index}}">
+            <span class="vj-title">{{TITLE}}</span>
+            <div class="vj-item">
+                {{#each ITEM}}<span data-vj-data="{{DATA}}">{{TEXT}}</span>{{/each}}
+            </div>
+            <p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p>
+        </div>
+    {{/CHECK}}
+{{/each}}
+</script>
+
+
+<!-- SELECT -->
+<script type="text/x-handlebars-template" id="vj-ctrl-select">
+    <div class="vj-ctrl vj-ctrl-select {{CLASS}}">
+        <
+    </div>
+</script>
+
+
+<!-- CHECK -->
+<script type="text/x-handlebars-template" id="vj-ctrl-check">
+    <div class="vj-ctrl vj-ctrl-check {{CLASS}}"></div>
+</script>
+
+
+<!-- TEST -->
+<script type="text/x-handlebars-template" id="vj-ctrl-test">
+    <div class="vj-ctrl vj-ctrl-check">
+        
+    </div>
+</script>
+
+
+<script type="text/javascript">
+    var test_ctrl = {
+        "f1": {
+            "CHECK":{
+                "CLASS": "vj-check-single",
+                "TITLE": "字段名",
+                "DESC": "字段描述",
+                "ERRMSG": {
+                    "LEN": "长度超出限制",
+                    "TYP": "格式错误",
+                    "REQ": "必须填写"
+                },
+                "ITEM": [{
+                    "DATA": "value1",
+                    "TEXT": "值1"
+                },{
+                    "DATA": "value2",
+                    "TEXT": "值2"
+                },{
+                    "DATA": "value3",
+                    "TEXT": "值3"
+                },{
+                    "DATA": "value4",
+                    "TEXT": "值4"
+                }]
+            }
+        }
+    }
+    var tempSrc = $("#vj-ctrl").html()
+    var template = Handlebars.compile(tempSrc);
+    var html    = template(test_ctrl);
+    $(document).ready(function(){$(document.body).append(html)})
+</script>

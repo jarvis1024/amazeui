@@ -48,7 +48,7 @@
     .vj-cfm-box button:hover{
         text-decoration: underline;
     }
-    .vj-cfm-box [data-vj-icon]{
+    .vj-cfm-box [class*=vj-icon]{
         display: block;
         float: left;
         height: 100%;
@@ -57,3 +57,4 @@
         margin: 0 8px 8px 0;
         background-repeat: no-repeat;
     }
+    /*ICONs**/

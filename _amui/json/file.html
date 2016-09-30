@@ -1,0 +1,100 @@
+<link rel="stylesheet" type="text/css" href="./inputs.css">
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<body>
+<style type="text/css">
+    .vj-file-box{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        border: 1px solid #CCC;
+        border-radius: 5px
+        font-size: 0;
+    }
+    .vj-file-box>h5>.vj-close{
+        float: right;
+        line-height: 26px;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px !important;
+        font-family: Tahoma !important;
+    }
+    .vj-file-box>*{
+        width: 360px;
+        padding: 0 20px;
+    }
+    .vj-file-box>h5{
+        line-height: 26px;
+        color: #444;
+        background-color: #EEE;
+        font-weight: normal;
+        font-size: 16px;
+
+    }
+    .vj-file-box>.vj-tagbar{
+        border-bottom: 1px solid #CCC;
+        margin-bottom: 12px;
+    }
+    .vj-file-box>.vj-tagbar>.vj-tag{
+        background-color: #FFF;
+        border: 0;
+        height: 26px;
+        color: #444;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .vj-file-box>.vj-tagbar>.vj-tag:hover{
+        background-color: #E0E0E0;
+    }
+    .vj-file-box>.vj-tagbar>.vj-tag>.vj-count{
+        vertical-align: baseline;
+    }
+    .vj-file-box>.vj-tagbar>.vj-add{
+        float: right;
+        color: #2A2;
+    }
+</style>
+    <div class="vj-file-box">
+        <h5>图片库<a href="javascript:;" class="vj-close">×</a></h5>
+        <div class="vj-tagbar">
+            <button class="vj-tag">已上传</button>
+            <button class="vj-tag">本地<span class="vj-count">(19)</span></button>
+            <button class="vj-tag vj-add">上传文件</button>
+        </div>
+        <div class="vj-container">
+            <div class="vj-page vj-uploaded">
+                <div class="vj-content">
+                    <div class="vj-img-item vj-selected"></div>
+                    <div class="vj-img-item vj-uploading"></div>
+                    <div class="vj-img-item vj-pending"></div>
+
+                </div>
+
+                <div class="vj-bottombar">
+                    <div class="vj-bottombar">
+                        <span class="vj-desc">正在加载...</span>
+                        <button class="vj-btn vj-btn-private">上传</button>
+                        <button class="vj-btn vj-btn-default">移除</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="vj-page vj-local">
+                <div class="vj-content">
+                    <div class="vj-img-item vj-selected"></div>
+                    <div class="vj-img-item vj-uploading"></div>
+                    <div class="vj-img-item vj-pending"></div>
+                </div>
+
+                <div class="vj-bottombar">
+                    <span class="vj-desc">正在加载...</span>
+                    <button class="vj-btn vj-btn-private">上传</button>
+                    <button class="vj-btn vj-btn-default">移除</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>

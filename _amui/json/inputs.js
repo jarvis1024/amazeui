@@ -102,20 +102,20 @@ window.v_051 = (function(m){
 
 window.model = {
     GROUPNAEM: {
-        TAG_HTML: '<span data-vj-tag="\{\{INDEX\}\}" class="vj-tag-view">未命名</span>',
+        TAG_HTML: '<span data-vj-tag="\{\{INDEX\}\}" class="vj-tag-name">未命名</span>',
         TAB_HTML: '<div data-vj-tab="\{\{INDEX\}\}">'+
                 '<div class="vj-ctrl vj-ctrl-input vj-input-mutiple" data-vj-gourp="GROUPNAEM">'+
                     '<div class="vj-ctrl-item" data-vj-index="">'+
-                        '<span data-vj-title>名名</span>'+
-                        '<div data-vj-elm data-vj-toview>'+
-                            '<span data-vj="placeholder" >hinter</span>'+
-                            '<span data-vj="counter" >0/1</span>'+
-                            '<span data-vj="unit" >个</span>'+
+                        '<span class=vj-title>名名</span>'+
+                        '<div class=vj-content data-vj-toview>'+
+                            '<span class="vj-placeholder" >hinter</span>'+
+                            '<span class="vj-counter" >0/1</span>'+
+                            '<span class="vj-unit" >个</span>'+
                             '<input type="text" data-vj-name="FILED" data-vj-max="5000" data-vj-min="20" data-vj-price data-vj-len="12" data-vj-express="parseFloat({{}}).toFixed(2)">'+
                         '</div>'+
-                        '<p data-vj-text >'+
+                        '<p class=vj-desc >'+
                             '<span class="vj-err">123</span>'+
-                            '<span class="vj-desc">123</span>'+
+                            '<span>123</span>'+
                         '</p>'+
                     '</div>'+
                 '</div>'+
@@ -312,13 +312,13 @@ window.model = {
 
     $.fn.extend( {
         vj_alert: function( msg ){
-            if( $(this).closest("[data-vj-elm]").length>0 ){
+            if( $(this).closest(".vj-item").length>0 ){
                 $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-err").html( msg ).show()
             }
         }
     } )
 
-    // $("[data-vj-elm]").extend({
+    // $(".vj-item").extend({
     //  alert: function(msg){
     //      $(this).siblings("[data-vj-text]").find(".vj-err").html(msg).show()
     //  }
@@ -357,14 +357,11 @@ window.model = {
     var vj = (function(){
         var ss;
 
-        var vj_fn = (function(){
             var dubUtf8_REG = /[\u0080-\u07ff]/g ,
                 trbUtf8_REG = /[\u0800-\uffff]/g ,
-                dubByte_REG = /[^\x00-\xff]/g;
+                dubByte_REG = /[^\x00-\xff]/g,
 
-
-            return {
-                checkLen : function( elm ){
+                checkLen = function( elm ){
 
                     if( $(elm).closest("[data-vj-utf8]").length ){
                         var elmVal = elm.value || $(elm).attr("data-vj-value") || "", 
@@ -373,7 +370,7 @@ window.model = {
                             trbChr = elmVal.match( trbUtf8_REG ) || [],
                             chrLen = trbChr.length*2 + dubChr.length + elmVal.length;
 
-                        $(elm).siblings("[data-vj=counter]:first")
+                        $(elm).siblings(".vj-counter")
                             .html( 
                                 parseInt(chrLen/3).toString() 
                               + "/" 
@@ -386,14 +383,12 @@ window.model = {
                     }
                 },
 
-                nWindow : function(){
+                nWindow = function(){
                     var thisDom = 
                         '<div class=""> '
                     +   '<div> '
                 }
 
-            }
-        })();
 
         return {
 
@@ -433,17 +428,17 @@ window.model = {
             input:{
                 onInput: function(){
                     if( this.value ){
-                        $(this).siblings("[data-vj=placeholder]:first").hide()
+                        $(this).siblings(".vj-placeholder").hide()
 
                         if( $(this).is("[data-vj-len]") ){
-                            !vj_fn.checkLen( this )?
-                                $(this).closest("[data-vj-elm]").addClass("vj-err vj-err-len")
-                              : $(this).closest("[data-vj-elm]").removeClass("vj-err vj-err-len")
+                            !checkLen( this )?
+                                $(this).closest(".vj-item").addClass("vj-err vj-err-len")
+                              : $(this).closest(".vj-item").removeClass("vj-err vj-err-len")
                         }
 
                         $(this).closest(".vj-ctrl-item").find("[data-vj-text] .vj-err").hide()
                     }else{
-                        $(this).siblings("[data-vj=placeholder]:first").show()
+                        $(this).siblings(".vj-placeholder").show()
 
                     }
                 } ,
@@ -454,8 +449,8 @@ window.model = {
                     }
                     if( !thisVal.trim() || thisVal==0 ){
                         thisVal.toString().length ?
-                            $(this).siblings("[data-vj=placeholder]:first").hide()
-                          : $(this).siblings("[data-vj=placeholder]:first").show()
+                            $(this).siblings(".vj-placeholder").hide()
+                          : $(this).siblings(".vj-placeholder").show()
                         this.value = thisVal
                         return 0
                     }
@@ -475,8 +470,14 @@ window.model = {
                     if( $(this).is("[data-vj-express]") )
                         thisVal = eval( $(this).attr("data-vj-express").replace(/\{\{\}\}/g , thisVal ) )
 
-                    if( thisVal!==NaN && thisVal!==null )
-                        this.value = thisVal;
+                    if( thisVal!==NaN && thisVal!==null ){
+                        if( this.value!= thisVal ){
+                            this.value = thisVal;
+                            $(this).trigger("input");
+                        }else{
+                            this.value = thisVal;
+                        }
+                    }
 
                 } ,
                 onBlur: function(){
@@ -487,12 +488,12 @@ window.model = {
 
             select: {
                 onClick: function(e){
-                    if( $(e.target).is("[data-vj-data]") ){
-                        if( $(this).has("[data-vj-select='matrix']") ){
+                    if( $(e.target).is("[data-value]") ){
+                        if( $(this).closest(".vj-select-matrix").length ){
                             var func = "css"; 
                             var pram = 
-                                $(e.target).is("[data-vj-bgcolor]") ?
-                                { backgroundColor: $(e.target).attr("data-vj-bgcolor"), width: 20 }
+                                $(e.target).is("[data-bgcolor]") ?
+                                { backgroundColor: $(e.target).attr("data-bgcolor"), width: 20, marginRight: 6 }
                                 :{ width: 0 }
                         }else{
                             var func = "html";
@@ -503,14 +504,14 @@ window.model = {
                         }
 
                         $(this)
-                            .attr("data-vj-value", $(e.target).attr("data-vj-data") )
-                            .find("[data-vj=text]")
+                            .attr("data-vj-value", $(e.target).data().value )
+                            .find(".vj-text")
                                 .html( $(e.target).html() )
-                                .siblings("[data-vj=viewer]")[func](pram)
+                                .siblings(".vj-viewer")[func](pram)
                                
                         $(this).trigger("change")
                     }
-                    $(this).toggleClass("vj-active").find("[data-vj-select]").slideToggle(100);
+                    $(this).toggleClass("vj-active").find(".vj-select").slideToggle(100);
                 },
                 onChange: function(){
                     // vj_fm.update( $(this).closest("data-vj-group") );
@@ -521,7 +522,7 @@ window.model = {
 
             check: {
                 onClick: function(){
-                    $(this).closest('[data-vj-check]').attr("data-vj-check")==="single" ?
+                    $(this).closest(".vj-ctrl-check").is(".vj-check-single") ?
                         $(this).addClass("vj-checked").siblings().removeClass("vj-checked")
                       : $(this).toggleClass("vj-checked");
 
@@ -531,7 +532,7 @@ window.model = {
                             $(this).siblings(".vj-checked").add(this)
                           : $(this).siblings(".vj-checked")
                         , function(idx, elm){
-                            arrChecked.push("\"" + $(elm).attr("data-vj-data") + "\"");
+                            arrChecked.push("\"" + $(elm).data().value + "\"");
                     })
 
                     $(this).is("[data-vj-name]") ?
@@ -582,7 +583,7 @@ window.model = {
                     },
 
                     add: function(){
-                        var tagCount = $(".vj-tag-view").length,
+                        var tagCount = $(".vj-tag-name").length,
                             tagHTML = $.parseHTML( model.GROUPNAEM.TAG_HTML.replace(/\{\{INDEX\}\}/g, tagCount) ),
                             tabHTML = $.parseHTML( model.GROUPNAEM.TAB_HTML.replace(/\{\{INDEX\}\}/g, tagCount) );
 
@@ -611,9 +612,9 @@ window.model = {
                                     $.vj_comfirm({
                                         primary: function(){
                                             if( $target.is(".vj-active") ){
-                                                ( $target.siblings(".vj-tag-view").length ?  
-                                                    $target.siblings(".vj-tag-view:eq(0)")
-                                                  : $target.nextAll("[data-vj-add]") 
+                                                ( $target.siblings(".vj-tag-name").length ?  
+                                                    $target.siblings(".vj-tag-name:eq(0)")
+                                                  : $target.nextAll(".vj-tag-name") 
                                                 ).trigger("click")
                                             }
 
@@ -642,11 +643,11 @@ window.model = {
         .on("change", vj.input.onChange )
         .on("bulr", vj.input.onBlur )
 
-    $(".vj-ctrl-select [data-vj-elm]")
+    $(".vj-ctrl-select .vj-item")
         .on("click", vj.select.onClick )
         .on("change", vj.select.onChange )
 
-    $(".vj-ctrl-check [data-vj-elm] *")
+    $(".vj-ctrl-check .vj-item *")
         .on("click", vj.check.onClick )
         .on("change", vj.check.onChange )
 
@@ -654,32 +655,31 @@ window.model = {
     $(".vj-tag-table [data-vj-toview] [data-vj-value],input,textarea")
         .on("change", vj.table.tag.updateTitle )
 
-    $(".vj-tag-view")
+    $(".vj-tag-name")
         .on("click", vj.table.tag.onClick )
         .on("contextmenu", vj.table.tag.menuOption, vj.createContextMenu )
 
-    $(".vj-tag-container [data-vj-add]")
+    $(".vj-tag-container .vj-tag-add")
         .on("click", vj.table.tag.add )
 
     $(".vj-tag-table")
         .sortable({
-            axis: "x",
-            items: " .vj-tag-view",
+            items: " .vj-tag-name",
             update: function(){vj.table.tag.updatSort($(this))}
         })
 
 
 
     //CSS            
-    $.each( $(".vj-ctrl-input input").siblings("[data-vj=unit],[data-vj=counter]"), function(){
+    $.each( $(".vj-ctrl-input input").siblings(".vj-unit,.vj-counter"), function(){
         $(this)
             .siblings("input")
                 .css( "padding-right", (this.offsetWidth+8).toString() + "px" )
     } )
 
-    $.each( $(".vj-select-matrix [data-vj-bgcolor]"), function(){
+    $.each( $(".vj-select-matrix [data-bgcolor]"), function(){
         $(this)
-            .attr( "data-vj-bgcolor", $(this).css("background-color") )
+            .attr( "data-bgcolor", $(this).css("background-color") )
             .css("font-size",0)
     } )
 

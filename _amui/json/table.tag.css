@@ -15,7 +15,7 @@
     font-size: 13px;
     line-height: 26px;
     color: #7F7F7F;
-    background-color: #EEE;
+    background-color: #E0E0E0;
 }
 .vj-tag-container .vj-tag-view:hover{
     color: #2A2;
@@ -41,7 +41,7 @@
     vertical-align: middle;
     text-align: center;
     color: #7F7F7F;
-    background-color: #EEE;
+    background-color: #E0E0E0;
     cursor: pointer;
     margin-left: 12px;
 }
