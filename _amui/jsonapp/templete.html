@@ -12,6 +12,16 @@
     Handlebars.registerHelper("addOne",function(index,options){
         return index;
     });
+    Handlebars.registerHelper("debug", function(optionalValue) {  
+        console.log("Current Context");
+        console.log("====================");
+        console.log(this);
+        if (optionalValue) {
+            console.log("Value");
+            console.log("====================");
+            console.log(optionalValue);
+        }
+    });
 </script>
 
 <!-- INPUT -->
@@ -58,7 +68,6 @@
 </script>
 
 
-<!-- SELECT -->
 <script type="text/x-handlebars-template" id="vj-ctrl-select">
     <div class="vj-ctrl vj-ctrl-select {{CLASS}}">
         <
@@ -111,5 +120,17 @@
     var tempSrc = $("#vj-ctrl").html()
     var template = Handlebars.compile(tempSrc);
     var html    = template(test_ctrl);
+    // (function($) {
+    //     var compiled = {};
+    //     $.fn.handlebars = function(template, data) {
+    //         if (template instanceof jQuery) {
+    //             template = $(template).html();
+    //         }
+    //     compiled[template] = Handlebars.compile(template);
+    //     this.html(compiled[template](data));
+    //     };
+    // })(jQuery);
+    // $('#content').handlebars($('#template'), { name: "Alan" });
     $(document).ready(function(){$(document.body).append(html)})
+
 </script>
