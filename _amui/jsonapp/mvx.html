@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MVX</title>
+</head>
+<body>
+<div class="container" style="border:2px solid green; padding: 5px;">
+    
+</div>
+<script type="text/javascript" src="../assets/js/handlebars.min.js"></script>
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="pg.js"></script>
+<script type="text/javascript">
+    // (function(){
+        // var fact = function(pram){
+
+        //     this.pram = pram;
+        //     var abcd = "1234";
+
+        //     var dom = $.parseHTML('<div class="className"><span></span><div>');
+        //     $(document.body).append(dom)
+        //     $(dom).find("span").html( pram.field_A.TYPE )
+        //     this.dom = $(dom)
+        // };
+        // /*
+        // *fact 
+        // *vald
+        // *list
+        // */
+        // fact.prototype.method = function( pram ) {
+        //     // console.log( pram === this.pram )
+        //     console.log( this.abcd )
+        //     // body...
+        // };
+        // fact.prototype.abcd = "12345";
+        // $.fn.extend({
+        //     vj: function( selector, option ){
+        //         var me = this;
+        //         var input = $.parseHTML('<input type="text" name="input" id="input">')
+        //         $(selector).append(input)
+        //         $(input).on("change",function(){
+                    
+        //         })
+        //     }
+        // })
+
+        // var newFact = new $.vj( ".container", { myData: "123456" } )
+        // newFact.setCallbacks({
+
+        // })
+        // console.log( newFact)
+
+        var J_Validate = function(){
+            console.log( this )
+        };
+
+        J_Validate.prototype.events = {
+            select: {
+                change: function(){
+                    console.log( "select Change event" );
+                }
+            },
+            input: {
+                change: function(){
+                    console.log( "input Change event" );
+                }
+            }
+        };
+
+        J_Validate.prototype.init = function( $dom ) {
+            // $(".vj-ctrl.vj-ctrl-"+idx)
+            $.each( this.events, function( idx, elm ){
+                var $target = $dom.find(".vj-ctrl.vj-ctrl-"+idx)
+                if( $target.length>0 ){
+                    var context;
+                    switch(idx){
+                        case "input": context = "input,textarea"; break;
+                        case "select": context = ""; break;
+                        case "check": context = ""; break;
+                        case "file": context = ""; break;
+                        default: context = "";
+                    }
+                    $.each( elm, function( event, fn ){
+                        $target.on( event, fn )
+
+                    })
+
+                }
+                console.log( idx )
+                console.log( elm )
+            })
+            return $dom
+        };
+
+        J_Validate.prototype. = function(first_argument) {
+            // body...
+        };
+
+    (function($) {
+        $.fn.myPlugin = function(){
+            var option = arguments[0];
+            //构造dom
+            //绑定Event
+            //
+        }
+    })(jQuery)
+
+    $(".container").pluginName({ a: 2})
+    // })()
+</script>
+</body>
+</html>

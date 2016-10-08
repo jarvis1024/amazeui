@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../json/inputs.css">
 <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="../assets/js/handlebars.js"></script>
+<body class="vj-form">
 <script type="text/javascript">
     Handlebars.registerHelper('if_equal', function(val1, val2, options) {
         if( val1 === val2 ) {
@@ -22,12 +23,16 @@
             console.log(optionalValue);
         }
     });
+    // Handlebars.registerHelper("include", function()
 </script>
 
 <!-- CTRL -->
+<script type="text/x-handlebars-template" id="vj-ctrl-sim">
+    
+    {{>router this}}
+</script>
 <script type="text/x-handlebars-template" id="vj-ctrl">
     {{#each this}}
-        {{#debug this}}{{/debug}}
         {{#INPUT}}
             <div class="vj-ctrl vj-ctrl-input {{CLASS}}">
                 <span class="vj-title">{{TITLE}}</span>
@@ -48,9 +53,9 @@
             <div class="vj-ctrl vj-ctrl-select {{CLASS}}">
                 <span class="vj-title">{{TITLE}}</span>
                 <div class="vj-item">
-                    {{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}
-                    {{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}
-                    <div class="vj-select">{{#each ITEM}}<span data-vj-data="{{DATA}}">{{TEXT}}</span>{{/each}}</div>
+                    <span class="vj-viewer">{{VIEWER}}</span>
+                    <span class="vj-text">{{TEXT}}</span>
+                    <div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div>
                 </div>
                 <p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p>
             </div>
@@ -60,7 +65,7 @@
             <div class="vj-ctrl vj-ctrl-check {{CLASS}}">
                 <span class="vj-title">{{TITLE}}</span>
                 <div class="vj-item">
-                    {{#each ITEM}}<span data-vj-data="{{DATA}}">{{TEXT}}</span>{{/each}}
+                    {{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}
                 </div>
                 <p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p>
             </div>
@@ -72,51 +77,331 @@
     {{/each}}
 </script>
 
-<script type="text/x-handlebars-template" id="vj-ctrl-min">{{#each this}}{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{DATA}}">{{TEXT}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" index="{{@index}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{DATA}}">{{TEXT}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}{{/each}}</script>
 
 <script type="text/javascript">
+    (function(hbs){
+        hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "root"}}{{>root this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
+        
+        hbs.registerPartial('table', 'TABLE_{{@key}}<div style="margin:3px;border:2px solid green" >{{>router this}}<div>')
+
+        hbs.registerPartial('root', 'ROOT_{{@key}}<div style="margin:3px;border:2px solid red" >{{>router this}}<div>')
+
+        hbs.registerPartial('ctrl','CTRL_{{@key}}{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" index="{{@index}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}');
+    })(Handlebars)
     var test_ctrl = {
-        "f1": {
-            "CHECK":{
-                "CLASS": "vj-check-single",
-                "TITLE": "字段名",
-                "DESC": "字段描述",
-                "ERRMSG": {
-                    "LEN": "长度超出限制",
-                    "TYP": "格式错误",
-                    "REQ": "必须填写"
+        "parent":{
+            "TEMPLATE": "root",
+            "ff":{
+
+                "TEMPLATE": "table",
+                "f1": {
+                    "TEMPLATE": "ctrl",
+                    "CHECK":{
+                        "CLASS": "vj-check-single",
+                        "TITLE": "FF-F1",
+                        "DESC": "字段描述",
+                        "ERRMSG": {
+                            "LEN": "长度超出限制",
+                            "TYP": "格式错误",
+                            "REQ": "必须填写"
+                        },
+                        "ITEM": [{
+                            "DATA": "value1",
+                            "TEXT": "值1"
+                        },{
+                            "DATA": "value2",
+                            "TEXT": "值2"
+                        },{
+                            "DATA": "value3",
+                            "TEXT": "值3"
+                        },{
+                            "DATA": "value4",
+                            "TEXT": "值4"
+                        }]
+                    }
                 },
-                "ITEM": [{
-                    "DATA": "value1",
-                    "TEXT": "值1"
-                },{
-                    "DATA": "value2",
-                    "TEXT": "值2"
-                },{
-                    "DATA": "value3",
-                    "TEXT": "值3"
-                },{
-                    "DATA": "value4",
-                    "TEXT": "值4"
-                }]
+                "children":{
+                    "TEMPLATE": "table",
+                    "f2": {
+                        "TEMPLATE": "ctrl",
+                        "CHECK":{
+                            "CLASS": "vj-check-single",
+                            "TITLE": "children-F2",
+                            "DESC": "字段描述",
+                            "ERRMSG": {
+                                "LEN": "长度超出限制",
+                                "TYP": "格式错误",
+                                "REQ": "必须填写"
+                            },
+                            "ITEM": [{
+                                "DATA": "value1",
+                                "TEXT": "值1"
+                            },{
+                                "DATA": "value2",
+                                "TEXT": "值2"
+                            },{
+                                "DATA": "value3",
+                                "TEXT": "值3"
+                            },{
+                                "DATA": "value4",
+                                "TEXT": "值4"
+                            }]
+                        }
+                    }
+                }
             }
-        },
+        }
 
     }
-    var tempSrc = $("#vj-ctrl").html()
+    var ctest_051 = {// menu/create
+        "button":{
+            "REQUIRED": true,
+            "TYPE": Array,
+            "LEN": [1,3],
+            "ITEM": {
+                "TYPE":Object, // Array ITEM 貌似不需要TYPE
+
+                "name":{
+                    "REQUIRED": true,
+                    "TYPE": "string",
+                    "LEN": [0,16]
+                },
+
+                "type":{
+                    "REQUIRED": ["DEPEND", "sub_button", [null, undefined] ],
+                    "UNREQUIRED": ["INSTANCE", "sub_button", Array ],
+                    "TYPE": "string",
+                    "ENUM": [
+                        "click", "view", "scancode_push", "scancode_waitmsg",
+                        "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                        "location_select", "media_id", "view_limited"
+                    ],
+                },
+
+                "url": {
+                    "REQUIRED": ["DEPEND", "type", ["view"] ],
+                    "TYPE": "string",
+                    "LEN": [0, 1024]
+                },
+
+                "key": {
+                    "REQUIRED": ["DEPEND", "type", ["click"] ],
+                    "TYPE": "string",
+                    "LEN": [0, 128]
+                },
+
+                "media_id": {
+                    "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                    "TYPE": "string"
+                },
+
+
+                "sub_button":{
+                    "TYPE": Array,
+                    "LEN": [1,5],
+                    "ITEM": {
+                        "TYPE": Object,
+
+                        "sub_button":{
+                            "REQUIRED": true,
+                            "TYPE": Array,
+                            "DEFAULT": [],
+                            "LEN": [0,0]
+                        },
+
+                        "name":{
+                            "REQUIRED": true,
+                            "TYPE": "string",
+                            "LEN": [0,60]
+                        },
+
+                        "type":{
+                            "REQUIRED": true,
+                            "TYPE": "string",
+                            "ENUM": [
+                                "click", "view", "scancode_push", "scancode_waitmsg",
+                                "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                                "location_select", "media_id", "view_limited"
+                            ],
+                        },
+
+                        "url": {
+                            "REQUIRED": ["DEPEND", "type", ["view"] ],
+                            "TYPE": "string",
+                            "LEN": [0, 1024]
+                        },
+
+                        "key": {
+                            "REQUIRED": ["DEPEND", "type", ["click"] ],
+                            "TYPE": "string",
+                            "LEN": [0, 128]
+                        },
+
+                        "media_id": {
+                            "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                            "TYPE": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    var mtest_051 = {// menu/create
+        "button":{
+            "TEMPLATE": "root",
+            "ITEM": {
+                "TEMPLATE": "table",
+                "name":{
+                    "TEMPLATE": "ctrl",
+                    "INPUT":{
+                        "CLASS": "vj-input-single",
+                        "INPUT": "input",
+                        "COUNTER": "0/5",
+                        "PLACEHOLDER": "按钮显示文字",
+                        "TITLE": "名称",
+                        "TAGNAME": true,
+                        "DESC":""
+                    }
+                },
+
+                "type":{
+                    "TEMPLATE": "ctrl",
+                    "SELECT":{
+                        "CLASS": "vj-select-row",
+                        "TITLE": "类型",
+                        "TEXT": "选择类型",
+                        "ITEM": {
+                            "click":  "自定义事件",
+                            "view":  "打开网页",
+                            "scancode_push":  "扫码推事件(打开网页)",
+                            "scancode_waitmsg":  "扫码推事件(等待消息)",
+                            "pic_sysphoto":  "弹出拍照发图",
+                            "pic_photo_or_album":  "弹出拍照或相册发图",
+                            "pic_weixin":  "弹出相册发图",
+                            "location_select":  "弹出地理位置",
+                            "media_id":  "下发素材",
+                            "view_limited":  "打开图文页面"
+                        },
+                        "DESC": ""
+                    }
+                },
+
+                "url": {
+                    "TEMPLATE": "ctrl",
+                    "INPUT":{
+                        "CLASS": "vj-input-single",
+                        "INPUT": "input",
+                        "PLACEHOLDER": "http://example.com/url/",
+                        "TITLE": "链接",
+                        "TAGNAME": true,
+                        "DESC":""
+                    }
+                },
+
+                "key": {
+                    "TEMPLATE": "ctrl",
+                    "SELECT":{
+                        "CLASS": "vj-select-row",
+                        "TITLE": "事件",
+                        "TEXT": "选择事件组",
+                        "ITEM": {"AJAX":  "http://api.mycuo.com/custom_key"},
+                        "DESC": ""
+                    }
+                },
+
+                "media_id": {
+                    "TEMPLATE": "ctrl",
+                    "FILE":{
+                        "CLASS": "vj-file-media",
+                        "TITLE": "下发素材",
+                        "ITEM": {"AJAX":  "http://api.mycuo.com/media_id?t=news"},
+                        "DESC": ""
+                    }
+                },
+
+
+                "sub_button":{
+                    "TEMPLATE": "table",
+                    "ITEM": {
+                    "TEMPLATE": "table",
+
+                        "name":{
+                            "TEMPLATE": "ctrl",
+                            "INPUT":{
+                                "CLASS": "vj-input-single",
+                                "INPUT": "input",
+                                "COUNTER": "0/15",
+                                "PLACEHOLDER": "按钮显示文字",
+                                "TITLE": "名称",
+                                "TAGNAME": true,
+                                "DESC":""
+                            }
+                        },
+
+                        "type":{
+                            "TEMPLATE": "ctrl",
+                            "SELECT":{
+                                "CLASS": "vj-select-row",
+                                "TITLE": "类型",
+                                "TEXT": "选择类型",
+                                "ITEM": {
+                                    "click":  "自定义事件",
+                                    "view":  "打开网页",
+                                    "scancode_push":  "扫码推事件(打开网页)",
+                                    "scancode_waitmsg":  "扫码推事件(等待消息)",
+                                    "pic_sysphoto":  "弹出拍照发图",
+                                    "pic_photo_or_album":  "弹出拍照或相册发图",
+                                    "pic_weixin":  "弹出相册发图",
+                                    "location_select":  "弹出地理位置",
+                                    "media_id":  "下发素材",
+                                    "view_limited":  "打开图文页面"
+                                },
+                                "DESC": ""
+                            }
+                        },
+
+                        "url": {
+                            "TEMPLATE": "ctrl",
+                            "INPUT":{
+                                "CLASS": "vj-input-single",
+                                "INPUT": "input",
+                                "PLACEHOLDER": "http://example.com/url/",
+                                "TITLE": "链接",
+                                "TAGNAME": true,
+                                "DESC":""
+                            }
+                        },
+
+                        "key": {
+                            "TEMPLATE": "ctrl",
+                            "SELECT":{
+                                "CLASS": "vj-select-row",
+                                "TITLE": "事件",
+                                "TEXT": "选择事件组",
+                                "ITEM": {"AJAX":  "http://api.mycuo.com/custom_key"},
+                                "DESC": ""
+                            }
+                        },
+
+                        "media_id": {
+                            "TEMPLATE": "ctrl",
+                            "FILE":{
+                                "CLASS": "vj-file-media",
+                                "TITLE": "下发素材",
+                                "ITEM": {"AJAX":  "http://api.mycuo.com/media_id?t=news"},
+                                "DESC": ""
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+    var test_051 = $.extend(true, {} , ctest_051, mtest_051)
+    var tempSrc = $("#vj-ctrl-sim").html()
     var template = Handlebars.compile(tempSrc);
-    var html    = template(test_ctrl);
-    // (function($) {
-    //     var compiled = {};
-    //     $.fn.handlebars = function(template, data) {
-    //         if (template instanceof jQuery) {
-    //             template = $(template).html();
-    //         }
-    //     compiled[template] = Handlebars.compile(template);
-    //     this.html(compiled[template](data));
-    //     };
-    // })(jQuery);
-    // $('#content').handlebars($('#template'), { name: "Alan" });
+    var html    = template(test_051);
     $(document).ready(function(){$(document.body).append(html)})
 
-</script>
+</script></body>

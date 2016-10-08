@@ -4,7 +4,7 @@
         "TYPE": Array,
         "LEN": [1,3],
         "ITEM": {
-            "TYPE":Object,
+            "TYPE":Object, // Array ITEM 貌似不需要TYPE
 
             "name":{
                 "REQUIRED": true,

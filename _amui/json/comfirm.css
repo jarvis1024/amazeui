@@ -1,12 +1,12 @@
-/*COMFIRM*/
-    .vj-cfm-box{
+/*MODAL*/
+    .vj-modal-dialog{
         position: fixed;
         z-index: 1;
         width: 100%;
         top: 50%;
         left: 0;
     }
-    .vj-cfm-box>div{
+    .vj-modal-dialog>div{
         position: relative;
         margin: -50px auto;
         width: 340px;
@@ -16,7 +16,7 @@
         font-size: 0;
         text-align: right;
     }
-    .vj-cfm-box h5{
+    .vj-modal-dialog h5{
         margin: 0;
         padding: 0 12px;
         font-size: 13px;
@@ -25,14 +25,21 @@
         background-color: #EEE;
         text-align: left;
     }
-    .vj-cfm-box p{
+    .vj-modal-dialog p{
         margin: 12px;
         font-size: 14px;
         line-height: 20px;
         color: #333;
+        clear: both;
         text-align: left;
     }
-    .vj-cfm-box button{
+    .vj-modal-dialog input{
+        display: block;
+        width: 300px;
+        height: 26px;
+        margin: 6px auto;
+    }
+    .vj-modal-dialog button{
         display: inline-block;
         cursor: pointer;
         margin: 0 16px 10px 0;
@@ -45,10 +52,10 @@
         border-color: #AAA;
         background-color: #FFF;
     }
-    .vj-cfm-box button:hover{
+    .vj-modal-dialog button:hover{
         text-decoration: underline;
     }
-    .vj-cfm-box [class*=vj-icon]{
+    .vj-modal-dialog [class*=vj-icon]{
         display: block;
         float: left;
         height: 100%;

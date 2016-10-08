@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="inputs.css">
+<link rel="stylesheet" type="text/css" href="comfirm.css">
 <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
 <script type="text/javascript">
 </script>
@@ -30,19 +30,103 @@
             $(document.body).append(box)
         }
     })
+    var vj_modal = {
+        confirm : function( option ){
+            if( !$.isFunction(option.primary) && option.primary!==undefined )
+                return false
+            
+            if( !$.isFunction(option.default) && option.default!==undefined )
+                return false
 
-    var s = (msg)=>{$.vj_comfirm({
+            if( $(".vj-modal-dialog").length )
+                return false
+            
+            var title = option.title || "确认操作",
+                desc = option.desc || "该操作可能无法撤销，是否确认？",
+                btn1 = option.primaryText || "确认",
+                btn2 = option.defaultText || "取消",
+                theme = option.theme || "default";
+
+            var box = $.parseHTML('<div class="vj-modal-dialog vj-confirm-'+theme+'"><div><h5>'+title+'</h5><p>'+(option.icon? '<span class="vj-icon-'+option.icon+'"></span>': '')+desc+'</p><button class="vj_btn_primary">'+btn1+'</button><button class="vj_btn_default">'+btn2+'</button></div></div>')
+            
+            $(box).find(".vj_btn_primary").on("click", option.primary || (function(){}) )
+            $(box).find(".vj_btn_default").on("click", option.default || (function(){}) )
+            $(box).find("[class*=vj_btn]").on("click", function(){
+                $(this).closest(".vj-modal-dialog").remove()
+            } )
+
+            $(document.body).append(box)
+        },
+        alert : function( option ){
+            if( !$.isFunction(option.default) && option.default!==undefined )
+                return false
+
+            if( $(".vj-modal-dialog").length )
+                return false
+
+            var title = option.title || "提示",
+                desc = option.desc || "",
+                btn = option.buttonText || "确认",
+                theme = option.theme || "default";
+
+            var box = $.parseHTML('<div class="vj-modal-dialog vj-alert-'+theme+'"><div><h5>'+title+'</h5><p>'+(option.icon? '<span class="vj-icon-'+option.icon+'"></span>': '')+desc+'</p><button class="vj_btn_default">'+btn+'</button></div></div>')
+
+            $(box).find(".vj_btn_default").on("click", option.default || (function(){}) )
+            $(box).find("[class*=vj_btn]").on("click", function(){
+                $(this).closest(".vj-modal-dialog").remove()
+            } )
+
+            $(document.body).append(box)
+        },
+        prompt : function( option ){
+            if( !$.isFunction(option.primary) && option.primary!==undefined )
+                return false
+            
+            if( !$.isFunction(option.default) && option.default!==undefined )
+                return false
+
+            if( $(".vj-modal-dialog").length )
+                return false
+
+            var forms = "";
+            if( option.forms ){
+                $.each( option.forms, function(idx,elm){
+                    var placeholder = idx.toString().match(/\D+/g)
+                    forms = forms+ '<input type="text" name="'+elm+'" placeholder="'+(placeholder? placeholder[0]: "")+'">'
+                } )
+            }
+            var title = option.title || "填写内容",
+                desc = option.desc || "完善以下内容后继续。",
+                btn1 = option.primaryText || "确认",
+                btn2 = option.defaultText || "取消",
+                theme = option.theme || "default";
+
+            var box = $.parseHTML('<div class="vj-modal-dialog vj-confirm-'+theme+'"><div><h5>'+title+'</h5><p>'+(option.icon? '<span class="vj-icon-'+option.icon+'"></span>': '')+desc+'</p><p>'+forms+'</p><button class="vj_btn_primary">'+btn1+'</button><button class="vj_btn_default">'+btn2+'</button></div></div>')
+            
+            $(box).find(".vj_btn_primary").on("click", { context: $(box).find("input")}, option.primary || (function(){}) )
+            $(box).find(".vj_btn_default").on("click", { context: $(box).find("input")}, option.default || (function(){}) )
+            $(box).find("[class*=vj_btn]").on("click", function(){
+                $(this).closest(".vj-modal-dialog").remove()
+            } )
+
+            $(document.body).append(box)
+        }
+    }
+    var s = (msg)=>{vj_modal.prompt({
             title: "the title",
             desc: "the description "+msg,
-            primary: function(){
+            forms: {"名字":"name","1":"2"},
+            primary: function(e){
                 console.log("primary btn "+msg)
             },
-            default: function(){
-                console.log("default btn "+msg)
+            default: function(e){
+               $.each(e.data.context, function( idx, elm ){
+                    console.log( elm.name +':'+ elm.value )
+                })
+               console.log(e.data.context)
             },
             icon: "test"
         })}
 </script>
 
 <button onclick="s('hello world')">test</button>
-
