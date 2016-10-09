@@ -80,20 +80,20 @@
 
 <script type="text/javascript">
     (function(hbs){
-        hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "root"}}{{>root this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
+        hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "router"}}{{>router this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table this}}{{/if_equal}}{{#if_equal TEMPLATE "tag"}}{{>tag this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
         
-        hbs.registerPartial('table', 'TABLE_{{@key}}<div style="margin:3px;border:2px solid green" >{{>router this}}<div>')
+        hbs.registerPartial('tag', '<div class="vj-table vj-tag-table" data-vj-group="{{@../key}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div>')
 
-        hbs.registerPartial('root', 'ROOT_{{@key}}<div style="margin:3px;border:2px solid red" >{{>router this}}<div>')
+        hbs.registerPartial('table', '<tr><td class="vj-name" data-vj-group="{{@key}}"><span class="vj-title">{{TITLE}}</span></td><td>{{>router this}}</td></tr> ')
 
-        hbs.registerPartial('ctrl','CTRL_{{@key}}{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" index="{{@index}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}');
+        hbs.registerPartial('ctrl','{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" index="{{@index}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}<br>');
     })(Handlebars)
     var test_ctrl = {
         "parent":{
-            "TEMPLATE": "root",
+            "TEMPLATE": "table",
             "ff":{
 
-                "TEMPLATE": "table",
+                "TEMPLATE": "tag",
                 "f1": {
                     "TEMPLATE": "ctrl",
                     "CHECK":{
@@ -121,7 +121,7 @@
                     }
                 },
                 "children":{
-                    "TEMPLATE": "table",
+                    "TEMPLATE": "tag",
                     "f2": {
                         "TEMPLATE": "ctrl",
                         "CHECK":{
@@ -206,7 +206,8 @@
                             "REQUIRED": true,
                             "TYPE": Array,
                             "DEFAULT": [],
-                            "LEN": [0,0]
+                            "LEN": [0,0],
+                            "ITEM":{}
                         },
 
                         "name":{
@@ -248,9 +249,10 @@
     }
     var mtest_051 = {// menu/create
         "button":{
-            "TEMPLATE": "root",
+            "TEMPLATE": "table",
+            "TITLE": "自定义菜单",
             "ITEM": {
-                "TEMPLATE": "table",
+                "TEMPLATE": "tag",
                 "name":{
                     "TEMPLATE": "ctrl",
                     "INPUT":{
@@ -271,6 +273,7 @@
                         "TITLE": "类型",
                         "TEXT": "选择类型",
                         "ITEM": {
+                            "sub_button": "",
                             "click":  "自定义事件",
                             "view":  "打开网页",
                             "scancode_push":  "扫码推事件(打开网页)",
@@ -323,8 +326,7 @@
                 "sub_button":{
                     "TEMPLATE": "table",
                     "ITEM": {
-                    "TEMPLATE": "table",
-
+                        "TEMPLATE": "tag",
                         "name":{
                             "TEMPLATE": "ctrl",
                             "INPUT":{
@@ -398,10 +400,12 @@
             }
         }
     }
+    var test_sel_051 = {"button":{"name":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"type":{"SELECT":{"CLASS":"vj-select-row","ITEM":{}},"TEMPLATE":"ctrl"},"url":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"key":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"media_id":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"sub_button":{"sub_button":{},"name":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"type":{"SELECT":{"CLASS":"vj-select-row","ITEM":{}},"TEMPLATE":"ctrl"},"url":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"key":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"media_id":{"TEMPLATE":"ctrl","INPUT":{"CLASS":"vj-input-single","INPUT":"input","TITLE":{"url":"链接地址","name":"名称","type":"类型","sub_button":"子菜单"},"ERRMSG":{"LEN":"长度超出限制","TYP":"格式错误","REQ":"必须填写"}}},"TEMPLATE":"tag"},"TEMPLATE":"table"}}
     var test_051 = $.extend(true, {} , ctest_051, mtest_051)
     var tempSrc = $("#vj-ctrl-sim").html()
     var template = Handlebars.compile(tempSrc);
-    var html    = template(test_051);
+    var html    = template(test_sel_051);
+    console.log( html )
     $(document).ready(function(){$(document.body).append(html)})
 
 </script></body>

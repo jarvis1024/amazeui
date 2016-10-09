@@ -1,0 +1,332 @@
+<html>
+<head>
+    <title>a</title>
+    <link rel="stylesheet" type="text/css" href="../json/inputs.css">
+</head>
+<body class="vj-form">
+    <script type="text/javascript" src="../assets/js/handlebars.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui[drag_ort].min.js"></script>
+    <script>
+        function j(json, option) {
+            var defaults = $.extend( true, {
+                    "INPUT": {
+                        "CLASS": "vj-input-single",
+                        "INPUT": "input",
+                        "ERRMSG":{
+                            "LEN": "长度超出限制",
+                            "TYP": "格式错误",
+                            "REQ": "必须填写"
+                        }
+                    },
+                    "SELECT": {
+                        "CLASS": "vj-select-row",
+                        "ITEM":{},
+                        "ERRMSG":{
+                            "LEN": "长度超出限制",
+                            "TYP": "格式错误",
+                            "REQ": "必须填写"
+                        }
+                    },
+                    "CHECK": {
+                        "CLASS": "vj-check-mutiple",
+                        "ITEM":{},
+                        "ERRMSG":{
+                            "LEN": "长度超出限制",
+                            "TYP": "格式错误",
+                            "REQ": "必须填写"
+                        }
+                    },
+                    "BOOL": {
+                        "CLASS": "vj-check-mutiple",
+
+                    },
+                    "FILE": {
+
+                    },
+                    "TITLE":{
+                        "button":       "自定义菜单",
+                        "type":         "类型",
+                        "name":         "名称",
+                        "url":          "链接地址",
+                        "media_id":     "素材",
+                        "key":          "事件组",
+                        "sub_button":   "子菜单"
+                    },
+                    "ITEM":{
+                        "sub_button":       "子菜单",
+                        "click":            "自定义事件",
+                        "view":             "打开网页",
+                        "scancode_push":    "扫码推事件(打开网页)",
+                        "scancode_waitmsg": "扫码推事件(等待消息)",
+                        "pic_sysphoto":     "弹出拍照发图",
+                        "pic_weixin":       "弹出相册发图",
+                        "pic_photo_or_album":"弹出拍照或相册发图",
+                        "location_select":  "弹出地理位置",
+                        "media_id":         "下发素材",
+                        "view_limited":     "打开图文页面"
+                    },
+                    "CUSTOM":{}
+                }, option),
+                target = json ,
+                result = {},
+                resum = ["TYPE", "REQUIRED","UNREQUIRED","LEN","ENUM","DEFAULT"];
+
+            var glevel = 0;
+
+
+            function eca( a, b, c, d){
+                a[d] = b[d];
+                if( c instanceof Array ){
+                    for(var ii=0;ii<c.length;ii++){
+                        a[d].ITEM[c[ii]] = b.ITEM[c[ii]]||"unknow"; 
+                    }
+                }else{
+                    $.getJSON( c.url, c.param, function(d){ a[d].ITEM = d });
+                }
+                return a
+            }
+            function loop( a, b, c ){
+                /*
+                 * @param a : target, 
+                 * @param b : default,
+                 * @param c : result,
+                 * @param g : global result
+                 * @return result
+                 */
+                var lev = glevel++, d;
+
+                $.each( a, function(idx, elm){
+
+                    if( $.inArray(idx, resum)>-1) return true
+
+                    d  = {};
+
+                    if( elm.TYPE===Object ){
+                        d = loop(elm, b, {} )
+                        d.TEMPLATE = "table";
+                        d.TITLE = b.TITLE[idx]
+                        //
+
+                    }else{
+                        if( elm.TYPE===Array ){
+                            elm = elm.ITEM
+
+                            if( elm.TYPE===Object ){
+                                if( lev===0 ){
+                                    d[idx] = loop(elm, b, {} )
+                                    d.TEMPLATE = "table"
+                                    d[idx].TEMPLATE = "tag"
+                                    d.TITLE = b.TITLE[idx]
+                                }else{
+                                    d = loop(elm, b, {} )
+                                    d.TEMPLATE = "tag"
+                                }
+                                //
+                            }else{
+                                if ( !elm.TYPE ) return true  //for empty field
+
+                                if( elm.hasOwnProperty("ENUM") ){
+                                    d = eca( d, b, elm.ENUM, "CHECK" )
+                                    d.CHECK.TITLE = b.TITLE[idx]
+                                    d.CHECK = $.extend(true,{}, d.CHECK, b.CUSTOM[idx] )
+
+                                }else{
+
+                                    //do sth judge for file or else
+                                    d.INPUT = b.INPUT;
+                                    d.INPUT.TITLE = b.TITLE[idx]
+                                    d.INPUT = $.extend(true,{}, d.INPUT, b.CUSTOM[idx] )
+
+                                }
+                                d.TEMPLATE = "ctrl";
+                                //
+                            }
+
+                        }else{
+                            if( elm.hasOwnProperty("ENUM") ){
+                                d = eca( d, b, elm.ENUM, "SELECT" )
+                                d.SELECT.TITLE = b.TITLE[idx]
+                                d.SELECT = $.extend(true,{}, d.SELECT, b.CUSTOM[idx] )
+
+                            }else{
+                                if( elm.TYPE==="bool"){
+                                    d = eca( d, b, elm.ENUM, "CHECK" )
+                                    d.CHECK.TITLE = b.TITLE[idx]
+                                    d.CHECK = $.extend(true,{}, d.CHECK, b.CUSTOM[idx] )
+
+                                }else{
+                                    d.INPUT = b.INPUT;
+                                    d.INPUT.TITLE = b.TITLE[idx]
+                                    d.INPUT = $.extend(true,{}, d.INPUT, b.CUSTOM[idx] )
+                                }
+
+                            }
+                            d.TEMPLATE = "ctrl";
+                            //
+                        }
+
+                    }
+
+                    if( d.hasOwnProperty("G") ){
+                        c.G = $.extend(true, {}, c.G, d.G)
+                        delete d.G
+                    }
+
+                    d.TEMPLATE==="table" ?
+                        c.G = $.extend(true, {}, c.G, {[idx]:d})
+                      : c[idx] = d
+
+                } )
+                if(lev===0){
+                    c = $.extend(true, {}, c, c.G)
+                    delete c.G
+                }
+
+                return c
+            }
+
+            result = loop(target, defaults, result, result)
+            return {
+                result : result,
+                target : target
+            }
+        }
+        var s = {// menu/create
+            "button":{
+                "REQUIRED": true,
+                "TYPE": Array,
+                "LEN": [1,3],
+                "ITEM": {
+                    "TYPE":Object, // Array ITEM 貌似不需要TYPE
+
+                    "name":{
+                        "REQUIRED": true,
+                        "TYPE": "string",
+                        "LEN": [0,16]
+                    },
+
+                    "type":{
+                        "REQUIRED": ["DEPEND", "sub_button", [null, undefined] ],
+                        "UNREQUIRED": ["INSTANCE", "sub_button", Array ],
+                        "TYPE": "string",
+                        "ENUM": [
+                            "click", "view", "scancode_push", "scancode_waitmsg",
+                            "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                            "location_select", "media_id", "view_limited"
+                        ],
+                    },
+
+                    "url": {
+                        "REQUIRED": ["DEPEND", "type", ["view"] ],
+                        "TYPE": "string",
+                        "LEN": [0, 1024]
+                    },
+
+                    "key": {
+                        "REQUIRED": ["DEPEND", "type", ["click"] ],
+                        "TYPE": "string",
+                        "LEN": [0, 128]
+                    },
+
+                    "media_id": {
+                        "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                        "TYPE": "string"
+                    },
+
+
+                    "sub_button":{
+                        "TYPE": Array,
+                        "LEN": [1,5],
+                        "ITEM": {
+                            "TYPE": Object,
+
+                            "sub_button":{
+                                "REQUIRED": true,
+                                "TYPE": Array,
+                                "DEFAULT": [],
+                                "LEN": [0,0],
+                                "ITEM":{}
+                            },
+
+                            "name":{
+                                "REQUIRED": true,
+                                "TYPE": "string",
+                                "LEN": [0,60]
+                            },
+
+                            "type":{
+                                "REQUIRED": true,
+                                "TYPE": "string",
+                                "ENUM": [
+                                    "click", "view", "scancode_push", "scancode_waitmsg",
+                                    "pic_sysphoto", "pic_photo_or_album", "pic_weixin",
+                                    "location_select", "media_id", "view_limited"
+                                ],
+                            },
+
+                            "url": {
+                                "REQUIRED": ["DEPEND", "type", ["view"] ],
+                                "TYPE": "string",
+                                "LEN": [0, 1024]
+                            },
+
+                            "key": {
+                                "REQUIRED": ["DEPEND", "type", ["click"] ],
+                                "TYPE": "string",
+                                "LEN": [0, 128]
+                            },
+
+                            "media_id": {
+                                "REQUIRED": ["DEPEND", "type", ["media_id", "view_limited"] ],
+                                "TYPE": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        (function(hbs){
+            hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "router"}}{{>router this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table this}}{{/if_equal}}{{#if_equal TEMPLATE "tag"}}{{>tag this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
+            
+            hbs.registerPartial('tag', '<div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{@../../key}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div>')
+
+            hbs.registerPartial('table', '<tr><td class="vj-name"><span class="vj-title">{{TITLE}}</span><lable>{{@key}}</lable></td><td>{{>router this}}</td></tr> ')
+
+            hbs.registerPartial('ctrl','{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}<br>');
+            hbs.registerHelper('if_equal', function(val1, val2, options) {
+                if( val1 === val2 ) {
+                    return options.fn(this);
+                } else {
+                    return options.inverse(this);
+                }
+            });
+
+        })(Handlebars)
+        var setUp = {
+            "CUSTOM":{
+                "type":{
+                    "TEXT": "选择类型",
+                    "DESC": "无需选择"
+                }
+            }
+        }
+        var tempSrc = "{{>router this}}";
+        var jsonRes = j(s, setUp).result 
+        console.log( jsonRes )
+
+        var html = Handlebars.compile(tempSrc)( jsonRes );
+        $.holdReady(true)
+        $(document.body).append(html)
+        $.holdReady(false)
+        //@example
+        // $.holdReady(true);
+        // $.getScript("myplugin.js", function() {
+        //   $.holdReady(false);
+        // });
+
+
+    </script>
+    <script type="text/javascript" src="../json/inputs.js"></script>
+</body>
+</html>

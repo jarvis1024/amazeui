@@ -1,0 +1,23 @@
+    //* 1
+    ( button )
+        //* 2 @button
+        ( type, name,... )
+            //* 3 @sub 
+            ( type, name, .... )
+            < sub: {}
+
+
+    END&RESULT
+
+
+    {//@loop 1
+        a: { //@loop 2
+            b: 1,
+            c: 2,
+            d:{ //@loop 3
+                b: 1,
+                c: 2
+            }
+        }
+
+    }

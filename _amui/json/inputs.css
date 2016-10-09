@@ -65,6 +65,11 @@ td.vj-name>span:after{
     line-height: 26px;
     font-size: 14px;
     color: #444;
+    display: inline-block;
+    width: 70px;
+}
+.vj-ctrl .vj-desc{
+    margin-left: 80px;
 }
 .vj-ctrl .vj-desc>*{
     display: block;
