@@ -1,0 +1,43 @@
+*{
+    margin: auto;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","Apple Color Emoji","Segoe UI Symbol",Arial,sans-serif;
+}
+.vj-form button{
+    background-color: transparent;
+    border: 1px solid #AAA;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+.vj-form{
+    width: 95%;
+    min-width: 400px;
+    margin: 0 auto;
+}
+.vj-form td{
+    border: 0;
+    border-top: 1px solid #CCC;
+    padding: 12px;
+}
+.vj-form td.vj-name{
+    width: 25%;
+    text-align: right;
+    vertical-align: baseline !important ;
+}
+.vj-form td.vj-name>span{
+    font-size: 15px;
+    color: #333;
+    line-height: 26px;
+}
+.vj-form td.vj-name>span:after{
+    content: "：";
+}
+.vj-form input, .vj-form textarea{
+    border: 1px solid #AAA;
+    width: 300px;
+}
+.vj-form input:focus, .vj-form textarea:focus, .vj-form button:focus{
+    border-color: #2A2;
+    outline: 0;
+}

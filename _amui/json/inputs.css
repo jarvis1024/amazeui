@@ -87,7 +87,7 @@ td.vj-name>span:after{
     margin-right: 12px;
 }
 .vj-item>span{
-    z-index: -1
+    z-index: -1;
 }
 .vj-item>.vj-placeholder{
     position: absolute;
@@ -143,11 +143,11 @@ td.vj-name>span:after{
     background-color: #FFF;
     top: 100%;
     left: -1px;
-    z-index: 1;
+    z-index: 10;
     border: 1px solid #CCC;
 
     max-height: 240px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 .vj-ctrl-select .vj-item{
     border: 1px solid #AAA;
@@ -190,7 +190,7 @@ td.vj-name>span:after{
     padding: 0 6px 6px 0;
     width: 130px;
 }
-.vj-select-matrix .vj-select>*{
+.vj-select-matrix .vj-select>span{
     display: inline-block !important;
     width: 24px;
     height: 24px;
@@ -198,12 +198,14 @@ td.vj-name>span:after{
     height: 24px;
     margin: 6px 0 0 6px;
 }
-.vj-select-row .vj-select>*{
+.vj-select-row .vj-select>span{
     display: block !important;
+    white-space: nowrap;
     padding: 0 8px;
+
 }
-.vj-select-row .vj-select>*:hover{
-    background-color: #F0F0F0;
+.vj-select-row .vj-select>span:hover{
+    background-color: #E7E7E7;
     color: #2A2;
 }
 

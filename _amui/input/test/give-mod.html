@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Give Model</title>
+</head>
+<body>
+<div id="target">
+    <div class="ctrl" data-group="root" data-name="name">
+        A
+    </div>
+    <div class="ctrl" data-group="root" data-name="type">
+        B
+    </div>
+    <div class="ctrl" data-group="body" data-name="tar">
+        C
+        <div class="ctrl" data-group="body.tar" data-name="name">
+            CA
+        </div>
+        <div class="ctrl" data-group="body.tar" data-name="type">
+            CB
+        </div>
+    </div>
+</div>
+<!-- JS Lib -->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui[drag_ort].min.js"></script>
+<script type="text/javascript" src="../js/handlebars.min.js"></script>
+<!-- JS Dis -->
+<script src="../js/give-mod.js"></script>
+</body>
+</html>

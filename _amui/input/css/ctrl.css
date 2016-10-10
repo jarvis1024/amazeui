@@ -1,0 +1,216 @@
+/*CTRL Regular**/
+.vj-ctrl{
+    position: relative;
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 0;
+    
+    transition: all .2s ease-in-out;
+}
+.vj-ctrl-input input, .vj-ctrl-input textarea{
+    display: block;
+    background-color: transparent;
+    line-height: 16px;
+    font-size: 13px;
+    color: #222;
+    padding: 4px 6px;
+}
+.vj-ctrl .vj-title{
+    margin-right: 6px;
+    white-space: nowrap;
+    line-height: 26px;
+    font-size: 14px;
+    color: #444;
+    display: inline-block;
+    width: 70px;
+}
+.vj-ctrl .vj-desc{
+    margin-left: 80px;
+}
+.vj-ctrl .vj-desc>*{
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+}
+.vj-ctrl .vj-desc>.vj-err{
+    color: #D44 !important;
+}
+.vj-item{
+    display: inherit;
+    position: relative;
+    margin-right: 12px;
+}
+
+/*INPUT*/
+.vj-item>span{
+    z-index: -1
+}
+.vj-item>.vj-placeholder{
+    position: absolute;
+    color: #999;
+    font-size: 14px;
+    line-height: 26px;
+    margin-left: 8px;
+}
+.vj-item>.vj-counter{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #999;
+    font-size: 13px;
+    font-style: italic;
+    font-family: Verdana;
+    line-height: 26px;
+    margin-right: 6px;
+}
+.vj-item>.vj-unit{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #444;
+    font-size: 14px;
+    line-height: 26px;
+    margin-right: 6px;
+}
+.vj-item>.vj-viewer{
+    /*z-index: 0;*/
+    display: inline-block;
+    cursor: pointer;
+    height: 20px;
+}
+.vj-item>.vj-text{
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 20px;
+    color: #444;
+}
+.vj-item.vj-err input, .vj-item.vj-err textarea{
+    border-color: #D44 !important;
+}
+.vj-item.vj-err-len .vj-counter{
+    color: #D44 !important;
+}
+
+/*SELECT*/
+.vj-select{
+    display: none;
+    position: absolute;
+    background-color: #FFF;
+    top: 100%;
+    left: -1px;
+    z-index: 10;
+    border: 1px solid #CCC;
+
+    max-height: 240px;
+    overflow-y: auto;
+}
+.vj-ctrl-select .vj-item{
+    border: 1px solid #AAA;
+    padding: 3px 6px;
+    padding-right: 24px;
+    line-height: 20px;
+    background-color: #FFF;
+    vertical-align: baseline;
+}
+.vj-ctrl-select .vj-item:hover{
+    background-color: #F0F0F0;
+}
+.vj-ctrl-select .vj-item:after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    right: 8px;
+    width: 0;
+    height: 0;
+    border-color: #AAA transparent transparent;
+    border-width: 6px 4px 0 4px;    
+    border-style: solid dashed dashed;
+    margin-top: -3px;
+
+    transition: transform .1s ease-in-out;
+}
+.vj-ctrl-select .vj-item.vj-active:after{
+    transform: rotate(180deg)
+}
+.vj-select>*{
+    cursor: pointer;
+    font-size: 12px;
+    color: #444;
+    line-height: 24px;
+
+}
+.vj-select-matrix .vj-select{
+    padding: 0 6px 6px 0;
+    width: 130px;
+}
+.vj-select-matrix .vj-select>*{
+    display: inline-block !important;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    height: 24px;
+    margin: 6px 0 0 6px;
+}
+.vj-select-row .vj-select>*{
+    display: block !important;
+    padding: 0 8px;
+}
+.vj-select-row .vj-select>*:hover{
+    background-color: #F0F0F0;
+    color: #2A2;
+}
+
+/*CHECK*/
+.vj-ctrl-check .vj-item>*{
+    display: block;
+    cursor: pointer;
+    color: #444;
+    font-size: 14px;
+    line-height: 26px;
+    margin-right: 12px;
+}
+.vj-check-mutiple .vj-item>*:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    border: 2px solid #444;
+}
+.vj-check-mutiple .vj-item>.vj-checked:before{
+    content: "√";
+    color: #444;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: initial;
+    line-height: 4px;
+    text-align: right;
+    text-shadow: 1px 1px 1px #FFF;
+}
+
+.vj-check-single .vj-item>*:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #444;
+}
+.vj-check-single .vj-item>.vj-checked:before{
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAgMAAAC5YVYYAAAADFBMVEUAAAAuoTguoTguoThqAj5yAAAAA3RSTlMAEIBdDFWvAAAAGUlEQVQI12MAAkYHBu4HDPJfgAjIAHKBYgA0FwR/WlSYWgAAAABJRU5ErkJggg==")
+}
