@@ -332,6 +332,24 @@
 
                 };
 
+                $.each( $target.find(".vj-ctrl.vj-ctrl-check"), function(idx, elm){
+                    var $elm = $(elm),
+                        group = $elm.data("group"),
+                        name = $elm.data("name"),
+                        data = mod;
+
+                    for( var ii=0,gp=group.split("."); ii<gp.length; ii++ ){
+                        data = data[gp[ii]]
+                        if( data.TYPE===Array ) // if Group is a Array Object
+                            data = data.ITEM
+                    }
+
+                    $elm.data( data[name] )
+                        .find(".vj-item>span")
+                        .on("click", onClick)
+                } )
+
+
             };
             $me.GlobalEvent = {
                 click:{
