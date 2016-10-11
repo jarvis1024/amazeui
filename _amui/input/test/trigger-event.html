@@ -3,22 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>jQuery Form</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/ctrl.css">
+    <link rel="stylesheet" href="../css/tag.css">
+    <link rel="stylesheet" href="../css/context_menu.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <style>
+        *{
+            margin: auto;
+            vertical-align: top;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","Apple Color Emoji","Segoe UI Symbol",Arial,sans-serif;
+        }
+        .vj-table-row{
+            margin: auto;
+            padding: 5px;
+            min-width: 600px;
+            border-top: 1px solid #CCC;
+            overflow: hidden;
+        }
+        .vj-table-row:nth-last-of-type(1){
+            border-bottom: 1px solid #CCC;
+        }
+        .vj-table-row .vj-table-hd{
+            float: left;
+            min-width: 180px;
+            padding: 5px;
+        }
+        .vj-table-row .vj-table-bd{
+            float: left;
+            padding: 5px;
+        }
+    </style>
+
 </head>
 <body>
-<table class="vj-form">
-    <tbody>
-        <tr>
-            <td>
-                
-            </td>
-            <td id="a1">
-            <input type="text" name="id">
-                
-            </td>
-        </tr>
-    
-    </tbody>
-</table>
+<div id="a1" class="vj-table-row vj-form" data-name="button" data-group="ROOT"><div class="vj-table-hd">自定义菜单</div><div class="vj-table-bd"><div class="vj-table vj-tag-table ui-sortable" data-name="button" data-group="ROOT"><div class="vj-tag-container"><span data-vj-tag="" class="vj-tag-name ui-sortable-handle">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab=""><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="name" data-group="button"><span class="vj-title">名称</span><div class="vj-item"><span class="vj-counter">0/5</span><input type="text" class="vj-input" ></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br>
+<div class="vj-ctrl vj-ctrl-select vj-select-matrix" data-name="type" data-group="button"><span class="vj-title">类型</span><div class="vj-item"><span class="vj-viewer"></span><span class="vj-text">选择类型</span><div class="vj-select"><span data-value="Color010" data-bgcolor >Color010</span><span data-value="Color020" data-bgcolor >Color020</span><span data-value="Color030" data-bgcolor >Color030</span><span data-value="Color040" data-bgcolor >Color040</span><span data-value="Color050" data-bgcolor >Color050</span><span data-value="Color060" data-bgcolor >Color060</span><span data-value="Color070" data-bgcolor >Color070</span><span data-value="Color080" data-bgcolor >Color080</span><span data-value="Color081" data-bgcolor >Color081</span><span data-value="Color082" data-bgcolor >Color082</span><span data-value="Color090" data-bgcolor >Color090</span><span data-value="Color100" data-bgcolor >Color100</span><span data-value="Color101" data-bgcolor >Color101</span><span data-value="Color102" data-bgcolor >Color102</span></div></div><p class="vj-desc"><span class="vj-err"></span><span>无需选择</span></p></div><br><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="url" data-group="button"><span class="vj-title">链接地址</span><div class="vj-item"><span class="vj-counter">0/341</span><input type="text" class="vj-input" ></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="key" data-group="button"><span class="vj-title">事件组</span><div class="vj-item"><span class="vj-counter">0/42</span><input type="text" class="vj-input" ></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="media_id" data-group="button"><span class="vj-title">素材</span><div class="vj-item"><input type="text" class="vj-input"></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br><div class="vj-table vj-tag-table ui-sortable" data-name="sub_button" data-group="button"><div class="vj-tag-container"><span data-vj-tag="" class="vj-tag-name ui-sortable-handle">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab=""><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="name" data-group="button.sub_button"><span class="vj-title">名称</span><div class="vj-item"><span class="vj-counter">0/20</span><input type="text" class="vj-input" ></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br><div class="vj-ctrl vj-ctrl-select vj-select-row" data-name="type" data-group="button.sub_button"><span class="vj-title">类型</span><div class="vj-item"><span class="vj-text">选择类型</span><div class="vj-select"><span data-value="click">自定义事件</span><span data-value="view">打开网页</span><span data-value="scancode_push">扫码推事件(打开网页)</span><span data-value="scancode_waitmsg">扫码推事件(等待消息)</span><span data-value="pic_sysphoto">弹出拍照发图</span><span data-value="pic_photo_or_album">弹出拍照或相册发图</span><span data-value="pic_weixin">弹出相册发图</span><span data-value="location_select">弹出地理位置</span><span data-value="media_id">下发素材</span><span data-value="view_limited">打开图文页面</span></div></div><p class="vj-desc"><span class="vj-err"></span><span>无需选择</span></p></div><br><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="url" data-group="button.sub_button"><span class="vj-title">链接地址</span><div class="vj-item"><span class="vj-counter">0/341</span><input type="text" class="vj-input" ></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="key" data-group="button.sub_button"><span class="vj-title">事件组</span><div class="vj-item"><span class="vj-counter">0/42</span><input type="text" class="vj-input" ></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br><div class="vj-ctrl vj-ctrl-input vj-input-single" data-name="media_id" data-group="button.sub_button"><span class="vj-title">素材</span><div class="vj-item"><input type="text" class="vj-input"></div><p class="vj-desc"><span class="vj-err"></span><span></span></p></div><br></div></div></div></div></div></div></div></div>
 
 
 
@@ -31,7 +52,8 @@
 <!-- JS Dis -->
 <script type="text/javascript" src="../js/init.js"></script>
 <script>
-    console.log( $("#a1").vj_config({}) )
+    var dom = $("#a1").vj_config({}) ;
+    dom.vjInit()
 </script>
 </body>
 </html>

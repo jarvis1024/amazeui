@@ -76,20 +76,21 @@
 
             function setGroup(a, b){
                 $.each( a, function(eIdx){
-                    if( $.inArray(eIdx, resum)>-1) return true
-                    // if( a[eIdx] instanceof Object ){
-                        /*if( a[eIdx].GROUP==undefined ){
-                            a[eIdx].GROUP= eIdx
-                        }else */if( a[eIdx].GROUP!=="ROOT"){
-                            a[eIdx].GROUP= b
-                        }
-                    // }
+                    if( $.inArray(eIdx, resum)>-1 || !a[eIdx].hasOwnProperty("TEMPLATE") ){
+                        return true
+                    }
+
+                    if( $.inArray(a[eIdx].TEMPLATE, ["table", "table_tag", "tag"])>-1){
+                        setGroup( a[eIdx], b)
+                    }
+
+                    if( a[eIdx].GROUP=="undefined" ){
+                        a[eIdx].GROUP= b
+                    }else if( a[eIdx].GROUP!=="ROOT" && b!=="ROOT"){
+                        a[eIdx].GROUP= b+"."+a[eIdx].GROUP
+                    }
                 } )
-                // if( a.GROUP==undefined ){
-                //     a.GROUP= b
-                // }else if( a.GROUP!=="ROOT" ){
-                //     a.GROUP= b+"."+a.GROUP
-                // }
+
                 return a
             }
 
@@ -125,32 +126,23 @@
 
                         d.TEMPLATE = "table";
                         d.TITLE = b.TITLE[idx]
-                        d.GROUP = lev===0? "ROOT": undefined
+                        d.GROUP = lev===0? "ROOT": "undefined"
                         //
 
                     }else{
                         if( elm.TYPE===Array ){
                             elm = elm.ITEM
-
                             if( elm.TYPE===Object ){
+                                d = loop( elm, b, {} )
+                                d.TITLE = b.TITLE[idx]
                                 if( lev===0 ){
-                                    d.TEMPLATE = "table"
+                                    d.TEMPLATE = "table_tag"
                                     d.GROUP = "ROOT"
-                                    d.TITLE = b.TITLE[idx]
-                                    d[idx] = loop( elm, b, {} )
-
-                                    if( d[idx].hasOwnProperty("G") ){ //move lev1 Object 2 root
-                                        d = $.extend( true, d, {G: d[idx].G} )
-                                        delete d[idx].G
-                                    }
-                                    d[idx].TEMPLATE = "tag"
-                                    d[idx].GROUP = "ROOT"
                                 }else{
-                                    d = loop( elm, b, {} )
-                                    d = setGroup( d, idx)
                                     d.TEMPLATE = "tag"
+                                    d.GROUP = "undefined"
                                 }
-                                //
+                                //if Object
                             }else{
                                 if ( !elm.TYPE ) return true  //for empty field
 
@@ -168,9 +160,11 @@
 
                                 }
                                 d.TEMPLATE = "ctrl";
-                                //
+                                d.GROUP = "undefined"
+                                //else !Object
                             }
 
+                            //if Array
                         }else{
                             if( elm.hasOwnProperty("ENUM") ){
                                 d = eca( d, b, elm.ENUM, "SELECT" )
@@ -184,33 +178,39 @@
                                     d.CHECK = $.extend(true, d.CHECK, b.CUSTOM[idx] )
 
                                 }else{
+
                                     d.INPUT = b.INPUT;
                                     d.INPUT.TITLE = b.TITLE[idx]
                                     d.INPUT = $.extend(true, d.INPUT, b.CUSTOM[idx] )
+                                    if( $.isArray( elm.LEN ) ){
+                                        console.log( idx )
+                                        d.INPUT.COUNTER = "0/" + parseInt(elm.LEN[1] / 3)
+                                    }
                                 }
 
                             }
                             d.TEMPLATE = "ctrl";
-                            //
+                            d.GROUP = "undefined"
+                            //else !Array
                         }
 
                     }
+
+                    d = setGroup(d, idx)
 
                     if( d.hasOwnProperty("G") ){
                         d.G = setGroup( d.G, idx)
                         c.G = $.extend(true, c.G, d.G)
                         delete d.G
-                    }else{
-                        d = setGroup(d, idx)
                     }
 
 
-                    if( d.TEMPLATE==="table" ){
-                        
+                    if( d.TEMPLATE==="table" || d.TEMPLATE==="table_tag" ){
                         c.G = $.extend(true, c.G, {[idx]:d})
 
                     }else{
                         c[idx] = d
+
                     }
 
                 } )
@@ -279,11 +279,11 @@
                             "TYPE": Object,
 
                             "sub_button":{
-                                "REQUIRED": true,
                                 "TYPE": Array,
                                 "DEFAULT": [],
                                 "LEN": [0,0],
-                                "ITEM":{}
+                                "ITEM":{ }
+
                             },
 
                             "name":{
@@ -323,15 +323,21 @@
                 }
             }
         };
-
         (function(hbs){
-            hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "router"}}{{>router this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table this}}{{/if_equal}}{{#if_equal TEMPLATE "tag"}}{{>tag this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
+            hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "router"}}{{>router this}}{{/if_equal}}{{#if_equal TEMPLATE "table_tag"}}{{>table-tag this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table-2 this}}{{/if_equal}}{{#if_equal TEMPLATE "tag"}}{{>tag this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
             
-            hbs.registerPartial('tag', '<div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{@../../key}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div>')
+            hbs.registerPartial('tag', '<div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{GROUP}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div>')
 
-            hbs.registerPartial('table', '<tr data-name="{{@key}}" data-group="{{GROUP}}"><td class="vj-name"><span class="vj-title">{{TITLE}}</span><lable>{{@key}}</lable></td><td>{{>router this}}</td></tr> ')
+            // hbs.registerPartial('tag', '<div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{@../../key}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div>')
 
-            hbs.registerPartial('ctrl','{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}" class="vj-check">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}<br>');
+            hbs.registerPartial('table', '<tr data-name="{{@key}}" data-group="{{GROUP}}"><td class="vj-name"><span class="vj-title">{{TITLE}}</span><lable>{{@key}}</lable></td><td>{{>router this}}</td></tr>')
+            
+            hbs.registerPartial('table-2', '<div class="vj-table-row" data-name="{{@key}}" data-group="{{GROUP}}"><div class="vj-table-hd">{{TITLE}}</div><div class="vj-table-bd">{{>router this}}</div></div>')
+
+            hbs.registerPartial('table-tag', '<div class="vj-table-row" data-name="{{@key}}" data-group="{{GROUP}}"><div class="vj-table-hd">{{TITLE}}</div><div class="vj-table-bd"><div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{GROUP}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div></div></div>')
+
+            hbs.registerPartial('ctrl','{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}" class="vj-check">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}<br>');
+            
             hbs.registerHelper('if_equal', function(val1, val2, options) {
                 if( val1 === val2 ) {
                     return options.fn(this);
@@ -341,6 +347,26 @@
             });
 
         })(Handlebars)
+        
+        // (function(hbs){
+        //     hbs.registerPartial('router', '{{#each this}}{{#if_equal TEMPLATE "router"}}{{>router this}}{{/if_equal}}{{#if_equal TEMPLATE "table_tag"}}{{>table_tag this}}{{/if_equal}}{{#if_equal TEMPLATE "table"}}{{>table this}}{{/if_equal}}{{#if_equal TEMPLATE "tag"}}{{>tag this}}{{/if_equal}}{{#if_equal TEMPLATE "ctrl"}}{{>ctrl this}}{{/if_equal}}{{/each}}')
+            
+        //     hbs.registerPartial('tag', '<div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{GROUP}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div>')
+
+        //     hbs.registerPartial('table', '<tr data-name="{{@key}}" data-group="{{GROUP}}"><td class="vj-name"><span class="vj-title">{{TITLE}}</span><lable>{{@key}}</lable></td><td>{{>router this}}</td></tr> ')
+
+        //     hbs.registerPartial('table_tag', '<tr data-name="{{@key}}" data-group="{{GROUP}}"><td class="vj-name"><span class="vj-title">{{TITLE}}</span><lable>{{@key}}</lable></td><td><div class="vj-table vj-tag-table" data-name="{{@key}}" data-group="{{GROUP}}" ><div class="vj-tag-container"><span data-vj-tag  class="vj-tag-name">未命名</span><span class="vj-tag-add"></span></div><div class="vj-tab-container"><div data-vj-tab >{{>router this}}</div></div></div></td></tr> ')
+
+        //     hbs.registerPartial('ctrl','{{#INPUT}}<div class="vj-ctrl vj-ctrl-input {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}{{#if PLACEHOLDER}}<span class="vj-placeholder">{{PLACEHOLDER}}</span>{{/if}}{{#if COUNTER}}<span class="vj-counter">{{COUNTER}}</span>{{/if}}{{#if UNIT}}<span class="vj-unit">{{UNIT}}</span>{{/if}}{{#if_equal INPUT "input"}}<input type="text" class="vj-input">{{/if_equal}}{{#if_equal INPUT "textarea"}}<textarea class="vj-input"></textarea>{{/if_equal}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/INPUT}}{{#SELECT}}<div class="vj-ctrl vj-ctrl-select {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}{{#if TEXT}}<span class="vj-text">{{TEXT}}</span>{{/if}}<div class="vj-select">{{#each ITEM}}<span data-vj-data="{{@key}}">{{this}}</span>{{/each}}</div></div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/SELECT}}{{#CHECK}}<div class="vj-ctrl vj-ctrl-check {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}"><span class="vj-title">{{TITLE}}</span><div class="vj-item">{{#each ITEM}}<span data-vj-data="{{@key}}" class="vj-check">{{this}}</span>{{/each}}</div><p class="vj-desc"><span class="vj-err"></span><span>{{DESC}}</span></p></div>{{/CHECK}}<br>');
+        //     hbs.registerHelper('if_equal', function(val1, val2, options) {
+        //         if( val1 === val2 ) {
+        //             return options.fn(this);
+        //         } else {
+        //             return options.inverse(this);
+        //         }
+        //     });
+
+        // })(Handlebars)
         var setUp = {
             "CUSTOM":{
                 "type":{
@@ -357,6 +383,7 @@
         $.holdReady(true)
         $(document.body).append(html)
         $.holdReady(false)
+        
         //@example
         // $.holdReady(true);
         // $.getScript("myplugin.js", function() {
@@ -368,7 +395,7 @@
     <script type="text/javascript" src="../json/inputs.js"></script>
     <div style="display:none">
         {{#INPUT}}
-        <div class="vj-ctrl vj-ctrl-input {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}">
+        <div class="vj-ctrl vj-ctrl-input {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}">
             <span class="vj-title">{{TITLE}}</span>
             <div class="vj-item">
                 {{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}
@@ -388,7 +415,7 @@
         {{/INPUT}}
 
         {{#SELECT}}
-        <div class="vj-ctrl vj-ctrl-select {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}">
+        <div class="vj-ctrl vj-ctrl-select {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}">
             <span class="vj-title">{{TITLE}}</span>
             <div class="vj-item">
                 {{#if VIEWER}}<span class="vj-viewer">{{VIEWER}}</span>{{/if}}
@@ -407,7 +434,7 @@
         {{/SELECT}}
 
         {{#CHECK}}
-        <div class="vj-ctrl vj-ctrl-check {{CLASS}}" data-name="{{@key}}" data-group="{{@../key}}">
+        <div class="vj-ctrl vj-ctrl-check {{CLASS}}" data-name="{{@key}}" data-group="{{../GROUP}}">
             <span class="vj-title">{{TITLE}}</span>
             <div class="vj-item">
                 {{#each ITEM}}

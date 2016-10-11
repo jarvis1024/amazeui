@@ -96,7 +96,6 @@
 
 /*SELECT*/
 .vj-select{
-    display: none;
     position: absolute;
     background-color: #FFF;
     top: 100%;
@@ -105,7 +104,10 @@
     border: 1px solid #CCC;
 
     max-height: 240px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .1s ease-in-out;
 }
 .vj-ctrl-select .vj-item{
     border: 1px solid #AAA;
@@ -134,6 +136,9 @@
 
     transition: transform .1s ease-in-out;
 }
+.vj-ctrl-select .vj-item.vj-active .vj-select{
+    transform: scaleY(1);
+}
 .vj-ctrl-select .vj-item.vj-active:after{
     transform: rotate(180deg)
 }
@@ -142,11 +147,10 @@
     font-size: 12px;
     color: #444;
     line-height: 24px;
-
 }
 .vj-select-matrix .vj-select{
     padding: 0 6px 6px 0;
-    width: 130px;
+    width: 145px;
 }
 .vj-select-matrix .vj-select>*{
     display: inline-block !important;
@@ -156,12 +160,14 @@
     height: 24px;
     margin: 6px 0 0 6px;
 }
-.vj-select-row .vj-select>*{
+.vj-select-row .vj-select>span{
     display: block !important;
+    white-space: nowrap;
     padding: 0 8px;
+
 }
-.vj-select-row .vj-select>*:hover{
-    background-color: #F0F0F0;
+.vj-select-row .vj-select>span:hover{
+    background-color: #E7E7E7;
     color: #2A2;
 }
 

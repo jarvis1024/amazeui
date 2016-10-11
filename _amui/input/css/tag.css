@@ -1,1 +1,59 @@
-tag.css
+.vj-table{
+    margin: 0 20px;
+}
+.vj-tag-container{
+    position: relative;
+    padding: 0 24px;
+    font-size: 0;
+    z-index: 1;
+    margin-bottom: -1px;
+}
+.vj-tag-container .vj-tag-name{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+    font-size: 13px;
+    line-height: 26px;
+    color: #7F7F7F;
+    background-color: #E0E0E0;
+}
+.vj-tag-container .vj-tag-name:hover{
+    color: #2A2;
+    cursor: pointer;
+    text-decoration: underline; 
+}
+.vj-tag-container .vj-tag-name.vj-active{
+    color: #666;
+    border-width: 1px 1px 0 1px;
+    background-color: #FFF;
+    border-color: #CCC;
+    border-style: solid;
+}
+.vj-tag-container .vj-tag-add:before{
+    content: "+";
+    display: inline-block;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+    color: #7F7F7F;
+    background-color: #E0E0E0;
+    cursor: pointer;
+    margin-left: 12px;
+}
+.vj-tag-container .vj-tag-add:hover:before{
+    color: #2A2;
+}
+.vj-tab-container{
+    border: 1px solid #CCC;
+    padding: 24px;
+    position: relative;
+}
+.vj-tab-container [data-vj-tab]{
+    position: relative;
+    top: 0
+}
