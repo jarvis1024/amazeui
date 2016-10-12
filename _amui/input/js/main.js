@@ -383,7 +383,7 @@
 
             check: {
                 onClick: function(){
-                    $(this).closest(".vj-ctrl-check").is(".vj-check-single") ?
+                    $(this).closest(".vj-ctrl-check").is(".vj-check-radio") ?
                         $(this).addClass("vj-checked").siblings().removeClass("vj-checked")
                       : $(this).toggleClass("vj-checked");
 

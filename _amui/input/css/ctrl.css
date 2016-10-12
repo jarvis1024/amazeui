@@ -16,16 +16,14 @@
     padding: 4px 6px;
 }
 .vj-ctrl .vj-title{
-    margin-right: 6px;
-    white-space: nowrap;
-    line-height: 26px;
+    margin-right: 12px;
+    line-height: 18px;
     font-size: 14px;
+    padding: 4px 0;
     color: #444;
     display: inline-block;
     width: 70px;
-}
-.vj-ctrl .vj-desc{
-    margin-left: 80px;
+    vertical-align: middle;
 }
 .vj-ctrl .vj-desc>*{
     display: block;
@@ -44,17 +42,18 @@
 }
 
 /*INPUT*/
-.vj-item>span{
-    z-index: -1
+.vj-placeholder, .vj-counter, .vj-unit{
+    z-index: -1;
+    white-space: nowrap;
+    line-height: 26px;
 }
-.vj-item>.vj-placeholder{
+.vj-item .vj-placeholder{
     position: absolute;
     color: #999;
     font-size: 14px;
-    line-height: 26px;
     margin-left: 8px;
 }
-.vj-item>.vj-counter{
+.vj-item .vj-counter{
     position: absolute;
     right: 0;
     bottom: 0;
@@ -62,25 +61,23 @@
     font-size: 13px;
     font-style: italic;
     font-family: Verdana;
-    line-height: 26px;
     margin-right: 6px;
 }
-.vj-item>.vj-unit{
+.vj-item .vj-unit{
     position: absolute;
     right: 0;
     bottom: 0;
     color: #444;
     font-size: 14px;
-    line-height: 26px;
     margin-right: 6px;
 }
-.vj-item>.vj-viewer{
+.vj-item .vj-viewer{
     /*z-index: 0;*/
     display: inline-block;
     cursor: pointer;
     height: 20px;
 }
-.vj-item>.vj-text{
+.vj-item .vj-text{
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
@@ -95,7 +92,7 @@
 }
 
 /*SELECT*/
-.vj-select{
+.vj-select-list{
     position: absolute;
     background-color: #FFF;
     top: 100%;
@@ -109,50 +106,54 @@
     transform-origin: top;
     transition: transform .1s ease-in-out;
 }
-.vj-ctrl-select .vj-item{
+.vj-ctrl-select .vj-select, .vj-ctrl-file .vj-item{
+    position: inherit;
     border: 1px solid #AAA;
     padding: 3px 6px;
-    padding-right: 24px;
     line-height: 20px;
     background-color: #FFF;
     vertical-align: baseline;
+    white-space: nowrap;
 }
-.vj-ctrl-select .vj-item:hover{
+.vj-ctrl-select .vj-select:hover{
     background-color: #F0F0F0;
 }
-.vj-ctrl-select .vj-item:after{
+.vj-ctrl-select .vj-select:after{
     content: "";
     display: inline-block;
-    position: absolute;
+    position: relative;
+    vertical-align: middle;
     cursor: pointer;
     top: 50%;
-    right: 8px;
+    right: 4px;
     width: 0;
     height: 0;
     border-color: #AAA transparent transparent;
     border-width: 6px 4px 0 4px;    
     border-style: solid dashed dashed;
     margin-top: -3px;
+    margin-left: 12px;
 
     transition: transform .1s ease-in-out;
 }
-.vj-ctrl-select .vj-item.vj-active .vj-select{
+.vj-ctrl-select .vj-select.vj-active .vj-select-list{
     transform: scaleY(1);
 }
-.vj-ctrl-select .vj-item.vj-active:after{
+.vj-ctrl-select .vj-select.vj-active:after{
     transform: rotate(180deg)
 }
-.vj-select>*{
+.vj-select-list>*{
     cursor: pointer;
     font-size: 12px;
     color: #444;
     line-height: 24px;
 }
-.vj-select-matrix .vj-select{
+.vj-select-matrix .vj-select-list{
+    white-space: normal;
     padding: 0 6px 6px 0;
     width: 145px;
 }
-.vj-select-matrix .vj-select>*{
+.vj-select-matrix .vj-select-list>*{
     display: inline-block !important;
     width: 24px;
     height: 24px;
@@ -160,13 +161,12 @@
     height: 24px;
     margin: 6px 0 0 6px;
 }
-.vj-select-row .vj-select>span{
+.vj-select-text .vj-select-list>span{
     display: block !important;
     white-space: nowrap;
     padding: 0 8px;
-
 }
-.vj-select-row .vj-select>span:hover{
+.vj-select-text .vj-select-list>span:hover{
     background-color: #E7E7E7;
     color: #2A2;
 }
@@ -180,7 +180,7 @@
     line-height: 26px;
     margin-right: 12px;
 }
-.vj-check-mutiple .vj-item>*:before{
+.vj-check-box .vj-item>*:before{
     content: "";
     display: inline-block;
     vertical-align: middle;
@@ -193,7 +193,7 @@
     border-radius: 3px;
     border: 2px solid #444;
 }
-.vj-check-mutiple .vj-item>.vj-checked:before{
+.vj-check-box .vj-item>.vj-checked:before{
     content: "√";
     color: #444;
     font-size: 12px;
@@ -204,7 +204,7 @@
     text-shadow: 1px 1px 1px #FFF;
 }
 
-.vj-check-single .vj-item>*:before{
+.vj-check-radio .vj-item>*:before{
     content: "";
     display: inline-block;
     vertical-align: middle;
@@ -217,6 +217,6 @@
     border-radius: 50%;
     border: 2px solid #444;
 }
-.vj-check-single .vj-item>.vj-checked:before{
+.vj-check-radio .vj-item>.vj-checked:before{
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAgMAAAC5YVYYAAAADFBMVEUAAAAuoTguoTguoThqAj5yAAAAA3RSTlMAEIBdDFWvAAAAGUlEQVQI12MAAkYHBu4HDPJfgAjIAHKBYgA0FwR/WlSYWgAAAABJRU5ErkJggg==")
 }
