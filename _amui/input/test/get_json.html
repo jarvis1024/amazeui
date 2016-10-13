@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get json from project</title>
+</head>
+<body>
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<textarea id="origin" style="width:600px; height: 300px"></textarea><br>
+<button id="action">开始</button><br>
+<p id="hint"></p>
+<pre id="result"></pre>
+<script>
+    function loop( obj ){
+        $.each( obj, function(idx){
+            if( obj[idx] instanceof Object){
+                obj[idx] = loop( obj[idx] )
+            }
+            if( obj[idx].hasOwnProperty("url") ){
+                $.getJSON( obj[idx].url, function(r){
+                    obj[idx] = r
+                })
+            }
+        })
+        return obj 
+    }
+    $(function(){
+        $("#action").on("click", function(){
+            var originJson = $("#origin").val();
+            var result = loop( $.parseJSON( originJson ))
+            $("#result").html( result)
+        })
+    })()
+</script>
+    
+</body>
+</html>

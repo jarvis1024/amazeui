@@ -106,7 +106,8 @@
     transform-origin: top;
     transition: transform .1s ease-in-out;
 }
-.vj-ctrl-select .vj-select, .vj-ctrl-file .vj-item{
+.vj-ctrl-select .vj-select, .vj-ctrl-file .vj-file-button{
+    display: inherit;
     position: inherit;
     border: 1px solid #AAA;
     padding: 3px 6px;
@@ -161,18 +162,18 @@
     height: 24px;
     margin: 6px 0 0 6px;
 }
-.vj-select-text .vj-select-list>span{
+.vj-select-text .vj-select-list>.vj-li{
     display: block !important;
     white-space: nowrap;
     padding: 0 8px;
 }
-.vj-select-text .vj-select-list>span:hover{
+.vj-select-text .vj-select-list>.vj-li:hover{
     background-color: #E7E7E7;
     color: #2A2;
 }
 
 /*CHECK*/
-.vj-ctrl-check .vj-item>*{
+.vj-ctrl-check .vj-item>.vj-li{
     display: block;
     cursor: pointer;
     color: #444;
@@ -180,8 +181,7 @@
     line-height: 26px;
     margin-right: 12px;
 }
-.vj-check-box .vj-item>*:before{
-    content: "";
+.vj-check-box .vj-item>.vj-li:before, .vj-check-radio .vj-item>.vj-li:before{
     display: inline-block;
     vertical-align: middle;
     position: relative;
@@ -190,33 +190,29 @@
     margin-right: 6px;
     width: 8px;
     height: 8px;
-    border-radius: 3px;
     border: 2px solid #444;
 }
-.vj-check-box .vj-item>.vj-checked:before{
+.vj-check-box .vj-item>.vj-li:before{
     content: "√";
-    color: #444;
+    color: transparent;
     font-size: 12px;
     font-weight: bold;
     font-family: initial;
     line-height: 4px;
     text-align: right;
+    text-shadow: 1px 1px 1px transparent;
+    
+    transition: color .1s ease-in-out, text-shadow .1s ease-in-out;
+    border-radius: 3px;
+}
+.vj-check-box .vj-item>.vj-li.vj-checked:before{
+    color: #444;
     text-shadow: 1px 1px 1px #FFF;
 }
-
-.vj-check-radio .vj-item>*:before{
+.vj-check-radio .vj-item>.vj-li:before{
     content: "";
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    left: 0;
-    top: 0;
-    margin-right: 6px;
-    width: 8px;
-    height: 8px;
     border-radius: 50%;
-    border: 2px solid #444;
 }
-.vj-check-radio .vj-item>.vj-checked:before{
+.vj-check-radio .vj-item>.vj-li.vj-checked:before{
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAgMAAAC5YVYYAAAADFBMVEUAAAAuoTguoTguoThqAj5yAAAAA3RSTlMAEIBdDFWvAAAAGUlEQVQI12MAAkYHBu4HDPJfgAjIAHKBYgA0FwR/WlSYWgAAAABJRU5ErkJggg==")
 }

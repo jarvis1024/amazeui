@@ -6,14 +6,123 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/ctrl.css">
     <link rel="stylesheet" href="../css/file.css">
+    <style>
+        .vj-file-contain{
+            display: inherit;
+            margin-top: 12px;
+        }
+        .vj-file-items{
+            display: inline-block;
+            padding: 5px;
+            margin-right: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #D1D1D1;
+        }
+        .vj-items-bd{
+            width: 120px;
+            height: 120px;
+            text-align: center;
+        }
+        .vj-items-bd>img{
+            max-height: 120px;
+            max-width: 120px;
+        }
+        .vj-valign-m{
+            position: relative;
+        }
+        .vj-valign-m:before{
+            content: "";
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .vj-valign-m>*{
+            display: inline-block;
+            vertical-align: middle;            
+        }
+        .vj-items-title{
+            display: block;
+            text-align: center;
+            line-height: 18px;
+            font-size: 13px;
+            width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+    </style>
 </head>
 <body>
     <div class="vj-ctrl vj-ctrl-file">
         <span class="vj-title">hi</span>
         <div class="vj-item">
-            <div class="vj-viewer">View</div>
-            <div class="vj-text">TEXT</div>
+            <div class="vj-file-button">
+                <div class="vj-viewer">View</div>
+                <div class="vj-text">TEXT</div>
+            </div><br>
+            <div class="vj-file-contain">
+                <div class="vj-file-items" title="名字">
+                    <div class="vj-items-bd vj-valign-m">
+                        <img src="http://www.mycuo.com/pics/wxmpmtl/img/6eruAh2rrbiTcZXMCeoN6QXetMZNZDD-wxRkmWQcSuo.jpg" alt="name">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/fine-uploader.core.min.js"></script>
+<script>
+    // input { fn, options }
+    var file_mode = {
+        file: function($tar){
+            this.elm = $tar
+            return this
+        }
+    };
+    file_mode.file.prototype.test = function() {
+        // body...
+        console.log(this)
+    };
+    // {
+    //             fn: function($tar){
+    //                 var tarData = $tar.data();
+    //                 tarData.file.object = new tarData.file.class( tarData.file.option )
+    //             },
+    //             test: function(){
+    //                 console.log(this)
+    //             },
+    //             class: qq.FineUploaderBasic,
+    //             callback: {
+    //                 init: function($tar, opt){
+    //                     return new qq.FineUploaderBasic(opt)
+    //                 }
+    //             },
+    //             option: {
+                    
+    //             }
+    //         }
+
+    /*
+    each ( ctrl-file, fn(idx,elm ){
+        $.elm.data( data[name] )
+        if( data[name].file hasOwnProperty("fn") ){
+            data[name].file.fn( $elm )
+        }
+    } )
+
+    $ctrl-file.on("")
+    */
+
+    (function(){
+        var $elm = $(".vj-ctrl")
+        var fmode = file_mode
+        fmode.file = new fmode.file( $elm )
+        $elm.data(fmode)
+
+        file_mode.file.test()
+        // file_mode.file.fn( $elm )
+    })()
+</script>
 </body>
 </html>

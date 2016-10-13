@@ -2,11 +2,11 @@
 
     // @param REQUIRED : boolean / arrary 4 judge 
     // @param UNREQUIRED : boolean / arrary 4 judge 
-    // @param TYPE : string / __proto__[Array, Object]
+    // @param TYPE : string [str, int, float] / __proto__[Array, Object]
     // @param LEN : array[ min, max] @TYPE === Array
-    // @param MAX : int { max numer}
-    // @param MIN : int { min numer}
-    // @param ITEM : object { child fields }
+    // @param MAX : int { max number}
+    // @param MIN : int { min number}
+    // @param ITEM : object { child fields } @ Array, field
     // @param FORMAT : ["money", "percent", "url" ...]
     // @param EXPRESS : string @example "parseInt({{}}*100)"
     // @param FILE : Object{ FN, OPTION }
@@ -71,7 +71,7 @@
                     listener.input( $target, model, $me.GlobalEvent )
                     listener.select( $target, model, $me.GlobalEvent )
                     listener.check( $target, model, $me.GlobalEvent )
-                    // listener.file( $target )
+                    // listener.file( $target, model, $me.GlobalEvent )
 
                 }
 
