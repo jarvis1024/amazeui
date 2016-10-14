@@ -70,20 +70,34 @@
             </div>
         </div>
     </div>
+    <div id="test_warp" style="border:2px solid green;padding: 5px; width: 820px;">
+        <div id="drop" style="width: 200px;height: 200px;display: inline-block; background-color: #CCC;">0</div>
+        <div id="com" style="display: inline-block;height: 200px;background-color: #AE9;width: 600px;"></div>
+    </div>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/fine-uploader.core.min.js"></script>
 <script>
     // input { fn, options }
-    var file_mode = {
-        file: function($tar){
-            this.elm = $tar
-            return this
+    var mode = {
+        CTRL: "file", 
+        // ...
+
+        file: new qq.FineUploaderBasic(),
+        option: {
+            enpoint: "../up.asp",
+            param: { a: 1051 },
+            callbacks: {
+            }
         }
+
+
+
     };
-    file_mode.file.prototype.test = function() {
-        // body...
-        console.log(this)
-    };
+
+    // file_mode.file.prototype.test = function() {
+    //     // body...
+    //     console.log(this)
+    // };
     // {
     //             fn: function($tar){
     //                 var tarData = $tar.data();
@@ -115,12 +129,53 @@
     */
 
     (function(){
-        var $elm = $(".vj-ctrl")
-        var fmode = file_mode
-        fmode.file = new fmode.file( $elm )
-        $elm.data(fmode)
+        var $drop = $("#drop")
+        $(document)
+            .on('dragenter', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+            .on('dragleave', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if( e.target == document.body ){
+                    $drop.html( "" )
+                }
+            })
+            .on('dragover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $drop.html( "Drag & Drop File Here" )
+            })
+            .on('drop', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+            .on('drag', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+        $("#drop")
+            .on('dragenter', function (e) {
+            })
+            .on("drop", function(e){
+                var files = e.originalEvent.dataTransfer.files;
+                console.log( files )
+            })
 
-        file_mode.file.test()
+        var qqUploaderOption = {
+            autoUpload: false, 
+            debug: true, 
+            formNmae: "vj.file", 
+            maxConnections: 5, 
+
+        }
+        var $elm = $(".vj-ctrl")
+        // var fmode = file_mode
+        // fmode.file = new fmode.file( $elm )
+        $elm.data(mode)
+
+        // file_mode.file.test()
         // file_mode.file.fn( $elm )
     })()
 </script>
