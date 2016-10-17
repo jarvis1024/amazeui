@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Controller File </title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/ctrl.css">
+    <link rel="stylesheet" href="../css/file.css">
+
+</head>
+<body>
+    <div id="test_warp" style="border:2px solid green;padding: 5px; width: 820px;">
+        <div id="drop" style="width: 200px;height: 200px;display: inline-block; background-color: #CCC;">0</div>
+        <div id="com" style="display: inline-block;height: 200px;background-color: #AE9;width: 600px;"></div>
+    </div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/fine-uploader.core.min.js"></script>
+<script>
+    // (function(){
+/*        function dragInto(e){
+            var files = e.originalEvent.dataTransfer.files;
+            var fileData, fileName, fileSize, fileReader;
+            fileReader = new FileReader()
+            for( ii in files){
+                fileName = files[ii].name
+                fileSize = files[ii].size
+                switch(files[ii].type.split("/")[0]){
+                    case "image": 
+                }
+            }
+            return {
+                files : e.originalEvent.dataTransfer.files,
+
+            }
+        }
+
+
+        {
+            TYPE: "file.image",
+            MUTIPLE: true/false;
+            LEN:[ min, max ],
+
+            SIZE:[ min, max ],
+            SCALE: [ min, max ],
+
+            REPO_ID: 51,
+            REPO_GATE: "/api/weixin/manager/_wechatgate.repo.asp",
+            KEY: ["media_id"],
+
+            
+
+
+        }
+
+        FineUploaderBasic OPTION
+        {
+            requirest{
+                inputName: "file",
+                filenameParam: "filename",
+                uuidName: "fileuuid"
+            }
+        }
+*/
+        function dragFile(e){
+            if( e.originalEvent.isTrusted ){
+                if( e.originalEvent.dataTransfer.files.length>0 )
+                    flieReader.addFiles( e.originalEvent.dataTransfer.files )
+                    // appendFile( e.originalEvent.dataTransfer.files )
+        }
+        var $drop = $("#drop")
+        $(document)
+            .on('dragenter', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+            .on('dragleave', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if( e.target == document.body ){
+                    // 移出body
+                    $drop.html( "" )
+                }
+            })
+            .on('dragover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $drop.html( "Drag & Drop File Here" )
+            })
+            .on('drop', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+
+        var flieReader = new qq.FineUploaderBasic({
+            autoUpload: false, 
+            callbacks: {
+                onSubmit: function(id, name){
+                    var ctn = document.createElement("div"),
+                        img = document.createElement("img");
+ 
+                    var view = {},
+                        file = this.getFile(id);
+
+                    this.drawThumbnail(id, img, 100)
+                    .done(function(a){
+                        view.src = a.src;
+                    })
+                    this.drawThumbnail(id, document.createElement("img") )
+                    .done(function(a){
+                        view.scale = a.width + "*" + a.height;
+                        file.width = a.width;
+                        file.height = a.height;
+
+                    })
+
+                    var size, unit = 0;
+                    size = this.getSize(id)
+                    while( size>1024 ){
+                        size = size/1024;
+                        unit++;
+                    }
+                    switch(unit){
+                        case 0: unit = "B";break;
+                        case 1: unit = "KB";break;
+                        case 2: unit = "MB";break;
+                        case 3: unit = "GB";break;
+                        case 4: unit = "TB";break;
+                        case 5: unit = "PB";break;
+                        case 6: unit = "EB";break;
+                        case 7: unit = "ZB";break;
+                        default: unit = "Unknow";break;
+                    }
+
+                    view.size = size.toFixed(2) + unit
+                    view.name = name.substr(0, name.lastIndexOf(".") )
+                    view.ext = name.substr( name.lastIndexOf(".")+1 )
+
+                    $(ctn).append(img)
+                    $(ctn).data("file", file )
+                    $(ctn).data("view", view )
+                    $("#com").append(ctn)
+                }
+            }
+        })
+        $("#drop")
+            .on("drop", dragFile )
+
+        // $("#drop")
+        //     .on("drop", dragFile )
+    // })()
+</script>
+</body>
+</html>
