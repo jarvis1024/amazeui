@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,6 @@
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/fine-uploader.core.min.js"></script>
 <script>
-    // (function(){
 /*        function dragInto(e){
             var files = e.originalEvent.dataTransfer.files;
             var fileData, fileName, fileSize, fileReader;
@@ -45,7 +44,7 @@
 
             REPO_ID: 51,
             REPO_GATE: "/api/weixin/manager/_wechatgate.repo.asp",
-            KEY: ["media_id"],
+            KEY: ["media_id"]
 
             
 
@@ -62,12 +61,12 @@
         }
 */
         function dragFile(e){
-            if( e.originalEvent.isTrusted ){
+            if( e.originalEvent.isTrusted )
                 if( e.originalEvent.dataTransfer.files.length>0 )
                     flieReader.addFiles( e.originalEvent.dataTransfer.files )
                     // appendFile( e.originalEvent.dataTransfer.files )
         }
-        var $drop = $("#drop")
+        var $drop = $("#drop");
         $(document)
             .on('dragenter', function (e) {
                 e.stopPropagation();
@@ -102,16 +101,16 @@
                         file = this.getFile(id);
 
                     this.drawThumbnail(id, img, 100)
-                    .done(function(a){
-                        view.src = a.src;
-                    })
+                        .done(function(a){
+                            view.src = a.src;
+                        })
                     this.drawThumbnail(id, document.createElement("img") )
-                    .done(function(a){
-                        view.scale = a.width + "*" + a.height;
-                        file.width = a.width;
-                        file.height = a.height;
+                        .done(function(a){
+                            view.scale = a.width + "*" + a.height;
+                            file.width = a.width;
+                            file.height = a.height;
 
-                    })
+                        })
 
                     var size, unit = 0;
                     size = this.getSize(id)
@@ -132,7 +131,7 @@
                     }
 
                     view.size = size.toFixed(2) + unit
-                    view.name = name.substr(0, name.lastIndexOf(".") )
+                    view.name = name.substr( 0, name.lastIndexOf(".") )
                     view.ext = name.substr( name.lastIndexOf(".")+1 )
 
                     $(ctn).append(img)
@@ -141,13 +140,14 @@
                     $("#com").append(ctn)
                 }
             }
-        })
-        $("#drop")
-            .on("drop", dragFile )
+        });
+        $("#drop").on("drop", dragFile );
 
-        // $("#drop")
-        //     .on("drop", dragFile )
-    // })()
+        /*
+            image, video, audio
+    
+        */
+
 </script>
 </body>
 </html>
