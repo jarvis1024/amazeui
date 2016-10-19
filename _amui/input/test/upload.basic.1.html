@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Controller File </title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/ctrl.css">
+    <link rel="stylesheet" href="../css/file.css">
+
+</head>
+<body>
+<button class="upload">Upload</button>
+    <div id="test_warp" style="border:2px solid green;padding: 5px; width: 820px;">
+        <div id="drop" style="width: 200px;height: 200px;display: inline-block; background-color: #CCC;">0</div>
+        <div id="com" style="display: inline-block;height: 200px;background-color: #AE9;width: 600px;"></div>
+    </div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/fine-uploader.core.min.js"></script>
+<script>
+    qq.FineUploaderBasic.prototype._vjSetup = function(option) {
+        this._options = $.extend(true,{}, this._options, option)
+    };
+    var uploadDefaults = {
+        debug: true,
+        autoUpload: false,
+        request: {
+            enpoint: "_wechatgate.repo.asp",
+            inputName: "file",
+            filenameParam: "filename",
+            uuidName: "fileuuid"
+        },
+        validation: {
+            allowedExtensions: ["jpg","jpeg"]
+        },
+        scaling :{
+            size: [
+                {name: "min", maxSize: 100},
+                {name: "medium", maxSize: 480},
+                {name: "max", maxSize: 640}
+            ],
+            sendOriginal: false
+        }
+
+    }
+    var upload = new qq.FineUploaderBasic({
+        button: $(".upload")[0]
+    });
+</script>
+
+</body></html>

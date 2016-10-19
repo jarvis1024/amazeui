@@ -39,11 +39,15 @@
             MUTIPLE: true/false;
             LEN:[ min, max ],
 
+            UPLOADER: {
+                
+            }
             SIZE:[ min, max ],
             SCALE: [ min, max ],
 
-            REPO_ID: 51,
-            REPO_GATE: "/api/weixin/manager/_wechatgate.repo.asp",
+            REPO_ID: 16,
+            UP: "/api/weixin/manager/_wechatgate.repo.asp",
+            DEL: "/api/weixin/manager/_wechatgate.repo.asp",
             KEY: ["media_id"]
 
             
@@ -91,7 +95,30 @@
             })
 
         var flieReader = new qq.FineUploaderBasic({
+
             autoUpload: false, 
+            requirest: {
+                endpoint: "",  // can use setEndpint() to change;
+                inputName: "file",
+                filenameParam: "filename",
+                uuidName: "fileuuid"
+            },
+            validation: {
+                allowedExtensions: [],
+                sizeLimit: 0,
+                minSizeLimit: 0,
+                itemLimit: 0,
+                stopOnFirstInvalidFile: true,
+                acceptFiles: null,
+                image: {
+                    maxHeight: 0,
+                    maxWidth: 0,
+                    minHeight: 0,
+                    minWidth: 0
+                }
+            },
+
+
             callbacks: {
                 onSubmit: function(id, name){
                     var ctn = document.createElement("div"),
