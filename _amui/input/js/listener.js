@@ -1,6 +1,6 @@
 var vj_listener = function( ){
 
-    this.chReg = {
+    this.chrReg = {
         dubUtf8_REG : /[\u0080-\u07ff]/g ,
         trbUtf8_REG : /[\u0800-\uffff]/g ,
         dubByte_REG : /[^\x00-\xff]/g
@@ -12,7 +12,7 @@ var vj_listener = function( ){
 vj_listener.prototype.input = function( $target, mod, GlobalEvent ){
     if( !$target instanceof $ )
         $target = $($target);
-    var chReg = this.chReg;
+    var chrReg = this.chrReg;
 
     var onInput = function(e){
             var $this = $(this),
@@ -29,8 +29,8 @@ vj_listener.prototype.input = function( $target, mod, GlobalEvent ){
                     switch( mod.option.charset.toUpperCase() ){
                         case "UTF-8": 
                             var elmVal = $this.val() , 
-                                dubChr = elmVal.match( chReg.dubUtf8_REG ) || [],
-                                trbChr = elmVal.match( chReg.trbUtf8_REG ) || [],
+                                dubChr = elmVal.match( chrReg.dubUtf8_REG ) || [],
+                                trbChr = elmVal.match( chrReg.trbUtf8_REG ) || [],
                                 chrLen = trbChr.length*2 + dubChr.length + elmVal.length;
 
                             $this.siblings(".vj-counter")
