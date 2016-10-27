@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mycuo App</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+        .page-row{
+            width: 100%;
+            min-width: 1200px;
+            font-size: 0;
+        }
+        .page-block{
+            width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+        }
+        .util-vam:before{
+            content: "";
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .util-vam>*{
+            vertical-align: middle;
+        }
+        
+        ol,ul{
+            margin: 0;
+            padding: 0;
+        }
+
+        .sans{
+            font-family: "Segoe UI",Arial,Helvetica,"Hiragino Sans GB","WenQuanYi Zen Hei","Microsoft Yahei",SimHei,STHeiti,sans-serif;
+        }
+        .serif{
+            font-family: serif;
+        }
+        @font-face {
+          font-family: 'FontAwesome';
+          src: url('./fonts/fontawesome-webfont.eot');
+          src: url('./fonts/fontawesome-webfont.eot') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2') format('woff2'), url('./fonts/fontawesome-webfont.woff') format('woff'), url('./fonts/fontawesome-webfont.ttf') format('truetype'), url('../fonts/fontawesome-webfont.svg#fontawesomeregular') format('svg');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+    </style>
+    <style>
+
+        /**TOP*/
+        .page-top{
+            background-color: #333;
+            text-align: right;
+            height: 36px;
+        }
+
+        .page-top .page-block>*{
+            display: inline-block;
+        }
+
+        .page-top .top-link{
+            font-size: 13px;
+            color: #fff;
+            margin: 4px;
+        }
+        
+        .top-search input{
+            border: 0;
+            width: 180px;
+            height: 18px;
+            font-size: 13px;
+            color: #000;
+            background-color: #fff;
+            margin-left: 16px;
+        }
+        .top-search button{
+            border: 0;
+            width: 20px;
+            height: 20px;
+            font-size: 0;
+            background-color: transparent;
+            margin-left: 8px;
+        }
+        /**TOP***/
+
+
+        /**Logo*/
+        .page-logo{
+            background-color: #f24233;
+            color: #fbcac5;
+            text-align: center;
+            height: 160px;
+        }
+
+        .page-logo .logo-img{
+            display: inline-block;
+            width: 140px;
+            margin-right: 60px;
+        }
+
+        .page-logo .logo-slogan{
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 400;
+            font-family: SimSun, serif;
+            letter-spacing: 30px;
+        }
+
+        /**Logo***/
+
+
+
+        /**NAV*/
+        .page-nav{
+            z-index: 1;
+            background-color: #fff;
+        }
+        .page-nav.util-fixed{
+            position: fixed;
+            top: 0;
+        }
+        .page-nav-h{
+            height: 0;
+        }
+        .page-nav-h.util-fixed{
+            height: 36px;
+        }
+        .page-nav ol{
+            background-color: #fff;
+            height: 36px;
+        }
+
+        .page-nav li{
+            display: inline-block;
+            list-style: none;
+            width: 12.5%;
+            height: 100%;
+            color: #444;
+        }
+
+        .page-nav li.nav-active{
+            background-color: #f24233;
+            color: #fff;
+        }
+
+        .page-nav li>a{
+            display: block;
+            padding: 0 30px;
+            white-space: nowrap;
+            text-align: justify;
+            text-align-last: justify;
+            height: 100%;
+            line-height: 36px;
+            font-size: 16px;
+            color: inherit;
+            font-family: "Segoe UI",Arial,Helvetica,"Hiragino Sans GB","WenQuanYi Zen Hei","Microsoft Yahei",SimHei,STHeiti,sans-serif;
+        }
+        /**NAV***/
+
+
+        /**Banner*/
+        .slide-list ul{
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slide-list ul li{
+            display: block;
+            list-style: none;
+            float: left;
+        }
+
+        .unslider{
+            position: relative;
+        }
+
+        .unslider a.unslider-arrow{
+            background-color: rgba(255,255,255, .4);
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .unslider .unslider-arrow.next{
+            left: 50%;
+            margin-left: 540px;
+            background-image: url(/page/img/right_arrow_.png);
+            background-position: 16px 6px;
+        }
+
+        .unslider .unslider-arrow.prev{
+            right: 50%;
+            margin-right: 540px;
+            background-image: url(/page/img/left_arrow_.png);
+            background-position: 11px 6px;
+        }
+        /**Banner***/
+
+
+        /**Icon Tag*/
+        .itag-list{
+            display: block;
+        }
+
+        .itag-list li{
+            display: inline-block;
+            width: 33.33%;
+            height: 42px;
+            font-size: 16px;
+            text-align: center;
+            color: #818181;
+            letter-spacing: 2px;
+            font-family: verdana;
+        }
+
+        [class*='icon']{
+            font-family: "FontAwesome",serif;
+        }
+        .icon-24{ font-size: 24px; }
+        .icon-14{ font-size: 14px; }
+        .icon-18{ font-size: 18px; }
+        .icon-28{ font-size: 28px; }
+
+        .icon-manthink:before{ content: "\f1fc"; }
+        .icon-lamp:before{ content: "\f0eb"; }
+        .icon-emits:before{ content: "\f1b2"; }
+        .icon-angleright:before{ content: "\f105"; }
+        .icon-comment:before{ content: "\f27b"; }
+        .icon-company:before{ content: "\f2b5"; }
+        .icon-user:before{ content: "\f2c0"; }
+        .icon-info:before{ content: "\f05a"; }
+        .icon-link:before{ content: "\f0c1"; }
+        /**Icon Tag***/
+
+
+        /**Block Header*/
+        .page-header{
+            font-family: "Segoe UI",Arial,Helvetica,"Hiragino Sans GB","WenQuanYi Zen Hei","Microsoft Yahei",SimHei,STHeiti,sans-serif;
+        }
+        .header-title{
+            font-size: 20px;
+            color: #222;
+            line-height: 24px;
+            font-weight: 500;
+        }
+        .header-desc{
+            display: inline-block;
+            vertical-align: bottom;
+            margin-left: 14px;
+            font-size: 13px;
+            line-height: 14px;
+            font-weight: 400;
+            color: #666;
+        }
+        .header-more{
+            display: inline-block;
+            float: right;
+            bottom: 0;
+            font-weight: 400;
+            font-size: 14px;
+            color: #333;
+        }
+        /**Block Header***/
+
+
+
+        /**Grid*/
+        .page-grid-4 .grid-item{
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            width: 291px;
+            height: 200px;
+            margin-right: 12px;
+            background-color: #ccc;
+        }
+
+        .page-grid-6 .grid-item{
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            width: 190px;
+            height: 190px;
+            margin-right: 12px;
+            background-color: #ccc;
+        }
+
+        .grid-item:last-of-type{
+            margin-right: 0;
+        }
+        /**Grid***/
+
+
+        .artist-item .artist-avatar{
+            display: block;
+            position: absolute;
+            text-align: center;
+            height: 200px;
+        }
+        .artist-avatar>img{
+            min-height: 100%;
+            width: 100%;
+        }
+
+        /**Artist***/
+
+        
+        /**Goods*/
+        .page-goods{
+            background-color: #EEE;
+        }
+        .goods-facepage, .goods-contentpage{
+            height: 420px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            vertical-align: top;
+        }
+        .goods-facepage{
+            display: inline-block;
+            width: 260px;
+            margin-right: 40px;
+            background-color: #fff;
+        }
+        .goods-contentpage{
+            display: inline-block;
+            width: 900px;
+        }
+
+        .goods-item{
+            vertical-align: top;
+            display: inline-block;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            width: 290px;
+            height: 205px;
+            background-color: #fff;
+            padding: 18px 73px;
+        }
+        .goods-img{
+            display: block;
+            background-color: #ccc;
+            width: 144px;
+            height: 144px;
+        }
+        .goods-title{
+            text-align: center;
+            display: block;
+            height: 24px;
+            line-height: 24px;
+            font-size: 14px;
+            color: #5e5e5e;
+        }
+        /**Goods***/
+
+
+        /**Foot*/
+        .page-foot{
+            background-color: #333;
+            color: #eee;
+            padding: 24px 0;
+        }
+        .foot-docs{
+            height: 64px;
+            font-size: 13px;
+        }
+        .foot-link{
+            margin-right: 24px;
+        }
+        /**Foot***/
+
+    </style>
+</head>
+<body>
+<div class="page-row page-top">
+    <div class="page-block util-vam">
+        <a href="#login" class="top-link">登陆</a>
+        <span class="top-link">|</span>
+        <a href="#signup" class="top-link">注册</a>
+        <form action="/search.asp" class="top-search  util-vam">
+            <input type="text" name="key">
+            <button type="submit">搜索</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="page-row page-logo">
+    <div class="page-block util-vam">
+        <img src="./img/new-brandlogo-2.png" alt="Creative Unique Original" class="logo-img">
+        <span class="logo-slogan">创意就是将错就错</span>
+    </div>
+</div>
+
+
+<div class="page-row page-nav">
+    <div class="page-block">
+        <ol class="nav-list">
+            <li class="nav-active">
+                <a href="#">&nbsp;首页&nbsp;</a>
+            </li>
+            <li>
+                <a href="#">原创作品</a>
+            </li>
+            <li>
+                <a href="#">艺术商品</a>
+            </li>
+            <li>
+                <a href="#">个性定制</a>
+            </li>
+            <li>
+                <a href="#">合作艺术家</a>
+            </li>
+            <li>
+                <a href="#">&nbsp;专题&nbsp;</a>
+            </li>
+            <li>
+                <a href="#">&nbsp;活动&nbsp;</a>
+            </li>
+            <li>
+                <a href="#">&nbsp;发布&nbsp;</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="page-row page-nav-h"></div>
+<div style="height:24px"></div>
+
+
+<div class="page-row page-slide">
+    <div class="page-block">
+        <div class="slide-list">
+            <ul>
+            <li><img src="./img/1.jpg"></li>
+            <li><img src="./img/2.jpg"></li>
+            <li><img src="./img/3.jpg"></li>
+            <li><img src="./img/4.jpg"></li>
+            <li><img src="./img/5.jpg"></li>
+            </ul>
+        </div>
+            
+    </div>
+</div>
+<div style="height:24px"></div>
+
+
+<div class="page-row page-itag3">
+    <div class="page-block">
+        <ol class="itag-list">
+            <li class="util-vam"><a href="javascript:;">
+                <span class="icon-lamp icon-24"></span>
+                creative
+            </a></li>
+            <li class="util-vam"><a href="javascript:;">
+                <span class="icon-emits icon-24"></span>
+                unique
+            </a></li>
+            <li class="util-vam"><a href="javascript:;">
+                <span class="icon-manthink icon-24"></span>
+                original
+            </a></li>
+        </ol>
+    </div>
+</div>
+<div style="height:24px"></div>
+
+
+<div class="page-row page-header">
+    <div class="page-block">
+        <h3 class="header-title">
+            合作艺术家&nbsp;Artist
+            <span class="header-desc">一句话描述</span>
+            <a href="#/artist" class="header-more">
+                查看更多
+                <span class="icon-angleright icon-14"></span>
+            </a>
+        </h3>
+    </div>
+</div>
+<div class="page-row page-artist page-grid-4">
+    <div class="page-block">
+        <div class="artist-item grid-item">
+            <div class="artist-avatar util-vam"><img src="http://www.mycuo.com/pics/ysj/20160412/201641212711307.jpg" alt=""></div>
+            <div class="artist-info">
+                <span class="artist-name"></span>
+                <p class="artist-desc">
+                    
+                </p>
+            </div>
+        </div>
+        <div class="artist-item grid-item">
+            <div class="artist-avatar util-vam"><img src="http://www.mycuo.com/pics/diy/20160413/儿力力.jpg" alt=""></div>
+            <div class="artist-info">
+                <span class="artist-name"></span>
+                <p class="artist-desc">
+                    
+                </p>
+            </div>
+        </div>
+        <div class="artist-item grid-item">
+            <div class="artist-avatar util-vam"><img src="http://www.mycuo.com/pics/diy/20160413/王云云.jpg" alt=""></div>
+            <div class="artist-info">
+                <span class="artist-name"></span>
+                <p class="artist-desc">
+                    
+                </p>
+            </div>
+        </div>
+        <div class="artist-item grid-item">
+            <div class="artist-avatar util-vam"><img src="http://www.mycuo.com/pics/ysj/20160408/20164815652556.jpg" alt=""></div>
+            <div class="artist-info">
+                <span class="artist-name"></span>
+                <p class="artist-desc">
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:24px"></div>
+
+
+<div class="page-row page-goods">
+    <div class="page-block">
+        <div class="goods-facepage">
+            <div style="margin:15px; border: 1px solid #e42; height:390px">
+                <span style="height:100%;display:inline-block;vertical-align:middle"></span>
+                <div style="height:240px;display:inline-block;vertical-align:middle;text-align:center;width:100%" class="sans">
+                    <h4 style="color:#f24233;font-size:24px;letter-spacing: 4px;font-weight:500;margin:18px 0;">艺术商品</h4>
+                    <h4 style="color:#f24233;font-size:24px;letter-spacing: 1px;font-weight:500;margin:18px 0;">Product</h4>
+                    <p style="color:#666;font-size:14px;margin-top:32px;padding: 0 32px;">描述</p>
+                </div>
+            </div>
+        </div>
+        <div class="goods-contentpage">
+            <div class="goods-item">
+                <img src=" " alt="" class="goods-img">
+                <span class="goods-title sans">123123</span>
+            </div>
+            <div class="goods-item">
+                <img src=" " alt="" class="goods-img">
+                <span class="goods-title sans">123123</span>
+            </div>
+            <div class="goods-item">
+                <img src=" " alt="" class="goods-img">
+                <span class="goods-title sans">123123</span>
+            </div>
+            <div class="goods-item">
+                <img src=" " alt="" class="goods-img">
+                <span class="goods-title sans">123123</span>
+            </div>
+            <div class="goods-item">
+                <img src=" " alt="" class="goods-img">
+                <span class="goods-title sans">123123</span>
+            </div>
+            <div class="goods-item">
+                <img src=" " alt="" class="goods-img">
+                <span class="goods-title sans">123123</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="height:24px"></div>
+
+
+<div class="page-row page-header">
+    <div class="page-block">
+        <h3 class="header-title">
+            原创作品&nbsp;Art&nbsp;Works
+            <span class="header-desc">一句话描述</span>
+            <a href="#/art" class="header-more">
+                查看更多
+                <span class="icon-angleright"></span>
+            </a>
+        </h3>
+    </div>
+</div>
+<div class="page-row page-artwork page-grid-4">
+    <div class="page-block">
+        <div class="artwork-item grid-item"></div>
+        <div class="artwork-item grid-item"></div>
+        <div class="artwork-item grid-item"></div>
+        <div class="artwork-item grid-item"></div>
+    </div>
+</div>
+<div style="height:24px"></div>
+
+
+<div class="page-row page-header">
+    <div class="page-block">
+        <h3 class="header-title">
+            近期专题&nbsp;Topic
+            <span class="header-desc">一句话描述</span>
+            <a href="#/art" class="header-more">
+                查看更多
+                <span class="icon-angleright"></span>
+            </a>
+        </h3>
+    </div>
+</div>
+<div class="page-row page-topic page-grid-4">
+    <div class="page-block">
+        <div class="topic-item grid-item"></div>
+        <div class="topic-item grid-item"></div>
+        <div class="topic-item grid-item"></div>
+        <div class="topic-item grid-item"></div>
+    </div>
+</div>
+<div style="height:24px"></div>
+
+
+<div class="page-row page-header">
+    <div class="page-block">
+        <h3 class="header-title">
+            最新资讯&nbsp;News
+            <span class="header-desc">一句话描述</span>
+            <a href="#/art" class="header-more">
+                查看更多
+                <span class="icon-angleright"></span>
+            </a>
+        </h3>
+    </div>
+</div>
+<div class="page-row page-news page-grid-6">
+    <div class="page-block">
+        <div class="news-item grid-item"></div>
+        <div class="news-item grid-item"></div>
+        <div class="news-item grid-item"></div>
+        <div class="news-item grid-item"></div>
+        <div class="news-item grid-item"></div>
+        <div class="news-item grid-item"></div>
+    </div>
+</div>
+<div style="height:60px"></div>
+
+<div class="page-row page-foot sans">
+    <div class="page-block">
+        <div class="foot-left">
+            <div class="foot-docs util-vam">
+                <a class="foot-link" href="">
+                    <span class="icon-18 icon-info"></span>&nbsp;关于我们
+                </a>
+                <a class="foot-link" href="">
+                    <span class="icon-18 icon-user"></span>&nbsp;用户帮助
+                </a>
+                <a class="foot-link" href="">
+                    <span class="icon-18 icon-company"></span>&nbsp;商务合作
+                </a>
+                <a class="foot-link" href="">
+                    <span class="icon-18 icon-comment"></span>&nbsp;联系我们
+                </a>
+            </div>
+            <div class="foot-docs util-vam">
+                <span class="icon-18 icon-link"></span>&nbsp;
+                <a class="foot-link" href="">Link 1</a>
+                <a class="foot-link" href="">Link 2</a>
+                <a class="foot-link" href="">Link 3</a>
+                <a class="foot-link" href="">Link 4</a>
+                <a class="foot-link" href="">Link 5</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="/lib/jquery/3.0.0.min.js"></script>
+<script src="/lib/unslider/2.0.3.min.js"></script>
+<script>
+    function onWindowScrool_nav( event ) {
+        $('.page-nav,.page-nav-h')[ window.scrollY>196? 'addClass':'removeClass' ]('util-fixed');
+    }
+    window.addEventListener('scroll',onWindowScrool_nav, false)
+    var nav = $(".slide-list").unslider( { nav: false, autoplay: true, speed: 400 } )
+</script>
+</body>
+</html>
